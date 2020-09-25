@@ -1,0 +1,43 @@
+# Create a new directory and enter it
+function mkd() {
+    mkdir -p "$@" && cd "$_";
+}
+
+# create new project. make git repo. etc.
+function create() {
+    readme="README.md";
+    cd ~/Desktop/Master/Coding\ Projects/
+    read -p "Project Name: " project;
+    read -p "init file: " init;
+    if [[ $init == *.py ]]; then
+        cd ~/Desktop/Master/Coding\ Projects/python/;
+    elif [[ $init == *.html ]]; then
+        cd ~/Desktop/Master/Coding\ Projects/web-dev/;
+    fi;
+    mkd $project;
+    touch $init;
+    touch $readme;
+    read -p "Create Git repo? (y/n): " res;
+    if [[ $res == "y" ]]; then
+        curl -u "terminalPoltergeist:qabvit-typGoj-dobri3" https://api.github.com/user/repos -d '{"name":"'"$project"'", "private":"true"}'
+        sleep 1;
+        git init;
+        git add .;
+        git commit -m 'initial commit';
+        git branch -M master;
+        git remote add origin https://github.com/terminalPoltergeist/$project.git;
+        git push -u origin master;
+    fi;
+    if [[ $init == *.py ]]; then
+        sbl $init;
+    elif [[ $init == *.html ]]; then
+        brackets $init;
+    fi;
+};
+
+function gitit() {
+    command git status;
+    command git add .;
+    command git commit -m "auto commit";
+    command git push;
+};
