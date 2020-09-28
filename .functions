@@ -1,3 +1,6 @@
+#!/bin/bash
+
+
 # Create a new directory and enter it
 function mkd() {
     mkdir -p "$@" && cd "$_";
@@ -41,3 +44,31 @@ function gitit() {
     command git commit -m "auto commit";
     command git push;
 };
+
+function code() {
+
+};
+
+function pullpi() {
+    command rsync -avP --delete pi@10.0.1.79:~/ ~/pi_backup/
+    sleep 2;
+    command rsync -avP --delete pi@10.0.1.79:~/.??* ~/pi_backup/
+};
+
+function pushpi() {
+    command rsync -avP ~/pi_backup/.??* pi@10.0.1.79:~/
+    sleep 2;
+    command rsync -avP ~/pi_backup/ pi@10.0.1.79:~/
+};
+
+function drypi() {
+    command rsync -navP --delete pi@10.0.1.79:~/ ~/pi_backup/
+    sleep 2;
+    command rsync -navP --delete pi@10.0.1.79:~/.??* ~/pi_backup/
+    printf "\n FROM REMOTE \n\n";
+    sleep 2;
+    command rsync -navP ~/pi_backup/.??* pi@10.0.1.79:~/
+    sleep 2;
+    command rsync -navP ~/pi_backup/ pi@10.0.1.79:~/
+    printf "\n FROM LOCAL \n";
+}
