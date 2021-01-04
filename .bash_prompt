@@ -23,6 +23,8 @@ yellow=$(tput setaf 136);
 brightyellow=$(tput setaf 190);
 aqua=$(tput setaf 23);
 salmon=$(tput setaf 173);
+sethighlight=$(tput smso);
+remhighlight=$(tput rmso);
 
 PS1="\[\033]0;\w\007\]";
 PS1+="\n";
@@ -39,6 +41,7 @@ PS1+="\[${brightyellow}\]$"; ## '->' prompt
 PS1+="\[${reset}\] "; ## break color
 PS1+="\[${salmon}\]";
 export PS1;
+
 
 # Highlight the hostname when connected via SSH.
 if [[ "${SSH_TTY}" ]]; then

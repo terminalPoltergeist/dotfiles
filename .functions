@@ -9,13 +9,13 @@ function mkd() {
 # create new project. make git repo. etc.
 function create() {
     readme="README.md";
-    cd ~/Desktop/Master/Coding\ Projects/
+    cd ~/Desktop/master/coding_projects/
     read -p "Project Name: " project;
     read -p "init file: " init;
     if [[ $init == *.py ]]; then
-        cd ~/Desktop/Master/Coding\ Projects/python/;
+        cd ~/Desktop/master/coding_projects/python/;
     elif [[ $init == *.html ]]; then
-        cd ~/Desktop/Master/Coding\ Projects/web-dev/;
+        cd ~/Desktop/master/coding_projects/web-dev/;
     fi;
     mkd $project;
     touch $init;
@@ -45,30 +45,32 @@ function gitit() {
     command git push;
 };
 
-function code() {
+#function code() {
+#
+#};
 
+
+function goodmorning(){
+    for v in /Volumes/*; do
+        echo "$v Mounted"
+    done
 };
 
-function pullpi() {
-    command rsync -avP --delete pi@10.0.1.79:~/ ~/pi_backup/
-    sleep 2;
-    command rsync -avP --delete pi@10.0.1.79:~/.??* ~/pi_backup/
+function goodnight() {
+    command sudo tmutil stopbackup;
+    for v in /Volumes/*; do
+    if [[ $v != *"Macintosh HD" && $v != *"Recovery"* && $v != "pi" ]]; then
+        echo "Unmounting $v..."
+        command diskutil unmount "/$v";
+        echo
+    fi;
+    done
+    count=10;
+    while [[ count -gt 0 ]]; do
+        count=$((count-1));
+        echo "Computer will sleep in: ${count}";
+        command sleep 1;
+    done
+    command pmset sleepnow;
 };
 
-function pushpi() {
-    command rsync -avP ~/pi_backup/.??* pi@10.0.1.79:~/
-    sleep 2;
-    command rsync -avP ~/pi_backup/ pi@10.0.1.79:~/
-};
-
-function drypi() {
-    command rsync -navP --delete pi@10.0.1.79:~/ ~/pi_backup/
-    sleep 2;
-    command rsync -navP --delete pi@10.0.1.79:~/.??* ~/pi_backup/
-    printf "\n FROM REMOTE \n\n";
-    sleep 2;
-    command rsync -navP ~/pi_backup/.??* pi@10.0.1.79:~/
-    sleep 2;
-    command rsync -navP ~/pi_backup/ pi@10.0.1.79:~/
-    printf "\n FROM LOCAL \n";
-}
