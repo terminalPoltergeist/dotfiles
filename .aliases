@@ -8,12 +8,14 @@ alias .....='cd ../../../..';
 alias dl='cd ~/Downloads';
 alias dt='cd ~/Desktop';
 alias master='cd ~/Desktop/master';
+alias school='cd ~/Desktop/master/school';
 alias root='cd /';
+alias 1133='cd ~/Desktop/master/school/csci1133';
 ## git shortcuts
 alias gs='git status';
 alias ga='git add';
 alias gc='git commit -m';
-alias gp='git push';
+alias gp='git push origin master';
 alias gl='git log';
 ## app shortcuts
 alias sbl='open -a "/Applications/Sublime Text.app"';
@@ -32,7 +34,7 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume output volume 100'"
 # Lock the screen (when going AFK) !!bigsur changed file location, need to rewrite path!!
-####### alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+alias afk="~/dotfiles/lockscreen.sh"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 

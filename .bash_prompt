@@ -23,23 +23,26 @@ yellow=$(tput setaf 136);
 brightyellow=$(tput setaf 190);
 aqua=$(tput setaf 23);
 salmon=$(tput setaf 173);
+norange=$(tput setaf 215);
+nblue=$(tput setaf 153);
+nyellow=$(tput setaf 229);
 sethighlight=$(tput smso);
 remhighlight=$(tput rmso);
 
 PS1="\[\033]0;\w\007\]";
 PS1+="\n";
 PS1+="\[${bold}\]";
-PS1+="\[${violet}\]<\u> ";
-PS1+="\[${red}\]@ "; ## '@' as the prompt id
-PS1+="\[${aqua}\]["; ## '[' before directory
-PS1+="\[${cyan}\]\w"; ## directory path
-PS1+="\[${aqua}\]] "; ## ']' after directory
-PS1+="\[${orange}\]\@";
-PS1+="\$(prompt_git \"\[${white}\] on \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
+PS1+="\[${norange}\]<\u> ";
+PS1+="\[${nblue}\]@ "; ## '@' as the prompt id
+PS1+="\[${nblue}\]["; ## '[' before directory
+PS1+="\[${nyellow}\]\w"; ## directory path
+PS1+="\[${nblue}\]] "; ## ']' after directory
+PS1+="\[${norange}\]\@";
+PS1+="\$(prompt_git \"\[${white}\] on \[${nyellow}\]\" \"\[${nblue}\]\")"; # Git repository details
 PS1+="\n";
-PS1+="\[${brightyellow}\]$"; ## '->' prompt
+PS1+="\[${nyellow}\]$"; ## '->' prompt
 PS1+="\[${reset}\] "; ## break color
-PS1+="\[${salmon}\]";
+PS1+="\[${nblue}\]";
 export PS1;
 
 

@@ -7,7 +7,7 @@ function mkd() {
 }
 
 # create new project. make git repo. etc.
-function create() {
+function project() {
     readme="README.md";
     cd ~/Desktop/master/coding_projects/
     read -p "Project Name: " project;
@@ -19,12 +19,13 @@ function create() {
     fi;
     mkd $project;
     touch $init;
-    touch $readme;
     read -p "Create Git repo? (y/n): " res;
     if [[ $res == "y" ]]; then
+        touch $readme;
         curl -u "terminalPoltergeist:qabvit-typGoj-dobri3" https://api.github.com/user/repos -d '{"name":"'"$project"'", "private":"true"}'
         sleep 1;
         git init;
+        touch ".gitignore"
         git add .;
         git commit -m 'initial commit';
         git branch -M master;
@@ -44,10 +45,6 @@ function gitit() {
     command git commit -m "auto commit";
     command git push;
 };
-
-#function code() {
-#
-#};
 
 
 function goodmorning(){
@@ -74,3 +71,32 @@ function goodnight() {
     command pmset sleepnow;
 };
 
+
+function lecture() {
+    today=0
+    today=$(date '+%m-%d');
+    command cd ~/Desktop/master/school/csci1133/lectures;
+    new_lecture=$today".py";
+    touch $new_lecture;
+    command open -a "/Applications/Sublime Text.app" $new_lecture;
+    alias run='python3 $new_lecture';
+}
+
+function lab() {
+    today=command date '+%m-%d';
+    command cd ~/Desktop/master/school/csci1133/labs;
+    new_lab=$today".py";
+    touch $new_lab;
+    command open -a "/Applications/Sublime Text.app" $new_lab;
+    alias run='python3 $new_lab';
+}
+
+function homework() {
+    today=0
+    today=$(date '+%m-%d');
+    command cd ~/Desktop/master/school/csci1133/homework;
+    new_hw=$today".py";
+    touch $new_hw;
+    command open -a "/Applications/Sublime Text.app" $new_hw;
+    alias run='python3 $new_hw';
+}
