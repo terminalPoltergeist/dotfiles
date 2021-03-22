@@ -6,6 +6,8 @@ elif infocmp xterm-256color >/dev/null 2>&1; then
     export TERM='xterm-256color';
 fi;
 
+
+# The following is for the cmd line prompt customization. Mine is cutomized to match the theme of my development enviroments.
 tput sgr0; # reset colors
 bold=$(tput bold);
 reset=$(tput sgr0);
@@ -38,11 +40,12 @@ PS1+="\[${nblue}\]["; ## '[' before directory
 PS1+="\[${nyellow}\]\w"; ## directory path
 PS1+="\[${nblue}\]] "; ## ']' after directory
 PS1+="\[${norange}\]\@";
+# shows git repo info in the prompt when in a git repo.
 PS1+="\$(prompt_git \"\[${white}\] on \[${nyellow}\]\" \"\[${nblue}\]\")"; # Git repository details
 PS1+="\n";
 PS1+="\[${nyellow}\]$"; ## '->' prompt
 PS1+="\[${reset}\] "; ## break color
-PS1+="\[${nblue}\]";
+PS1+="\[${nblue}\]"; ## the only color after the color reset will be the default for text in the terminal.
 export PS1;
 
 
@@ -53,6 +56,7 @@ else
     hostStyle="${yellow}";
 fi;
 
+# I got this function online but can't remember where. It basically provides information for a git repo in the cmd line prompt when in a git repo. The function is called above in the prompt customization.
 prompt_git() {
     local s='';
     local branchName='';

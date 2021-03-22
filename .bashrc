@@ -1,3 +1,6 @@
+### I have moved all functionality to other dotfiles, but don't want to delete this file incase I need it later.
+
+
 #if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
 #    export TERM='gnome-256color';
 #elif infocmp xterm-256color >/dev/null 2>&1; then
