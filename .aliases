@@ -11,12 +11,11 @@ alias dt='cd ~/Desktop';
 alias master='cd ~/Desktop/master';
 alias school='cd ~/Desktop/master/school';
 alias root='cd /';
-alias 1133='cd ~/Desktop/master/school/csci1133';
 ## git shortcuts
 alias gs='git status';
 alias ga='git add';
 alias gc='git commit -m';
-alias gp='git push origin master';
+alias gp='git push origin main';
 alias gl='git log';
 ## app shortcuts
 alias sbl='open -a "/Applications/Sublime Text.app"';
@@ -37,6 +36,8 @@ alias pumpitup="osascript -e 'set volume output volume 100'"
 # Lock the screen (when going AFK) !!bigsur changed file location, need to rewrite path!!
 ## found solution online. runs shell script to lock screen via applescript.
 alias afk="~/dotfiles/lockscreen.sh"
+# pomodoro app to track and manage time
+alias pomodoro="~/dotfiles/pomodoro.sh"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
