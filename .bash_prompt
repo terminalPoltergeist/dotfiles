@@ -1,0 +1,104 @@
+#!/bin/bash
+
+if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
+    export TERM='gnome-256color';
+elif infocmp xterm-256color >/dev/null 2>&1; then
+    export TERM='xterm-256color';
+fi;
+
+
+# The following is for the cmd line prompt customization. Mine is cutomized to match the theme of my development enviroments.
+tput sgr0; # reset colors
+bold=$(tput bold);
+reset=$(tput sgr0);
+black=$(tput setaf 0);
+blue=$(tput setaf 69);
+cyan=$(tput setaf 188);
+green=$(tput setaf 2);
+orange=$(tput setaf 166);
+purple=$(tput setaf 177);
+red=$(tput setaf 88);
+violet=$(tput setaf 96);
+white=$(tput setaf 15);
+yellow=$(tput setaf 136);
+brightyellow=$(tput setaf 190);
+aqua=$(tput setaf 23);
+salmon=$(tput setaf 131);
+norange=$(tput setaf 174);
+nblue=$(tput setaf 67);
+nyellow=$(tput setaf 137);
+nrose=$(tput setaf 181);
+sethighlight=$(tput smso);
+remhighlight=$(tput rmso);
+
+PS1="\[\033]0;\w\007\]";
+PS1+="\n";
+PS1+="\[${bold}\]";
+PS1+="\[${salmon}\]<\u> ";
+PS1+="\[${violet}\]@ "; ## '@' as the prompt id
+PS1+="\[${violet}\]["; ## '[' before directory
+PS1+="\[${nyellow}\]\w"; ## directory path
+PS1+="\[${violet}\]] "; ## ']' after directory
+PS1+="\[${salmon}\]\@";
+# shows git repo info in the prompt when in a git repo.
+PS1+="\$(prompt_git \"\[${white}\] on \[${nyellow}\]\" \"\[${nblue}\]\")"; # Git repository details
+PS1+="\n";
+PS1+="\[${nblue}\]$"; ## '->' prompt
+PS1+="\[${reset}\] "; ## break color
+tput sgr0; # reset colors
+export PS1;
+
+
+# Highlight the hostname when connected via SSH.
+if [[ "${SSH_TTY}" ]]; then
+    hostStyle="${bold}${red}";
+else
+    hostStyle="${yellow}";
+fi;
+
+# I got this function online but can't remember where. It basically provides information for a git repo in the cmd line prompt when in a git repo. The function is called above in the prompt customization.
+prompt_git() {
+    local s='';
+    local branchName='';
+
+    # Check if the current directory is in a Git repository.
+    git rev-parse --is-inside-work-tree &>/dev/null || return;
+
+    # Check for what branch we’re on.
+    # Get the short symbolic ref. If HEAD isn’t a symbolic ref, get a
+    # tracking remote branch or tag. Otherwise, get the
+    # short SHA for the latest commit, or give up.
+    branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
+        git describe --all --exact-match HEAD 2> /dev/null || \
+        git rev-parse --short HEAD 2> /dev/null || \
+        echo '(unknown)')";
+
+    # Early exit for Chromium & Blink repo, as the dirty check takes too long.
+    # Thanks, @paulirish!
+    # https://github.com/paulirish/dotfiles/blob/dd33151f/.bash_prompt#L110-L123
+    repoUrl="$(git config --get remote.origin.url)";
+    if grep -q 'chromium/src.git' <<< "${repoUrl}"; then
+        s+='*';
+    else
+        # Check for uncommitted changes in the index.
+        if ! $(git diff --quiet --ignore-submodules --cached); then
+            s+='+';
+        fi;
+        # Check for unstaged changes.
+        if ! $(git diff-files --quiet --ignore-submodules --); then
+            s+='!';
+        fi;
+        # Check for untracked files.
+        if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+            s+='?';
+        fi;
+        # Check for stashed files.
+        if $(git rev-parse --verify refs/stash &>/dev/null); then
+            s+='$';
+        fi;
+    fi;
+
+    [ -n "${s}" ] && s=" [${s}]";
+
+    echo -e "${1}${branchName}${2}${s}";
+}

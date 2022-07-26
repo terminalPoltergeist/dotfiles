@@ -1,0 +1,24 @@
+
+# title: Summary, imperative, use lower case commit tag, start upper case, don't end with a period
+# No more than 50 chars. ### 50th char is here:  #
+
+# Leave blank line between subject and body
+|What:
+
+|Why:
+
+|File(s) Changed:
+
+# Body: Explain *what* and *why* (not *how*)
+# Wrap at 72 chars. ################################## which is here:  #
+
+# commit tags:
+#   -add: generic tag for adding anything to a repo
+#   -implement: adding framework, library, or other established code
+#   -update: any changes to existing material that is not the codebase (assets, etc)
+#   -fix: quick fixes (1-3 lines)
+#   -bug: larger bug fixes (3+ lines or entire files)
+#   -remove: generic tag for removing anything from a repo
+#   -feat: implementing a new feature
+#   -refactor: refactoring part of the established code base
+#   -docs: changes to the documentation

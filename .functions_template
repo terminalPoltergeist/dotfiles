@@ -1,0 +1,87 @@
+#!/bin/bash
+
+'''
+This template is built off of the .funcitons setup that I use.
+Due to personal information confidentiality, I made a template rather than publishing my personal configurations.
+Many areas of this template have been redacted for this reason. I have put comments where you will need to provide your own information for these funcitons to work properly.
+'''
+
+# Create a new directory and enter it
+function mkd() {
+    mkdir -p "$@" && cd "$_";
+}
+
+# create new project. make git repo. etc.
+function project() {
+    readme="README.md";
+    # make sure to add your informaiton in the next line.
+    cd your_programming_projects_repo_here
+    read -p "Project Name: " project;
+    read -p "init file: " init;
+    # the next if-else is for sorting projects by their language. delete this if you organize projects in a different way.
+    if [[ $init == *.py ]]; then
+        # make sure to add your informaiton in the next line.
+        cd your_python_repo_here
+    elif [[ $init == *.html ]]; then
+        # make sure to add your informaiton in the next line.
+        cd your_web-development_repo_here;
+    fi;
+    mkd $project;
+    touch $init;
+    read -p "Create Git repo? (y/n): " res;
+    if [[ $res == "y" ]]; then
+        touch $readme;
+        # make sure to add your informaiton in the next line.
+        curl -u "your_github_username_here:your_github_password_here" https://api.github.com/user/repos -d '{"name":"'"$project"'", "private":"true"}'
+        sleep 1;
+        git init;
+        touch ".gitignore"
+        git add .;
+        git commit -m 'initial commit';
+        git branch -M master;
+        # make sure to add your information in the next line.
+        git remote add origin https://github.com/your_github_name_here/$project.git;
+        git push -u origin master;
+    fi;
+    # the next if-else opens my text editor of choice for the language I am using. These commands will NOT work unless you set up an alias for them. Edit or omit them for your needs.
+    if [[ $init == *.py ]]; then
+        sbl $init;
+    elif [[ $init == *.html ]]; then
+        brackets $init;
+    fi;
+};
+
+# just a shorhand function to commit to the server when you don't need a detailed commit message.
+function gitit() {
+    command git status;
+    command git add .;
+    command git commit -m "auto commit";
+    command git push;
+};
+
+# probably not very useful for anyone else, but I have multiple external storage devices and like to make sure they're all mounted when I plug in in the morning.
+function goodmorning(){
+    for v in /Volumes/*; do
+        echo "$v Mounted"
+    done
+};
+
+# similar to the above, probably not very useful for anyone else, but I need to unmount all my external devices at the end of the day. It also puts my computer to sleep when the devices are properly unmounted.
+function goodnight() {
+    command sudo tmutil stopbackup; ## stops a timemachine backup if its in progress
+    for v in /Volumes/*; do
+    if [[ $v != *"Macintosh HD" && $v != *"Recovery"* && $v != "pi" ]]; then ## this ensures that you do not unmount your hardrive
+        echo "Unmounting $v..."
+        command diskutil unmount "/$v";
+        echo
+    fi;
+    done
+    count=10;
+    while [[ count -gt 0 ]]; do
+        count=$((count-1));
+        echo "Computer will sleep in: ${count}";
+        command sleep 1;
+    done
+    command pmset sleepnow;
+};
+
