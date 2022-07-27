@@ -9,7 +9,7 @@ alias ..='cd ..';
 alias ...='cd ../..';
 alias ....='cd ../../..';
 alias .....='cd ../../../..';
-alias thispath='pwd | pbcopy';
+# alias thispath='pwd | pbcopy';
 ## some of the following commands are specific to my folder structure, modify to fit your needs
 alias dl='cd ~/Downloads';
 alias dt='cd ~/Desktop';
