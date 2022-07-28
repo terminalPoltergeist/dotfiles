@@ -12,6 +12,7 @@
     <br/>
     We decorate our <code>$HOME</code> with dotfiles; these are mine.
   </p>
+
   <img src="https://img.shields.io/tokei/lines/github/terminalPoltergeist/dotfiles" alt="lines">
   <img src="https://img.shields.io/github/commit-activity/m/terminalPoltergeist/dotfiles" alt="commit frequency">
   <img src="https://img.shields.io/github/last-commit/terminalPoltergeist/dotfiles" alt="last commit">
