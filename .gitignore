@@ -6,5 +6,4 @@ cseLabMachines.txt
 gitconfig/.gitconfig
 scripts/servers.sh
 ssh/config
-assets/
 docs/
