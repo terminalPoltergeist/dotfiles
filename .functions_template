@@ -24,55 +24,45 @@
 '''
 This template is built off of the .funcitons setup that I use.
 Due to personal information confidentiality, I made a template rather than publishing my personal configurations.
-Many areas of this template have been redacted for this reason. I have put comments where you will need to provide your own information for these funcitons to work properly.
+Some areas of this template have been redacted for this reason. I have put comments where you will need to provide your own information for these funcitons to work properly.
 '''
+
+###############################################
+################# File System #################
+###############################################
 
 # Create a new directory and enter it
 function mkd() {
     mkdir -p "$@" && cd "$_";
 }
 
-# create new project. make git repo. etc.
-function project() {
-    readme="README.md";
-    # make sure to add your informaiton in the next line.
-    cd your_programming_projects_repo_here
-    read -p "Project Name: " project;
-    read -p "init file: " init;
-    # the next if-else is for sorting projects by their language. delete this if you organize projects in a different way.
-    if [[ $init == *.py ]]; then
-        # make sure to add your informaiton in the next line.
-        cd your_python_repo_here
-    elif [[ $init == *.html ]]; then
-        # make sure to add your informaiton in the next line.
-        cd your_web-development_repo_here;
-    fi;
-    mkd $project;
-    touch $init;
-    read -p "Create Git repo? (y/n): " res;
-    if [[ $res == "y" ]]; then
-        touch $readme;
-        # make sure to add your informaiton in the next line.
-        curl -u "your_github_username_here:your_github_password_here" https://api.github.com/user/repos -d '{"name":"'"$project"'", "private":"true"}'
-        sleep 1;
-        git init;
-        touch ".gitignore"
-        git add .;
-        git commit -m 'initial commit';
-        git branch -M master;
-        # make sure to add your information in the next line.
-        git remote add origin https://github.com/your_github_name_here/$project.git;
-        git push -u origin master;
-    fi;
-    # the next if-else opens my text editor of choice for the language I am using. These commands will NOT work unless you set up an alias for them. Edit or omit them for your needs.
-    if [[ $init == *.py ]]; then
-        sbl $init;
-    elif [[ $init == *.html ]]; then
-        brackets $init;
-    fi;
+# Copy current working directory (adding arg 1 will copy path to that file)
+function thispath(){
+    if [ $# -eq 1 ]
+        then
+            wd=`pwd`;
+            pa="${wd}/${1}";
+            command echo $pa | pbcopy;
+        else
+            command pwd | pbcopy;
+    fi
 };
 
-# just a shorhand function to commit to the server when you don't need a detailed commit message.
+function symlink() {
+    read -p "Path to actual file: " path;
+    read -p "Path to link (will point to actual file): " link;
+    ln -s ~/$path ~/$link;
+}
+
+function removePath() { 
+    export PATH="$( echo $PATH| tr : '\n' |grep -v $1 | paste -s -d: )"
+}
+
+###############################################
+################ Git Functions ################
+###############################################
+
+# Auto commit/push
 function gitit() {
     command git status;
     command git add .;
@@ -80,18 +70,38 @@ function gitit() {
     command git push;
 };
 
-# probably not very useful for anyone else, but I have multiple external storage devices and like to make sure they're all mounted when I plug in in the morning.
-function goodmorning(){
-    for v in /Volumes/*; do
-        echo "$v Mounted"
+# List branches and prompt to switch to a branch
+function gcheck() {
+    branches=();
+    count=0;
+    echo "Availible branches:"
+    for branch in $(git for-each-ref refs/heads  | cut -d/ -f3-); do
+        (( count++ ))
+        echo "$count) $branch"
+        branches+=($branch)
     done
+    read -p 'Branch: ' ans;
+    command git checkout "${branches[$ans-1]}";
 };
 
-# similar to the above, probably not very useful for anyone else, but I need to unmount all my external devices at the end of the day. It also puts my computer to sleep when the devices are properly unmounted.
+###############################################
+################ SSH Functions ################
+###############################################
+
+# function ssend(){
+#     read -p 'path to file: ' path;
+#     read -p 'machine to send to: ' location;
+#     scp
+# }
+
+###############################################
+################ Gen Functions ################
+###############################################
+
 function goodnight() {
-    command sudo tmutil stopbackup; ## stops a timemachine backup if its in progress
+    command sudo tmutil stopbackup;
     for v in /Volumes/*; do
-    if [[ $v != *"Macintosh HD" && $v != *"Recovery"* && $v != "pi" ]]; then ## this ensures that you do not unmount your hardrive
+    if [[ $v != *"Macintosh HD" && $v != *"Recovery"* && $v != "pi" ]]; then
         echo "Unmounting $v..."
         command diskutil unmount "/$v";
         echo

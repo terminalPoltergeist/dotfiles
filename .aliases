@@ -25,12 +25,14 @@
 
 alias sourcebash='source ~/.bash_profile';
 
-## navigation shortcuts
+###############################################
+############ Navigation Shortcuts #############
+###############################################
+
 alias ..='cd ..';
 alias ...='cd ../..';
 alias ....='cd ../../..';
 alias .....='cd ../../../..';
-# alias thispath='pwd | pbcopy';
 ## some of the following commands are specific to my folder structure, modify to fit your needs
 alias dl='cd ~/Downloads';
 alias dt='cd ~/Desktop';
@@ -38,14 +40,22 @@ alias master='cd ~/Desktop/master';
 alias school='cd ~/Desktop/master/school';
 alias projects='cd ~/Desktop/master/projects';
 alias root='cd /';
-## git shortcuts
+
+###############################################
+################ Git Shortcuts ################
+###############################################
+
 alias gs='git status';
 alias ga='git add';
 alias gc='git commit';
 alias gp='git push';
 alias gl='git log';
 alias gb='git branch';
-## app shortcuts
+
+###############################################
+################ App Shortcuts ################
+###############################################
+
 ## again, these commands are tailored for my use, add/remove commands as you need them
 alias sbl='open -a "/Applications/Sublime Text.app"';
 alias brackets='open -a "/Applications/Brackets.app"';
@@ -58,9 +68,17 @@ alias spotpa='spotify pause';
 
 alias vim="vim -S ~/.vim/.vimrc";
 
+###############################################
+################ SSH Shortcuts ################
+###############################################
+
 ## The following commands ssh to remote servers, I placed the actual ssh commands in the private "servers.sh" file
 alias atlas="source ./scripts/servers.sh && atlas";
 alias webserver="source ./scripts/servers.sh && webserver";
+
+###############################################
+################ Gen Shortcuts ################
+###############################################
 
 # Hide/show all desktop icons (useful when presenting)
 ## Got this one from some Youtube video, I like a clutter free desktop
