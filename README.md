@@ -8,9 +8,9 @@
   </a>
 
   <p align="center">
-    For a developer, `$HOME` is where the heart is. 
+    For a developer, <code>$HOME</code> is where the heart is. 
     <br/>
-    We decorate our `$HOME` with dotfiles; these are mine.
+    We decorate our <code>$HOME</code> with dotfiles; these are mine.
   </p>
   <img src="https://img.shields.io/tokei/lines/github/terminalPoltergeist/dotfiles" alt="lines">
   <img src="https://img.shields.io/github/commit-activity/m/terminalPoltergeist/dotfiles" alt="commit frequency">
