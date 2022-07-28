@@ -8,9 +8,9 @@
   </a>
 
   <p align="center">
-    For a developer, <code>$HOME</code> is where the heart is. 
+    For a developer, `$HOME` is where the heart is. 
     <br/>
-    We decorate our <code>$HOME</code> with dotfiles; these are mine.
+    We decorate our `$HOME` with dotfiles; these are mine.
   </p>
   <img src="https://img.shields.io/tokei/lines/github/terminalPoltergeist/dotfiles" alt="lines">
   <img src="https://img.shields.io/github/commit-activity/m/terminalPoltergeist/dotfiles" alt="commit frequency">
@@ -46,7 +46,7 @@ If you want to try my configurations:
 
 ### How to use my configs
 
-*I hope to integrate some sort of automation for installation in the future, possibly using Bootstrap. I am too inexperienced at this point to make that happen. But stay tuned, it's coming.*
+*I hope to integrate some sort of automation for installation in the future. I am too inexperienced at this point to make that happen. But stay tuned, it's coming.*
 
 #### 1. Clean up existing dotfiles
 - If you have existing dotfiles, back them up and archive them
