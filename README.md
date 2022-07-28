@@ -69,7 +69,11 @@ If you want to try my configurations:
 
 *these are features/changes I want to make. I may implement a changelog in the future to help organize this.*
 
-- [  ] 
+- [ ] reorganize file structure
+    - [ ] create directories for each system's/program's configs
+- [ ] refresh install script
+    - [ ] create better linking system
+    - [ ] make install process more efficient
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
