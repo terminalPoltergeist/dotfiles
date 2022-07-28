@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/terminalPoltergeist/dotfiles">
-    <img src="/Users/jacknemitz/dotfiles/assets/output-onlinepngtools.png" alt="Logo" width="500" height="150">
+    <img src="/assets/output-onlinepngtools.png" alt="Logo" width="500" height="150">
   </a>
 
   <p align="center">
