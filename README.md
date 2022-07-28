@@ -30,7 +30,7 @@ I knew version control was important for configurations, so I made a git repo fo
 
 I have gone through many iterations of this repository, this is the current iteration. 
 
-[Here is a cool post on the philosophy behind robust dotfiles](https://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/) from @holman 
+[Here is a cool post on the philosophy behind robust dotfiles](https://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/) from [@holman](https://github.com/holman) 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
