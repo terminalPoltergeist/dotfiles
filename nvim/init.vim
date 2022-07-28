@@ -25,8 +25,8 @@ set shiftwidth=4
 set tabstop=4
 set hidden
 set mouse=a
-set scrolloff=8
-set sidescrolloff=8
+set scrolloff=6
+set sidescrolloff=6
 set relativenumber
 set number
 set confirm
@@ -82,6 +82,9 @@ nnoremap <Leader>b :ls<CR>:b<Space>
 noremap <silent> <Leader>s :call ToggleSpellCheck()<CR>
 " yank entire line after cursor
 map Y y$
+" map page scroll
+map <C-j> <C-e>
+map <C-k> <C-y>
 
 "-------------------------------------------------
 "	Plugins
