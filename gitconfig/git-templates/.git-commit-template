@@ -14,9 +14,6 @@
 |File(s) Changed:
 # (+) denotes file addition, (*) denotes file modification, (-) denotes file deletion
 
-|Next Up:
-# Brief description of what to do next
-
 # commit tags:
 #   -add: generic tag for adding anything to a repo
 #   -implement: adding framework, library, or other established code
