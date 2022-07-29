@@ -74,6 +74,12 @@ If you want to try my configurations:
 - [ ] refresh install script
     - [ ] create better linking system
     - [ ] make install process more efficient
+- [ ] add [Bubble Tea](https://github.com/charmbracelet/bubbletea) and possibly [Lipgloss](https://github.com/charmbracelet/lipgloss) stylization to entire directory
+    - [ ] transition shell functions to use BubbleTea
+        - [ ] use list selection rater than prompt/response for functions like `gcheck`
+        - [ ] use text fields for functions like `symlink`
+        - [ ] use list selection for `thispath` function?
+            - [ ] `thispath` should pull up a list with "./" and everything within current directory
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
