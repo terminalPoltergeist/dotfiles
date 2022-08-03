@@ -75,6 +75,7 @@ If you want to try my configurations:
     - [ ] create better linking system
     - [ ] make install process more efficient
 - [ ] add [Bubble Tea](https://github.com/charmbracelet/bubbletea) and possibly [Lipgloss](https://github.com/charmbracelet/lipgloss) stylization to entire directory
+    <br/>*maybe use [Gum](https://github.com/charmbracelet/gum)?*
     - [ ] transition shell functions to use BubbleTea
         - [ ] use list selection rater than prompt/response for functions like `gcheck`
         - [ ] use text fields for functions like `symlink`
