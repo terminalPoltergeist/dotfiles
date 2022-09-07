@@ -38,8 +38,8 @@ set cmdheight=2
 set updatetime=300
 set signcolumn=number
 set colorcolumn=72
-" set linebreak
-let @v = '$73a jj73|v$hd'
+set linebreak
+let @v = '\nb$73a jj73|v$hd\lb'
 syntax on
 set noswapfile
 highlight LineNr ctermfg=grey
@@ -95,6 +95,8 @@ map Y y$
 map <C-j> <C-e>
 map <C-k> <C-y>                                                                        
 nmap <Leader>v @v
+noremap <Leader>lb :set linebreak<CR>
+noremap <Leader>nb :set nolinebreak<CR>
 
 "-------------------------------------------------                     
 "	Plugins
@@ -105,7 +107,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall
-    autocmd VimEnter * PlugInstall | source ~/dotfiles/nvim/init.vim
+    autocmd VimEnter * PlugInstall | source ~/dotfiles/nvim/init.vim    
 endif
 
 call plug#begin('~/.config/nvim/plugins/')
