@@ -1,4 +1,4 @@
-"              ,---------------------------,
+"              ,---------------------------,                            
 "              |  /---------------------\  |
 "              | |                       | |
 "              | |     Jack Nemitz       | |
@@ -23,13 +23,13 @@
 "	General Settings
 "-------------------------------------------------
 
-set expandtab
+set expandtab                                                                        
 set shiftwidth=4
 set tabstop=4
-set hidden
-set mouse=a
+set hidden                                                             
+set mouse=a                                                                        
 set scrolloff=6
-set sidescrolloff=6
+set sidescrolloff=6                                                     
 set relativenumber
 set number
 set confirm
@@ -37,6 +37,9 @@ set autoindent
 set cmdheight=2
 set updatetime=300
 set signcolumn=number
+set colorcolumn=72
+" set linebreak
+let @v = '$73a jj73|v$hd'
 syntax on
 set noswapfile
 highlight LineNr ctermfg=grey
@@ -44,9 +47,12 @@ set incsearch
 set clipboard=unnamedplus
 highlight MatchParen cterm=underline ctermbg=NONE ctermfg=NONE
 highlight MatchParen gui=underline guibg=NONE guifg=NONE
-highlight VertSplit cterm=NONE
+highlight VertSplit cterm=NONE                                                                        
 highlight LineNr ctermbg=NONE
+highlight ColorColumn ctermbg=0
 highlight clear SignColumn
+let g:python3_host_prog = '/Users/jacknemitz/.pyenv/shims/python3'
+let g:python2_host_prog = '/Users/jacknemitz/.pyenv/shims/python'
 
 
 "-------------------------------------------------
@@ -87,9 +93,10 @@ noremap <silent> <Leader>s :call ToggleSpellCheck()<CR>
 map Y y$
 " map page scroll
 map <C-j> <C-e>
-map <C-k> <C-y>
+map <C-k> <C-y>                                                                        
+nmap <Leader>v @v
 
-"-------------------------------------------------
+"-------------------------------------------------                     
 "	Plugins
 "-------------------------------------------------
 
