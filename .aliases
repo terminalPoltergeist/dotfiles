@@ -23,7 +23,7 @@
 
 ## some of these scripts are inspired from a youtube video on bash dotfiles that I can no longer find
 
-alias sourcebash='source ~/.bash_profile';
+alias sourcebash='clear && source ~/.bash_profile';                     
 
 ###############################################
 ############ Navigation Shortcuts #############
@@ -74,7 +74,7 @@ alias vim="vim -S ~/.vim/.vimrc";
 
 ## The following commands ssh to remote servers, I placed the actual ssh commands in the private "servers.sh" file
 alias atlas="source ./scripts/servers.sh && atlas";
-alias webserver="source ./scripts/servers.sh && webserver";
+alias webserver="source /Users/jacknemitz/dotfiles/scripts/servers.sh && webserver";
 
 ###############################################
 ################ Gen Shortcuts ################
