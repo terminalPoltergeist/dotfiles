@@ -1,0 +1,8 @@
+# Commands go through bash
+shell = "bash -c '{}'"
+
+[[item]]
+file = "/Users/jacknemitz/.config/alacritty/alacritty.yml"
+template = "alacritty"
+subtemplate = "custom"
+
