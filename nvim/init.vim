@@ -37,7 +37,7 @@ set autoindent
 set cmdheight=2
 set updatetime=300
 set signcolumn=number
-set colorcolumn=72
+" set colorcolumn=72
 nnoremap <leader>cc :execute "set colorcolumn=" . (&colorcolumn == "" ? "72" : "")<CR>
 set linebreak
 let @v = '\nb$73a jj73|v$hd\lb'
