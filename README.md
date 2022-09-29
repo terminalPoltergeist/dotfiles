@@ -81,6 +81,7 @@ If you want to try my configurations:
         - [ ] use text fields for functions like `symlink`
         - [ ] use list selection for `thispath` function?
             - [ ] `thispath` should pull up a list with "./" and everything within current directory
+- [ ] update prompt style
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
