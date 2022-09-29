@@ -83,9 +83,9 @@ If you want to try my configurations:
 - [X] update prompt style
 - [ ] restore files
     - [ ] .functions
-    - [ ] .gitconfig
-    - [ ] servers.sh
-    - [ ] ssh/config
+    - [X] .gitconfig
+    - ~~[ ] servers.sh~~
+    - [X] ssh/config
 - [ ] write dotfiles local backup script
 - [X] rewrite readme constructor script
 <p align="right">(<a href="#top">back to top</a>)</p>
