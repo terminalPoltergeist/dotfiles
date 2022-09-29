@@ -68,7 +68,6 @@ If you want to try my configurations:
 ## TO DOs
 
 *these are features/changes I want to make. I may implement a changelog in the future to help organize this.*
-
 - [ ] reorganize file structure
     - [ ] create directories for each system's/program's configs
 - [ ] refresh install script
@@ -81,8 +80,14 @@ If you want to try my configurations:
         - [ ] use text fields for functions like `symlink`
         - [ ] use list selection for `thispath` function?
             - [ ] `thispath` should pull up a list with "./" and everything within current directory
-- [ ] update prompt style
-
+- [X] update prompt style
+- [ ] restore files
+    - [ ] .functions
+    - [ ] .gitconfig
+    - [ ] servers.sh
+    - [ ] ssh/config
+- [ ] write dotfiles local backup script
+- [X] rewrite readme constructor script
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Contributing

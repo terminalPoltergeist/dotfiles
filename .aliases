@@ -91,6 +91,7 @@ alias pumpitup="osascript -e 'set volume output volume 100'"
 # Lock the screen (when going AFK) !!bigsur changed file location, need to rewrite path!!
 ## found solution online. runs shell script to lock screen via applescript.
 alias afk="~/dotfiles/lockscreen.sh"
+alias AFK="pmset displaysleepnow"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
