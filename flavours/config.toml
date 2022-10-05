@@ -13,6 +13,10 @@ start = "\" Start flavours"
 end = "\" End flavours"
 
 [[item]]
+file = "/Users/jacknemitz/dotfiles/tmux/tmux.conf"
+template = "tmux"
+
+[[item]]
 file = "/Users/jacknemitz/.spicetify/Themes/Vaporwave/color.ini"
 template = "spicetify"
 rewrite = true
