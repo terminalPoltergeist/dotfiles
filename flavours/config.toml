@@ -6,3 +6,13 @@ file = "/Users/jacknemitz/.config/alacritty/alacritty.yml"
 template = "alacritty"
 subtemplate = "custom"
 
+[[item]]
+file = "/Users/jacknemitz/dotfiles/nvim/init.vim"
+template = "vim"
+start = "\" Start flavours"
+end = "\" End flavours"
+
+[[item]]
+file = "/Users/jacknemitz/.spicetify/Themes/Vaporwave/color.ini"
+template = "spicetify"
+rewrite = true
