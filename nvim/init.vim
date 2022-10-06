@@ -30,7 +30,7 @@ set hidden
 set mouse=a                                                                        
 set scrolloff=6
 set sidescrolloff=6                                                     
-set relativenumber
+set relativenumber 
 set number
 set confirm
 set autoindent
@@ -49,10 +49,11 @@ set clipboard=unnamedplus
 highlight MatchParen cterm=underline ctermbg=NONE ctermfg=NONE
 highlight MatchParen gui=underline guibg=NONE guifg=NONE
 highlight VertSplit cterm=NONE                                                                        
-" highlight ColorColumn ctermbg=0
-" highlight clear SignColumn
+highlight ColorColumn ctermbg=0
+highlight clear SignColumn
 let g:python3_host_prog = '/Users/jacknemitz/.pyenv/shims/python3'
 let g:python2_host_prog = '/Users/jacknemitz/.pyenv/shims/python'
+set foldmethod=marker
 
 
 "-------------------------------------------------
@@ -94,15 +95,17 @@ noremap <silent> <Leader>s :call ToggleSpellCheck()<CR>
 " yank entire line after cursor
 map Y y$
 " map page scroll
-map <C-j> <C-e>
-map <C-k> <C-y>                                                                        
+map <A-j> <C-e>
+map <A-k> <C-y>                                                                        
 nmap <Leader>v @v
 noremap <Leader>lb :set linebreak<CR>
 noremap <Leader>nb :set nolinebreak<CR>
+nnoremap <space> za
 
 "-------------------------------------------------                     
 "	Color Settings
 "-------------------------------------------------
+"colors via flavours{{{
 " Start flavours
 " vi:syntax=vim
 
@@ -421,10 +424,10 @@ call <sid>hi("gitcommitDiscardedFile",  s:gui08, "", s:cterm08, "", "bold", "")
 call <sid>hi("gitcommitSelectedFile",   s:gui0B, "", s:cterm0B, "", "bold", "")
 
 " GitGutter highlighting
-call <sid>hi("GitGutterAdd",     s:gui0B, s:gui01, s:cterm0B, s:cterm01, "", "")
-call <sid>hi("GitGutterChange",  s:gui0D, s:gui01, s:cterm0D, s:cterm01, "", "")
-call <sid>hi("GitGutterDelete",  s:gui08, s:gui01, s:cterm08, s:cterm01, "", "")
-call <sid>hi("GitGutterChangeDelete",  s:gui0E, s:gui01, s:cterm0E, s:cterm01, "", "")
+call <sid>hi("GitGutterAdd",     s:gui0B, s:gui00, s:cterm0B, s:cterm00, "", "")
+call <sid>hi("GitGutterChange",  s:gui0D, s:gui00, s:cterm0D, s:cterm00, "", "")
+call <sid>hi("GitGutterDelete",  s:gui08, s:gui00, s:cterm08, s:cterm00, "", "")
+call <sid>hi("GitGutterChangeDelete",  s:gui0E, s:gui00, s:cterm0E, s:cterm00, "", "")
 
 " HTML highlighting
 call <sid>hi("htmlBold",    s:gui0A, "", s:cterm0A, "", "", "")
@@ -539,6 +542,7 @@ delf <sid>hi
 unlet s:gui00 s:gui01 s:gui02 s:gui03  s:gui04  s:gui05  s:gui06  s:gui07  s:gui08  s:gui09 s:gui0A  s:gui0B  s:gui0C  s:gui0D  s:gui0E  s:gui0F
 unlet s:cterm00 s:cterm01 s:cterm02 s:cterm03 s:cterm04 s:cterm05 s:cterm06 s:cterm07 s:cterm08 s:cterm09 s:cterm0A s:cterm0B s:cterm0C s:cterm0D s:cterm0E s:cterm0F
 " End flavours
+"}}}
 
 hi LineNr ctermbg=NONE
 "-------------------------------------------------                     
@@ -571,11 +575,132 @@ source ~/dotfiles/nvim/plugins/vim-gitgutter.vim
 source ~/dotfiles/nvim/plugins/vim-surround.vim
 source ~/dotfiles/nvim/plugins/vim-tmux-navigator.vim
 source ~/dotfiles/nvim/plugins/nerdtree-git-plugin.vim
-source ~/dotfiles/nvim/plugins/coc.vim
 " source ~/dotfiles/nvim/plugins/coc.vim
+" source ~/dotfiles/nvim/plugins/coc.vim
+source ~/dotfiles/nvim/plugins/nvim-lspconfig.vim
 source ~/dotfiles/nvim/plugins/bracey.vim
 source ~/dotfiles/nvim/plugins/vim-startify.vim
 source ~/dotfiles/nvim/plugins/vim-closetag.vim
 source ~/dotfiles/nvim/plugins/vimtex.vim
+source ~/dotfiles/nvim/plugins/quick-lint.vim
+source ~/dotfiles/nvim/plugins/nvim-cmp.vim
+source ~/dotfiles/nvim/plugins/vim-vsnip.vim
+source ~/dotfiles/nvim/plugins/cmp-vsnip.vim
+source ~/dotfiles/nvim/plugins/cmp-nvim-lsp.vim
+source ~/dotfiles/nvim/plugins/cmp-buffer.vim
+source ~/dotfiles/nvim/plugins/cmp-path.vim
+source ~/dotfiles/nvim/plugins/cmp-cmdline.vim
 
 call plug#end()
+
+"-------------------------------------------------
+"	Snipits
+"-------------------------------------------------
+
+" lua require 'lspconfig'
+" lua require'lspconfig'.server.setup({})
+
+"-------------------------------------------------
+"	Language Servers
+"-------------------------------------------------
+
+lua require('lspconfig').bashls.setup{}
+lua require('lspconfig').vimls.setup{}
+lua require('lspconfig').cssls.setup{}
+lua require('lspconfig').html.setup{}
+lua require('lspconfig').jsonls.setup{}
+lua require('lspconfig').ltex.setup{}
+lua require'lspconfig'.pylsp.setup{}
+
+
+set completeopt=menu,menuone,noselect
+"autocompetion{{{
+lua <<EOF
+  -- Set up nvim-cmp.
+  local cmp = require'cmp' --FOLD
+
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      end,
+    },
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' }, -- For vsnip users.
+      -- { name = 'luasnip' }, -- For luasnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'snippy' }, -- For snippy users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Set up lspconfig.
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  require('lspconfig')['bashls'].setup {
+    capabilities = capabilities
+  }
+  require('lspconfig')['vimls'].setup {
+    capabilities = capabilities
+  }
+  require('lspconfig')['cssls'].setup {
+    capabilities = capabilities
+  }
+  require('lspconfig')['html'].setup {
+    capabilities = capabilities
+  }
+  require('lspconfig')['jsonls'].setup {
+    capabilities = capabilities
+  }
+  require('lspconfig')['ltex'].setup {
+    capabilities = capabilities
+  }
+  require('lspconfig')['pylsp'].setup {
+    capabilities = capabilities
+  }
+EOF
+"}}}
