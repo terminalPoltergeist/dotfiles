@@ -591,6 +591,7 @@ source ~/dotfiles/nvim/plugins/cmp-buffer.vim
 source ~/dotfiles/nvim/plugins/cmp-path.vim
 source ~/dotfiles/nvim/plugins/cmp-cmdline.vim
 source ~/dotfiles/nvim/plugins/instant-markdown.vim
+source ~/dotfiles/nvim/plugins/vim-wakatime.vim
 
 call plug#end()
 
