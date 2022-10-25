@@ -612,7 +612,7 @@ lua require('lspconfig').cssls.setup{}
 lua require('lspconfig').html.setup{}
 lua require('lspconfig').jsonls.setup{}
 lua require('lspconfig').ltex.setup{}
-lua require'lspconfig'.pylsp.setup{}
+lua require('lspconfig').pylsp.setup{}
 
 
 set completeopt=menu,menuone,noselect
