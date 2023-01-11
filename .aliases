@@ -94,6 +94,7 @@ alias afk="~/dotfiles/scripts/lockscreen.sh"
 alias AFK="pmset displaysleepnow"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
+alias please='sudo';
 
 
 # Detect which `ls` flavor is in use
