@@ -24,8 +24,8 @@
 "-------------------------------------------------
 
 set expandtab                                                                        
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 set hidden                                                             
 set mouse=a                                                                        
 set scrolloff=6
@@ -95,12 +95,14 @@ noremap <silent> <Leader>s :call ToggleSpellCheck()<CR>
 " yank entire line after cursor
 map Y y$
 " map page scroll
-map <A-j> <C-e>
-map <A-k> <C-y>                                                                        
+map <C-j> <C-e>
+map <C-k> <C-y>                                                                        
 nmap <Leader>v @v
 noremap <Leader>lb :set linebreak<CR>
 noremap <Leader>nb :set nolinebreak<CR>
 nnoremap <space> za
+nmap FF :Telescope find_files<cr>
+nmap FB :Telescope buffers<cr>
 
 "-------------------------------------------------                     
 "	Color Settings
@@ -592,6 +594,10 @@ source ~/dotfiles/nvim/plugins/cmp-path.vim
 source ~/dotfiles/nvim/plugins/cmp-cmdline.vim
 source ~/dotfiles/nvim/plugins/instant-markdown.vim
 source ~/dotfiles/nvim/plugins/vim-wakatime.vim
+source ~/dotfiles/nvim/plugins/telescope.nvim
+source ~/dotfiles/nvim/plugins/nvim-treesitter.vim
+source ~/dotfiles/nvim/plugins/vim-pug.vim
+source ~/dotfiles/nvim/plugins/schemastore.vim
 
 call plug#end()
 
@@ -613,6 +619,7 @@ lua require('lspconfig').html.setup{}
 lua require('lspconfig').jsonls.setup{}
 lua require('lspconfig').ltex.setup{}
 lua require('lspconfig').pylsp.setup{}
+lua require('lspconfig').jsonls.setup{}
 
 
 set completeopt=menu,menuone,noselect
@@ -701,8 +708,26 @@ lua <<EOF
   require('lspconfig')['ltex'].setup {
     capabilities = capabilities
   }
+  require('lspconfig').jsonls.setup {
+    settings = {
+      json = {
+        schemas = require('schemastore').json.schemas(),
+        validate = { enable = true },
+      },
+    },
+  }
   require('lspconfig')['pylsp'].setup {
-    capabilities = capabilities
+    capabilities = capabilities,
+    settings = {
+      pylsp = {
+        plugins = {
+          pycodestyle = {
+            ignore = {'W391', 'E501', 'E302', 'F401'},
+            maxLineLength = 100
+          }
+        }
+      }
+    }
   }
 EOF
 "}}}
