@@ -27,6 +27,8 @@ export FLAVOURS_CONFIG_FILE="$HOME/.config/flavours/config.toml";
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
+export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.

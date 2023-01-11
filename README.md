@@ -24,9 +24,9 @@
 
 I started "dotfiling" with a single .bashrc file. 
 
-I quickly found out how awesome configuring is and wanted to make a more beautiful, modular repository of my configurations. 
+I quickly found out how awesome configuring is and wanted to make a more beautiful, modular repository of my configs. 
 
-I knew version control was important for configurations, so I made a git repo for my configs. 
+I knew version control was important for configurations, so I made a git repo for them. 
 
 I have gone through many iterations of this repository, this is the current iteration. 
 
@@ -84,7 +84,7 @@ If you want to try my configurations:
 - [ ] restore files
     - [ ] .functions
     - [X] .gitconfig
-    - ~~[ ] servers.sh~~
+    - [ ] ~~servers.sh~~
     - [X] ssh/config
 - [ ] write dotfiles local backup script
 - [X] rewrite readme constructor script
