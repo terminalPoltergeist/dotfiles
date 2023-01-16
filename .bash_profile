@@ -28,6 +28,8 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+export GPG_TTY=${tty}
+gpgconf --launch gpg-agent
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
