@@ -33,6 +33,7 @@ set sidescrolloff=6
 set relativenumber 
 set number
 set confirm
+set cursorline
 set autoindent
 set cmdheight=2
 set updatetime=300
