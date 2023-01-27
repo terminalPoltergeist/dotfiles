@@ -20,3 +20,9 @@ template = "tmux"
 file = "/Users/jacknemitz/.spicetify/Themes/Vaporwave/color.ini"
 template = "spicetify"
 rewrite = true
+
+[[item]]
+file = "/Users/jacknemitz/dotfiles/sketchybar/colors.sh"
+template = "sketchybar"
+start = "# Start flavours"
+end = "# End flavours"
