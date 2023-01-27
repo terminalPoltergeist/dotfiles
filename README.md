@@ -70,6 +70,8 @@ If you want to try my configurations:
 *these are features/changes I want to make. I may implement a changelog in the future to help organize this.*
 - [ ] reorganize file structure
     - [ ] create directories for each system's/program's configs
+      - directory for stardard bash/system dotfiles
+      - directory for each apps dotfiles
 - [ ] refresh install script
     - [ ] create better linking system
     - [ ] make install process more efficient
@@ -81,8 +83,8 @@ If you want to try my configurations:
         - [ ] use list selection for `thispath` function?
             - [ ] `thispath` should pull up a list with "./" and everything within current directory
 - [X] update prompt style
-- [ ] restore files
-    - [ ] .functions
+- [X] restore files
+    - [X] .functions
     - [X] .gitconfig
     - [ ] ~~servers.sh~~
     - [X] ssh/config
