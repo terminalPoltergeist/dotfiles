@@ -31,6 +31,8 @@ export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 export GPG_TTY=${tty}
 gpgconf --launch gpg-agent
 
+export APOLLO="apollo.cselabs.umn.edu"
+
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
