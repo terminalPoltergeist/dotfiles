@@ -36,9 +36,8 @@ alias .....='cd ../../../..';
 ## some of the following commands are specific to my folder structure, modify to fit your needs
 alias dl='cd ~/Downloads';
 alias dt='cd ~/Desktop';
-alias master='cd ~/Desktop/master';
-alias school='cd ~/Desktop/master/school';
-alias projects='cd ~/Desktop/master/projects';
+alias school='cd ~/Desktop/school';
+alias projects='cd ~/Desktop/projects';
 alias root='cd /';
 
 ###############################################
