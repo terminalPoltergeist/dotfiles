@@ -723,7 +723,7 @@ lua <<EOF
       pylsp = {
         plugins = {
           pycodestyle = {
-            ignore = {'W391', 'E501', 'E302', 'F401'},
+            ignore = {'W391', 'E501', 'E302', 'F401', 'E401', 'E265'},
             maxLineLength = 100
           }
         }
