@@ -72,16 +72,18 @@ function gitit() {
 
 # List branches and prompt to switch to a branch
 function gcheck() {
-    branches=();
-    count=0;
-    echo "Availible branches:"
-    for branch in $(git for-each-ref refs/heads  | cut -d/ -f3-); do
-        (( count++ ))
-        echo "$count) $branch"
-        branches+=($branch)
-    done
-    read -p 'Branch: ' ans;
-    command git checkout "${branches[$ans-1]}";
+  branches=();
+  count=0;
+  for branch in $(git for-each-ref refs/heads  | cut -d/ -f3-); do
+      (( count++ ))
+      branches+=($branch)
+  done
+  gum style \
+	--foreground 212 --border-foreground 212 --border double \
+	--align center --width 50 --margin "0 1" --padding "0 1" \
+	'Git Checkout...'
+  choise=$(gum choose "${branches[@]}");
+  git checkout ${choise};
 };
 
 ###############################################
