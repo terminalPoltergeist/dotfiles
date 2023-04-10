@@ -144,9 +144,14 @@ function git_comm() {
       why="$why"$'  - '"$inp";
     fi;
   done;
-  git commit -m "$title" -m "$what"$'\n\n'"$why";
+  echo "$title"$'\n\n'"$what"$'\n\n'"$why" > commit.tmp;
+  until gum confirm --affirmative "Commit" --negative "Edit" --selected.background 110 "Commit changes?"; ss=$?; [[ $ss -eq 0 ]]
+  do
+    nvim commit.tmp;
+  done;
+  git commit -F commit.tmp;
+  rm commit.tmp;
 };
-
 ###############################################
 ################ SSH Functions ################
 ###############################################
