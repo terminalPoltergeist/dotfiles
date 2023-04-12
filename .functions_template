@@ -93,7 +93,7 @@ function symlink() {
 }
 
 function removePath() { 
-    export PATH="$( echo $PATH| tr : '\n' |grep -v $1 | paste -s -d: )"
+  export PATH="$( echo $PATH| tr : '\n' |grep -v $1 | paste -s -d: )"
 }
 
 ###############################################
@@ -102,24 +102,24 @@ function removePath() {
 
 # Auto commit/push
 function gitit() {
-    command git status;
-    command git add .;
-    command git commit -m "auto commit";
-    command git push;
+  command git status;
+  command git add .;
+  command git commit -m "auto commit";
+  command git push;
 };
 
 # List branches and prompt to switch to a branch
-function gcheck() {
+function check() {
   branches=();
   count=0;
   for branch in $(git for-each-ref refs/heads  | cut -d/ -f3-); do
-      (( count++ ))
-      branches+=($branch)
+    (( count++ ))
+    branches+=($branch)
   done
   gum style \
-	--foreground 212 --border-foreground 212 --border double \
-	--align center --width 50 --margin "0 1" --padding "0 1" \
-	'Git Checkout...'
+    --foreground 153 --border-foreground 182 --border double \
+    --align center --width 50 --margin "0 1" --padding "0 1" \
+    'Git Checkout...'
   choise=$(gum choose "${branches[@]}");
   git checkout ${choise};
 };
@@ -191,12 +191,6 @@ function git_comm() {
 ################ SSH Functions ################
 ###############################################
 
-# function ssend(){
-#     read -p 'path to file: ' path;
-#     read -p 'machine to send to: ' location;
-#     scp
-# }
-
 ###############################################
 ################ Gen Functions ################
 ###############################################
@@ -205,16 +199,16 @@ function goodnight() {
     command sudo tmutil stopbackup;
     for v in /Volumes/*; do
     if [[ $v != *"Macintosh HD" && $v != *"Recovery"* && $v != "pi" ]]; then
-        echo "Unmounting $v..."
-        command diskutil unmount "/$v";
-        echo
+      echo "Unmounting $v..."
+      command diskutil unmount "/$v";
+      echo
     fi;
     done
     count=10;
     while [[ count -gt 0 ]]; do
-        count=$((count-1));
-        echo "Computer will sleep in: ${count}";
-        command sleep 1;
+      count=$((count-1));
+      echo "Computer will sleep in: ${count}";
+      command sleep 1;
     done
     command pmset sleepnow;
 };
