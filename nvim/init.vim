@@ -618,7 +618,6 @@ lua require('lspconfig').vimls.setup{}
 lua require('lspconfig').cssls.setup{}
 lua require('lspconfig').html.setup{}
 lua require('lspconfig').jsonls.setup{}
-lua require('lspconfig').ltex.setup{}
 lua require('lspconfig').pylsp.setup{}
 lua require('lspconfig').jsonls.setup{}
 
@@ -706,9 +705,19 @@ lua <<EOF
   require('lspconfig')['jsonls'].setup {
     capabilities = capabilities
   }
-  require('lspconfig')['ltex'].setup {
-    capabilities = capabilities
+  --[[
+  require('lspconfig').ltex.setup {
+    settings = {
+      ltex = {
+        language = "en-US",
+        disabledRules = {['en-US'] = {"TOO_LONG_SENTENCE", "PROFANITY", "MORFOLOGIK_RULE_EN_US"}},
+        dictionary = {
+          ['en-US'] = {"dotfiles"}
+        }
+      }
+    }
   }
+  ]]--
   require('lspconfig').jsonls.setup {
     settings = {
       json = {
