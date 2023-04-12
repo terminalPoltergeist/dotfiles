@@ -96,6 +96,57 @@ function gcheck() {
   git checkout ${choise};
 };
 
+function git_comm() {
+  type=$(gum choose --cursor.foreground 182  "add" "implement" "update" "fix" "bug" "remove" "feat" "refactor" "docs" "other");
+  if [ "$type" == "other" ]; then
+    type=$(gum input --placeholder "Enter a custom commit type...");
+  fi;
+  gum style \
+	--foreground 182 --border-foreground 182 --border rounded \
+	--align center --width 25 --margin "0 0" --padding "0 0" \
+	'Commit';
+  title=$(gum input --width 72 --char-limit 72 --value "$type: ");
+  gum style \
+	--foreground 153 --border none \
+	--align left --width 50 --margin "1 0 1 1" --padding "0 0" \
+	"$title";
+  what=$'|What:\n';
+  gum style \
+  --foreground 153 --border none \
+  --align left --width 50 --margin "0 0 1 2" --padding "0 1" \
+  "|What: ";
+  inp=' ';
+  while [ "$inp" != '' ]
+  do 
+    inp=$(gum input --prompt "     - " --placeholder "WHAT functionally changed or press enter to submit");
+    if [ "$inp" != '' ]; then
+      gum style \
+      --foreground 153 --border none \
+      --align left --width 50 --margin "0 0 0 2" --padding "0 1" \
+      "  • $inp";
+      what="$what"$'  - '"$inp";
+    fi;
+  done;
+  why=$'|Why:\n';
+  gum style \
+  --foreground 153 --border none \
+  --align left --width 50 --margin "1 0 1 2" --padding "0 1" \
+  "|Why: ";
+  inp=' ';
+  while [ "$inp" != '' ]
+  do 
+    inp=$(gum input --prompt "     - " --placeholder "WHY the change was made or press enter to submit");
+    if [ "$inp" != '' ]; then
+      gum style \
+      --foreground 153 --border none \
+      --align left --width 50 --margin "0 0 0 2" --padding "0 1" \
+      "  • $inp";
+      why="$why"$'  - '"$inp";
+    fi;
+  done;
+  git commit -m "$title" -m "$what"$'\n\n'"$why";
+};
+
 ###############################################
 ################ SSH Functions ################
 ###############################################
