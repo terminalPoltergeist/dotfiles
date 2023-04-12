@@ -102,49 +102,55 @@ function git_comm() {
     type=$(gum input --placeholder "Enter a custom commit type...");
   fi;
   gum style \
-	--foreground 182 --border-foreground 182 --border rounded \
-	--align center --width 25 --margin "0 0" --padding "0 0" \
-	'Commit';
+    --foreground 182 --border-foreground 182 --border rounded \
+    --align center --width 25 --margin "0 0" --padding "0 0" \
+    'Commit';
   title=$(gum input --width 72 --char-limit 72 --value "$type: ");
   gum style \
-	--foreground 153 --border none \
-	--align left --width 50 --margin "1 0 1 1" --padding "0 0" \
-	"$title";
+    --foreground 153 --border none \
+    --align left --width 50 --margin "1 0 1 1" --padding "0 0" \
+    "$title";
   what=$'|What:\n';
   gum style \
-  --foreground 153 --border none \
-  --align left --width 50 --margin "0 0 1 2" --padding "0 1" \
-  "|What: ";
+    --foreground 153 --border none \
+    --align left --width 50 --margin "0 0 1 2" --padding "0 1" \
+    "|What: ";
   inp=' ';
   while [ "$inp" != '' ]
   do 
     inp=$(gum input --prompt "     - " --placeholder "WHAT functionally changed or press enter to submit");
     if [ "$inp" != '' ]; then
       gum style \
-      --foreground 153 --border none \
-      --align left --width 50 --margin "0 0 0 2" --padding "0 1" \
-      "  • $inp";
+        --foreground 153 --border none \
+        --align left --width 50 --margin "0 0 0 2" --padding "0 1" \
+        "  • $inp";
       what="$what"$'  - '"$inp";
     fi;
   done;
   why=$'|Why:\n';
   gum style \
-  --foreground 153 --border none \
-  --align left --width 50 --margin "1 0 1 2" --padding "0 1" \
-  "|Why: ";
+    --foreground 153 --border none \
+    --align left --width 50 --margin "1 0 1 2" --padding "0 1" \
+    "|Why: ";
   inp=' ';
   while [ "$inp" != '' ]
   do 
     inp=$(gum input --prompt "     - " --placeholder "WHY the change was made or press enter to submit");
     if [ "$inp" != '' ]; then
       gum style \
-      --foreground 153 --border none \
-      --align left --width 50 --margin "0 0 0 2" --padding "0 1" \
-      "  • $inp";
+        --foreground 153 --border none \
+        --align left --width 50 --margin "0 0 0 2" --padding "0 1" \
+        "  • $inp";
       why="$why"$'  - '"$inp";
     fi;
   done;
-  echo "$title"$'\n\n'"$what"$'\n\n'"$why" > commit.tmp;
+  echo "$title" > commit.tmp;
+  if [ ${#what} -ne 7 ]; then
+    echo $'\n'"$what" >> commit.tmp;
+  fi;
+  if [ ${#why} -ne 6 ]; then
+    echo $'\n'"$why" >> commit.tmp;
+  fi;
   until gum confirm --affirmative "Commit" --negative "Edit" --selected.background 110 "Commit changes?"; ss=$?; [[ $ss -eq 0 ]]
   do
     nvim commit.tmp;
@@ -152,6 +158,7 @@ function git_comm() {
   git commit -F commit.tmp;
   rm commit.tmp;
 };
+
 ###############################################
 ################ SSH Functions ################
 ###############################################
