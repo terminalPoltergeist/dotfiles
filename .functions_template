@@ -38,15 +38,43 @@ function mkd() {
 
 # Copy current working directory (adding arg 1 will copy path to that file)
 function thispath(){
+  help="thispath
+         A utility to copy a path to the system clipboard
+
+         USAGE:
+           thispath
+           thispath [OPTION]
+
+         OPTIONS:
+           -d, --directory        Make directories selectable
+           -f, --file             Make directories traversable (only files are selectable)
+  "
   if [ $# -eq 1 ]
     then
       wd=`pwd`;
-      pa="${wd}/${1}";
-      command echo $pa | pbcopy;
-    else
-      command pwd | pbcopy;
-  fi
-};
+      case $1 in
+        -d|--directory)
+          dir=$(gum file -a --directory);
+          command echo "${wd}/${dir}" | pbcopy;
+          ;;
+        -f|--file)
+          file=$(gum file -a);
+          command echo "${wd}/${file}" | pbcopy;
+          ;;
+        -*|--*)
+          echo "Unknown option $1"
+          ;;
+      esac
+  elif [ $# -gt 1 ]
+    then
+      while [[ $# -gt 0 ]]; do
+        echo "Unknown option: $1";
+        shift
+      done
+  else
+    command pwd | pbcopy;
+  fi;
+}
 
 function symlink() {
   gum style \
