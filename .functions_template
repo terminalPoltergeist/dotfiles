@@ -33,25 +33,35 @@ Some areas of this template have been redacted for this reason. I have put comme
 
 # Create a new directory and enter it
 function mkd() {
-    mkdir -p "$@" && cd "$_";
+  mkdir -p "$@" && cd "$_";
 }
 
 # Copy current working directory (adding arg 1 will copy path to that file)
 function thispath(){
-    if [ $# -eq 1 ]
-        then
-            wd=`pwd`;
-            pa="${wd}/${1}";
-            command echo $pa | pbcopy;
-        else
-            command pwd | pbcopy;
-    fi
+  if [ $# -eq 1 ]
+    then
+      wd=`pwd`;
+      pa="${wd}/${1}";
+      command echo $pa | pbcopy;
+    else
+      command pwd | pbcopy;
+  fi
 };
 
 function symlink() {
-    read -p "Path to actual file: " path;
-    read -p "Path to link (will point to actual file): " link;
-    ln -s ~/$path ~/$link;
+  gum style \
+	--foreground 212 --border-foreground 212 --border double \
+	--align center --width 50 --margin "0 1" --padding "0 1" \
+	'Select file to create a link...';
+  file=$(gum file -a);
+  echo "Creating link to $file...";
+  gum style \
+	--foreground 212 --border-foreground 212 --border double \
+	--align center --width 50 --margin "0 1" --padding "0 1" \
+	'Path to new link...';
+  link=$(gum input --placeholder "$(pwd)/...");
+  echo "Linking to $link...";
+  gum confirm && (ln -s ./$file ./$link && echo "Created link $link -> $file") || echo "Cancelled symlink...";
 }
 
 function removePath() { 
