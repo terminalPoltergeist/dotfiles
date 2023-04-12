@@ -68,28 +68,31 @@ If you want to try my configurations:
 ## TO DOs
 
 *these are features/changes I want to make. I may implement a changelog in the future to help organize this.*
+
+_structure_
 - [ ] reorganize file structure
     - [ ] create directories for each system's/program's configs
       - directory for stardard bash/system dotfiles
       - directory for each apps dotfiles
+    - [ ] move larger functions into dedicated file
+    - [ ] make each piece of functionality completely modular
+      - allow a single feature to be integrated into existing configs
+
+_usability_
 - [ ] refresh install script
     - [ ] create better linking system
     - [ ] make install process more efficient
-- [ ] add [Bubble Tea](https://github.com/charmbracelet/bubbletea) and possibly [Lipgloss](https://github.com/charmbracelet/lipgloss) stylization to entire directory
-    <br/>*maybe use [Gum](https://github.com/charmbracelet/gum)?*
-    - [ ] transition shell functions to use BubbleTea
-        - [ ] use list selection rater than prompt/response for functions like `gcheck`
-        - [ ] use text fields for functions like `symlink`
-        - [ ] use list selection for `thispath` function?
-            - [ ] `thispath` should pull up a list with "./" and everything within current directory
-- [X] update prompt style
-- [X] restore files
-    - [X] .functions
-    - [X] .gitconfig
-    - [ ] ~~servers.sh~~
-    - [X] ssh/config
 - [ ] write dotfiles local backup script
-- [X] rewrite readme constructor script
+
+_style_
+- [ ] add [Gum](https://github.com/charmbracelet/gum) to stylize scripts
+    - [X] use list selection rater than prompt/response for functions like `gcheck`
+    - [X] use text fields for functions like `symlink`
+    - [X] commit function with gum
+      - [X] update to not include what/why if empty
+      - [ ] adjust column width for body fields
+    - [X] use list selection for `thispath` function?
+    - [ ] tmux function to list sessions and options (attatch, kill, etc)
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Contributing
