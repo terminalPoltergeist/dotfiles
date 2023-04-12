@@ -46,7 +46,7 @@ alias root='cd /';
 
 alias gs='git status';
 alias ga='git add';
-alias gc='git commit';
+alias gc='git_comm';
 alias gp='git push';
 alias gl='git log';
 alias gb='git branch';
