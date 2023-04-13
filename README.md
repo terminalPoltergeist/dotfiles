@@ -83,6 +83,10 @@ _usability_
     - [ ] create better linking system
     - [ ] make install process more efficient
 - [ ] write dotfiles local backup script
+- [ ] tmux function to restore sessions after reboot
+  - [ ] get all info for all open sessions
+    - session name, number and position of windows and panes,  
+      paths to open files and current working directories/ running programs
 
 _style_
 - [ ] add [Gum](https://github.com/charmbracelet/gum) to stylize scripts
