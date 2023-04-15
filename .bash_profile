@@ -19,15 +19,17 @@
 #/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
+export PATH="$(cat path)";
+
 #Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:$PATH";
+# export PATH="$PATH:$HOME/bin";
 export FLAVOURS_CONFIG_FILE="$HOME/.config/flavours/config.toml";
 
 #Set up Go env
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+# export GOPATH="$HOME/go";
+# export PATH="$PATH:$GOPATH/bin";
 
-export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+# export PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
 export GPG_TTY=${tty}
 gpgconf --launch gpg-agent
 
