@@ -21,7 +21,7 @@
 
 ## some of these scripts are inspired from a youtube video on bash dotfiles that I can no longer find
 
-alias sourcebash='clear && source ~/.bash_profile';                    # sources all config files 
+alias sourcebash='clear && source ~/dotfiles/.bash_profile';                    # sources all config files 
 
 ###############################################
 ############ Navigation Shortcuts #############
