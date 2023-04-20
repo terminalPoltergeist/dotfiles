@@ -19,7 +19,7 @@
 #/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-export PATH="$(cat path)";
+# export PATH="$(cat path)";
 
 #Add `~/bin` to the `$PATH`
 # export PATH="$PATH:$HOME/bin";
@@ -42,6 +42,10 @@ for file in ~/dotfiles/.{path,bash_prompt,bashrc,exports,aliases,functions,extra
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;
