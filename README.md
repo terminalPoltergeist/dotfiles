@@ -83,6 +83,7 @@ _usability_
     - [ ] create better linking system
     - [ ] make install process more efficient
 - [ ] write dotfiles local backup script
+- [ ] C utility that forks and execs ssh for all cse labs machines and exits on first success
 - [ ] tmux function to restore sessions after reboot
   - [ ] get all info for all open sessions
     - session name, number and position of windows and panes,  
