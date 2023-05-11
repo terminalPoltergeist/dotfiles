@@ -24,11 +24,9 @@
 
 I started "dotfiling" with a single .bashrc file. 
 
-I quickly found out how awesome configuring is and wanted to make a more beautiful, modular repository of my configs. 
+As my needs of customizing my development environment grew, so did my configurations.
 
-I knew version control was important for configurations, so I made a git repo for them. 
-
-I have gone through many iterations of this repository, this is the current iteration. 
+I have gone through many iterations of this repository, this is the current version.
 
 [Here is a cool post on the philosophy behind robust dotfiles](https://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/) from [@holman](https://github.com/holman) 
 
@@ -36,8 +34,7 @@ I have gone through many iterations of this repository, this is the current iter
 
 ## Using my Configurations
 
-#### First off, a warning.
-**Do not blindly copy these configurations onto your system.**
+As with any configurations, don't blindly copy these onto your system.
 
 If you want to try my configurations:
 1. Fork this repository
@@ -47,7 +44,7 @@ If you want to try my configurations:
 
 ### How to use my configs
 
-*I hope to integrate some sort of automation for installation in the future. I am too inexperienced at this point to make that happen. But stay tuned, it's coming.*
+*I hope to integrate some sort of automation for installation in the future. Alas, I am lazy*
 
 #### 1. Clean up existing dotfiles
 - If you have existing dotfiles, back them up and archive them
@@ -75,6 +72,7 @@ _structure_
       - directory for stardard bash/system dotfiles
       - directory for each apps dotfiles
     - [ ] move larger functions into dedicated file
+      - possibly transition to a go cmdlet
     - [ ] make each piece of functionality completely modular
       - allow a single feature to be integrated into existing configs
 
@@ -97,20 +95,5 @@ _style_
       - [X] update to not include what/why if empty
       - [ ] adjust column width for body fields
     - [X] use list selection for `thispath` function?
-    - [ ] tmux function to list sessions and options (attatch, kill, etc)
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make my configurations better, please fork the repo and create a pull request. You can also simply open an issue with the tag "feature".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
+    - [ ] tmux function to list sessions and options (attach, kill, etc)
 <p align="right">(<a href="#top">back to top</a>)</p>
