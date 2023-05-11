@@ -63,6 +63,7 @@ alias firefox='open -a Firefox'
 ## spotify shortcuts
 alias spotpl='spotify play';
 alias spotpa='spotify pause';
+alias spicetify='~/.spicetify/spicetify';
 
 alias vim="vim -S ~/.vim/.vimrc";                                      # opens vim by sources .vimrc 
 
