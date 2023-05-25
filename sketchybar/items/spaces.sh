@@ -21,7 +21,6 @@ do
                               background.padding_right=-8                   \
                               background.color=$BACKGROUND_1                \
                               background.drawing=off                        \
-                              label.font="sketchybar-app-font:Regular:16.0" \
                               label.background.height=26                    \
                               label.background.drawing=on                   \
                               label.background.color=$BACKGROUND_2          \

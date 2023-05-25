@@ -5,7 +5,8 @@ sketchybar --add item battery right                             \
                          icon.font="$FONT:Regular:19.0"         \
                          padding_right=5                        \
                          padding_left=0                         \
-                         label.drawing=off                      \
+                         label.drawing=on                      \
                          update_freq=120                        \
                          updates=on                             \
+                         icon.padding_right=7                   \
             --subscribe battery power_source_change system_woke
