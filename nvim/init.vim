@@ -41,6 +41,7 @@ set signcolumn=number
 " set colorcolumn=72
 nnoremap <leader>cc :execute "set colorcolumn=" . (&colorcolumn == "" ? "72" : "")<CR>
 nmap <leader>e T<Space>cE()<Esc>PT<Space>lvEhyhi[]<Esc>P
+nmap <leader>r :%s/<br>/\r/g<CR>
 set linebreak
 let @v = '\nb$73a jj73|v$hd\lb'
 syntax on
@@ -618,9 +619,9 @@ lua require('lspconfig').bashls.setup{}
 lua require('lspconfig').vimls.setup{}
 lua require('lspconfig').cssls.setup{}
 lua require('lspconfig').html.setup{}
-lua require('lspconfig').jsonls.setup{}
 lua require('lspconfig').pylsp.setup{}
 lua require('lspconfig').jsonls.setup{}
+lua require('lspconfig').tsserver.setup{}
 
 
 set completeopt=menu,menuone,noselect
