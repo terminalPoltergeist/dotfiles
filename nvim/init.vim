@@ -23,59 +23,61 @@
 "	General Settings
 "-------------------------------------------------
 
-set expandtab                                                                        
-set shiftwidth=2
-set tabstop=2
-set hidden                                                             
-set mouse=a                                                                        
-set scrolloff=6
-set sidescrolloff=6                                                     
-set relativenumber 
-set number
-set confirm
-set cursorline
-set autoindent
-set cmdheight=2
-set updatetime=300
-set signcolumn=number
-" set colorcolumn=72
-nnoremap <leader>cc :execute "set colorcolumn=" . (&colorcolumn == "" ? "72" : "")<CR>
-set linebreak
-let @v = '\nb$73a jj73|v$hd\lb'
-syntax on
-syntax enable
-set noswapfile
-set incsearch
-set clipboard=unnamedplus
-highlight MatchParen cterm=underline ctermbg=NONE ctermfg=NONE
-highlight MatchParen gui=underline guibg=NONE guifg=NONE
-highlight VertSplit cterm=NONE                                                                        
-highlight ColorColumn ctermbg=0
-highlight clear SignColumn
-let g:python3_host_prog = '/Users/jacknemitz/.pyenv/shims/python3'
-let g:python2_host_prog = '/Users/jacknemitz/.pyenv/shims/python'
-set foldmethod=marker
+" set expandtab                                                                        
+" set shiftwidth=2
+" set tabstop=2
+" set hidden                                                             
+" set mouse=a                                                                        
+" set scrolloff=6
+" set sidescrolloff=6                                                     
+" set relativenumber 
+" set number
+" set confirm
+" set cursorline
+" set autoindent
+" set cmdheight=2
+" set updatetime=300
+" set signcolumn=number
+" " set colorcolumn=72
+" nnoremap <leader>cc :execute "set colorcolumn=" . (&colorcolumn == "" ? "72" : "")<CR>
+" nmap <leader>e T<Space>cE()<Esc>PT<Space>lvEhyhi[]<Esc>P
+" nmap <leader>r :%s/<br>/\r/g<CR>
+" set linebreak
+" let @v = '\nb$73a jj73|v$hd\lb'
+" syntax on
+" syntax enable
+" set noswapfile
+" set incsearch
+" set clipboard=unnamedplus
+" highlight MatchParen cterm=underline ctermbg=NONE ctermfg=NONE
+" highlight MatchParen gui=underline guibg=NONE guifg=NONE
+" highlight VertSplit cterm=NONE                                                                        
+" highlight ColorColumn ctermbg=0
+" highlight clear SignColumn
+" let g:python3_host_prog = '/Users/jacknemitz/.pyenv/shims/python3'
+" let g:python2_host_prog = '/Users/jacknemitz/.pyenv/shims/python'
+" set foldmethod=marker
 
 
 "-------------------------------------------------
 "   Plugin Specific Settings
 "-------------------------------------------------
 
-autocmd bufenter * if (winnr("$") ==1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" let NERDTreeHighlightCursorline = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeShowHidden=1
-let NERDTreeDirArrows = 1
-let NERDTreeWinSize = 35
-let g:NERDTreeWinPos = "right"
-:highlight clear SpellBad
-:highlight SpellBad ctermfg=009 ctermbg=011
-" OCaml setup
-set rtp+=<SHARE_DIR>/merlin/vim
-set rtp^="/Users/jacknemitz/.opam/csci2041/share/ocp-indent/vim"
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-autocmd FileType ocaml source /Users/jacknemitz/.opam/csci2041/share/typerex/ocp-indent/ocp-indent.vim
-filetype plugin indent on
+" autocmd bufenter * if (winnr("$") ==1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" " let NERDTreeHighlightCursorline = 1
+" let NERDTreeMinimalUI = 1
+" let NERDTreeShowHidden=1
+" let NERDTreeDirArrows = 1
+" let NERDTreeWinSize = 35
+" let g:NERDTreeWinPos = "right"
+" :highlight clear SpellBad
+" :highlight SpellBad ctermfg=009 ctermbg=011
+" " OCaml setup
+" set rtp+=<SHARE_DIR>/merlin/vim
+" set rtp^="/Users/jacknemitz/.opam/csci2041/share/ocp-indent/vim"
+" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+" autocmd FileType ocaml source /Users/jacknemitz/.opam/csci2041/share/typerex/ocp-indent/ocp-indent.vim
+" filetype plugin indent on
 
 
 
@@ -83,27 +85,27 @@ filetype plugin indent on
 "	Key Mappings
 "-------------------------------------------------
 
-" quicker escape
-imap jj <esc>
-" open new buffer with file under cursor
-map gf :edit <cfile><cr>
-" toggle nerdtree file manager
-map <Leader>n :NERDTreeToggle<cr><Leader>j
-" list buffers then prompt for buffer
-nnoremap <Leader>b :ls<CR>:b<Space>
-" toggle spell checking
-noremap <silent> <Leader>s :call ToggleSpellCheck()<CR>
-" yank entire line after cursor
-map Y y$
-" map page scroll
-map <C-j> <C-e>
-map <C-k> <C-y>                                                                        
-nmap <Leader>v @v
-noremap <Leader>lb :set linebreak<CR>
-noremap <Leader>nb :set nolinebreak<CR>
-nnoremap <space> za
-nmap FF :Telescope find_files<cr>
-nmap FB :Telescope buffers<cr>
+" " quicker escape
+" imap jj <esc>
+" " open new buffer with file under cursor
+" map gf :edit <cfile><cr>
+" " toggle nerdtree file manager
+" map <Leader>n :NERDTreeToggle<cr><Leader>j
+" " list buffers then prompt for buffer
+" nnoremap <Leader>b :ls<CR>:b<Space>
+" " toggle spell checking
+" noremap <silent> <Leader>s :call ToggleSpellCheck()<CR>
+" " yank entire line after cursor
+" map Y y$
+" " map page scroll
+" map <C-j> <C-e>
+" map <C-k> <C-y>                                                                        
+" nmap <Leader>v @v
+" noremap <Leader>lb :set linebreak<CR>
+" noremap <Leader>nb :set nolinebreak<CR>
+" nnoremap <space> za
+" nmap FF :Telescope find_files<cr>
+" nmap FB :Telescope buffers<cr>
 
 "-------------------------------------------------                     
 "	Color Settings
@@ -114,7 +116,7 @@ nmap FB :Telescope buffers<cr>
 
 " base16-vim (https://github.com/chriskempson/base16-vim)
 " by Chris Kempson (http://chriskempson.com)
-" Gruvbox light, medium scheme by Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
+" Nord scheme by arcticicestudio
 
 " This enables the coresponding base16-shell script to run so that
 " :colorscheme works in terminals supported by base16-shell scripts
@@ -122,43 +124,43 @@ nmap FB :Telescope buffers<cr>
 "   let g:base16_shell_path=base16-builder/output/shell/
 if !has("gui_running")
   if exists("g:base16_shell_path")
-    execute "silent !/bin/sh ".g:base16_shell_path."/base16-gruvbox-light-medium.sh"
+    execute "silent !/bin/sh ".g:base16_shell_path."/base16-nord.sh"
   endif
 endif
 
 " GUI color definitions
-let s:gui00        = "fbf1c7"
-let g:base16_gui00 = "fbf1c7"
-let s:gui01        = "ebdbb2"
-let g:base16_gui01 = "ebdbb2"
-let s:gui02        = "d5c4a1"
-let g:base16_gui02 = "d5c4a1"
-let s:gui03        = "bdae93"
-let g:base16_gui03 = "bdae93"
-let s:gui04        = "665c54"
-let g:base16_gui04 = "665c54"
-let s:gui05        = "504945"
-let g:base16_gui05 = "504945"
-let s:gui06        = "3c3836"
-let g:base16_gui06 = "3c3836"
-let s:gui07        = "282828"
-let g:base16_gui07 = "282828"
-let s:gui08        = "9d0006"
-let g:base16_gui08 = "9d0006"
-let s:gui09        = "af3a03"
-let g:base16_gui09 = "af3a03"
-let s:gui0A        = "b57614"
-let g:base16_gui0A = "b57614"
-let s:gui0B        = "79740e"
-let g:base16_gui0B = "79740e"
-let s:gui0C        = "427b58"
-let g:base16_gui0C = "427b58"
-let s:gui0D        = "076678"
-let g:base16_gui0D = "076678"
-let s:gui0E        = "8f3f71"
-let g:base16_gui0E = "8f3f71"
-let s:gui0F        = "d65d0e"
-let g:base16_gui0F = "d65d0e"
+let s:gui00        = "2E3440"
+let g:base16_gui00 = "2E3440"
+let s:gui01        = "3B4252"
+let g:base16_gui01 = "3B4252"
+let s:gui02        = "434C5E"
+let g:base16_gui02 = "434C5E"
+let s:gui03        = "4C566A"
+let g:base16_gui03 = "4C566A"
+let s:gui04        = "D8DEE9"
+let g:base16_gui04 = "D8DEE9"
+let s:gui05        = "E5E9F0"
+let g:base16_gui05 = "E5E9F0"
+let s:gui06        = "ECEFF4"
+let g:base16_gui06 = "ECEFF4"
+let s:gui07        = "8FBCBB"
+let g:base16_gui07 = "8FBCBB"
+let s:gui08        = "BF616A"
+let g:base16_gui08 = "BF616A"
+let s:gui09        = "D08770"
+let g:base16_gui09 = "D08770"
+let s:gui0A        = "EBCB8B"
+let g:base16_gui0A = "EBCB8B"
+let s:gui0B        = "A3BE8C"
+let g:base16_gui0B = "A3BE8C"
+let s:gui0C        = "88C0D0"
+let g:base16_gui0C = "88C0D0"
+let s:gui0D        = "81A1C1"
+let g:base16_gui0D = "81A1C1"
+let s:gui0E        = "B48EAD"
+let g:base16_gui0E = "B48EAD"
+let s:gui0F        = "5E81AC"
+let g:base16_gui0F = "5E81AC"
 
 " Terminal color definitions
 let s:cterm00        = "00"
@@ -211,22 +213,22 @@ endif
 
 " Neovim terminal colours
 if has("nvim")
-  let g:terminal_color_0 =  "#fbf1c7"
-  let g:terminal_color_1 =  "#9d0006"
-  let g:terminal_color_2 =  "#79740e"
-  let g:terminal_color_3 =  "#b57614"
-  let g:terminal_color_4 =  "#076678"
-  let g:terminal_color_5 =  "#8f3f71"
-  let g:terminal_color_6 =  "#427b58"
-  let g:terminal_color_7 =  "#504945"
-  let g:terminal_color_8 =  "#bdae93"
-  let g:terminal_color_9 =  "#9d0006"
-  let g:terminal_color_10 = "#79740e"
-  let g:terminal_color_11 = "#b57614"
-  let g:terminal_color_12 = "#076678"
-  let g:terminal_color_13 = "#8f3f71"
-  let g:terminal_color_14 = "#427b58"
-  let g:terminal_color_15 = "#282828"
+  let g:terminal_color_0 =  "#2E3440"
+  let g:terminal_color_1 =  "#BF616A"
+  let g:terminal_color_2 =  "#A3BE8C"
+  let g:terminal_color_3 =  "#EBCB8B"
+  let g:terminal_color_4 =  "#81A1C1"
+  let g:terminal_color_5 =  "#B48EAD"
+  let g:terminal_color_6 =  "#88C0D0"
+  let g:terminal_color_7 =  "#E5E9F0"
+  let g:terminal_color_8 =  "#4C566A"
+  let g:terminal_color_9 =  "#BF616A"
+  let g:terminal_color_10 = "#A3BE8C"
+  let g:terminal_color_11 = "#EBCB8B"
+  let g:terminal_color_12 = "#81A1C1"
+  let g:terminal_color_13 = "#B48EAD"
+  let g:terminal_color_14 = "#88C0D0"
+  let g:terminal_color_15 = "#8FBCBB"
   let g:terminal_color_background = g:terminal_color_0
   let g:terminal_color_foreground = g:terminal_color_5
   if &background == "light"
@@ -235,29 +237,29 @@ if has("nvim")
   endif
 elseif has("terminal")
   let g:terminal_ansi_colors = [
-        \ "#fbf1c7",
-        \ "#9d0006",
-        \ "#79740e",
-        \ "#b57614",
-        \ "#076678",
-        \ "#8f3f71",
-        \ "#427b58",
-        \ "#504945",
-        \ "#bdae93",
-        \ "#9d0006",
-        \ "#79740e",
-        \ "#b57614",
-        \ "#076678",
-        \ "#8f3f71",
-        \ "#427b58",
-        \ "#282828",
+        \ "#2E3440",
+        \ "#BF616A",
+        \ "#A3BE8C",
+        \ "#EBCB8B",
+        \ "#81A1C1",
+        \ "#B48EAD",
+        \ "#88C0D0",
+        \ "#E5E9F0",
+        \ "#4C566A",
+        \ "#BF616A",
+        \ "#A3BE8C",
+        \ "#EBCB8B",
+        \ "#81A1C1",
+        \ "#B48EAD",
+        \ "#88C0D0",
+        \ "#8FBCBB",
         \ ]
 endif
 
 " Theme setup
 hi clear
 syntax reset
-let g:colors_name = "base16-gruvbox-light-medium"
+let g:colors_name = "base16-nord"
 
 " Highlighting function
 " Optional variables are attributes and guisp
@@ -562,43 +564,46 @@ endif
 
 call plug#begin('~/.config/nvim/plugins/')
 
-source ~/dotfiles/nvim/plugins/commentary.vim
+" source ~/dotfiles/nvim/plugins/commentary.vim
 " source ~/dotfiles/nvim/plugins/airline.vim
-source ~/dotfiles/nvim/plugins/syntastic.vim
-source ~/dotfiles/nvim/plugins/auto-pairs.vim
-source ~/dotfiles/nvim/plugins/nerdtree.vim
+" source ~/dotfiles/nvim/plugins/syntastic.vim
+" source ~/dotfiles/nvim/plugins/auto-pairs.vim
+" source ~/dotfiles/nvim/plugins/nerdtree.vim
 " source ~/dotfiles/nvim/plugins/devicons.vim
-source ~/dotfiles/nvim/functions.vim
-source ~/dotfiles/nvim/plugins/indentline.vim
-source ~/dotfiles/nvim/plugins/gitguttr.vim
-source ~/dotfiles/nvim/plugins/fugitive.vim
-source ~/dotfiles/nvim/plugins/markdown-preview.vim
-source ~/dotfiles/nvim/plugins/vim-fugitive.vim
-source ~/dotfiles/nvim/plugins/vim-gitgutter.vim
-source ~/dotfiles/nvim/plugins/vim-surround.vim
-source ~/dotfiles/nvim/plugins/vim-tmux-navigator.vim
-source ~/dotfiles/nvim/plugins/nerdtree-git-plugin.vim
+" source ~/dotfiles/nvim/functions.vim
+" source ~/dotfiles/nvim/plugins/indentline.vim
+" source ~/dotfiles/nvim/plugins/gitguttr.vim
+" source ~/dotfiles/nvim/plugins/fugitive.vim
+" source ~/dotfiles/nvim/plugins/markdown-preview.vim
+" source ~/dotfiles/nvim/plugins/vim-fugitive.vim
+" source ~/dotfiles/nvim/plugins/vim-gitgutter.vim
+" source ~/dotfiles/nvim/plugins/vim-surround.vim
+" source ~/dotfiles/nvim/plugins/vim-tmux-navigator.vim
+" source ~/dotfiles/nvim/plugins/nerdtree-git-plugin.vim
 " source ~/dotfiles/nvim/plugins/coc.vim
 " source ~/dotfiles/nvim/plugins/coc.vim
-source ~/dotfiles/nvim/plugins/nvim-lspconfig.vim
-source ~/dotfiles/nvim/plugins/bracey.vim
-source ~/dotfiles/nvim/plugins/vim-startify.vim
-source ~/dotfiles/nvim/plugins/vim-closetag.vim
-source ~/dotfiles/nvim/plugins/vimtex.vim
-source ~/dotfiles/nvim/plugins/quick-lint.vim
-source ~/dotfiles/nvim/plugins/nvim-cmp.vim
-source ~/dotfiles/nvim/plugins/vim-vsnip.vim
-source ~/dotfiles/nvim/plugins/cmp-vsnip.vim
-source ~/dotfiles/nvim/plugins/cmp-nvim-lsp.vim
-source ~/dotfiles/nvim/plugins/cmp-buffer.vim
-source ~/dotfiles/nvim/plugins/cmp-path.vim
-source ~/dotfiles/nvim/plugins/cmp-cmdline.vim
-source ~/dotfiles/nvim/plugins/instant-markdown.vim
-source ~/dotfiles/nvim/plugins/vim-wakatime.vim
-source ~/dotfiles/nvim/plugins/telescope.nvim
-source ~/dotfiles/nvim/plugins/nvim-treesitter.vim
-source ~/dotfiles/nvim/plugins/vim-pug.vim
-source ~/dotfiles/nvim/plugins/schemastore.vim
+" source ~/dotfiles/nvim/plugins/nvim-lspconfig.vim
+" source ~/dotfiles/nvim/plugins/bracey.vim
+" source ~/dotfiles/nvim/plugins/vim-startify.vim
+" source ~/dotfiles/nvim/plugins/vim-closetag.vim
+" source ~/dotfiles/nvim/plugins/vimtex.vim
+" source ~/dotfiles/nvim/plugins/quick-lint.vim
+" source ~/dotfiles/nvim/plugins/nvim-cmp.vim
+" source ~/dotfiles/nvim/plugins/vim-vsnip.vim
+" source ~/dotfiles/nvim/plugins/cmp-vsnip.vim
+" source ~/dotfiles/nvim/plugins/cmp-nvim-lsp.vim
+" source ~/dotfiles/nvim/plugins/cmp-buffer.vim
+" source ~/dotfiles/nvim/plugins/cmp-path.vim
+" source ~/dotfiles/nvim/plugins/cmp-cmdline.vim
+" source ~/dotfiles/nvim/plugins/instant-markdown.vim
+" source ~/dotfiles/nvim/plugins/vim-wakatime.vim
+" source ~/dotfiles/nvim/plugins/telescope.nvim
+" source ~/dotfiles/nvim/plugins/nvim-treesitter.vim
+" source ~/dotfiles/nvim/plugins/vim-pug.vim
+" source ~/dotfiles/nvim/plugins/schemastore.vim
+" source ~/dotfiles/nvim/plugins/vim-js.vim
+" source ~/dotfiles/nvim/plugins/yats.vim
+" source ~/dotfiles/nvim/plugins/vim-jsx-pretty.vim
 
 call plug#end()
 
@@ -613,131 +618,135 @@ call plug#end()
 "	Language Servers
 "-------------------------------------------------
 
-lua require('lspconfig').bashls.setup{}
-lua require('lspconfig').vimls.setup{}
-lua require('lspconfig').cssls.setup{}
-lua require('lspconfig').html.setup{}
-lua require('lspconfig').jsonls.setup{}
-lua require('lspconfig').pylsp.setup{}
-lua require('lspconfig').jsonls.setup{}
+"lua require('lspconfig').bashls.setup{}
+"lua require('lspconfig').vimls.setup{}
+"lua require('lspconfig').cssls.setup{}
+"lua require('lspconfig').html.setup{}
+"lua require('lspconfig').pylsp.setup{}
+"lua require('lspconfig').jsonls.setup{}
+"lua require('lspconfig').tsserver.setup{}
 
 
-set completeopt=menu,menuone,noselect
-"autocompetion{{{
-lua <<EOF
-  -- Set up nvim-cmp.
-  local cmp = require'cmp' --FOLD
+"set completeopt=menu,menuone,noselect
+""autocompetion{{{
+"lua <<EOF
+"  -- Set up nvim-cmp.
+"  local cmp = require'cmp' --FOLD
 
-  cmp.setup({
-    snippet = {
-      -- REQUIRED - you must specify a snippet engine
-      expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-      end,
-    },
-    window = {
-      -- completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
-    },
-    mapping = cmp.mapping.preset.insert({
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    }),
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'vsnip' }, -- For vsnip users.
-      -- { name = 'luasnip' }, -- For luasnip users.
-      -- { name = 'ultisnips' }, -- For ultisnips users.
-      -- { name = 'snippy' }, -- For snippy users.
-    }, {
-      { name = 'buffer' },
-    })
-  })
+"  cmp.setup({
+"    snippet = {
+"      -- REQUIRED - you must specify a snippet engine
+"      expand = function(args)
+"        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+"        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+"        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+"        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+"      end,
+"    },
+"    window = {
+"      -- completion = cmp.config.window.bordered(),
+"      -- documentation = cmp.config.window.bordered(),
+"    },
+"    mapping = cmp.mapping.preset.insert({
+"      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+"      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+"      ['<C-Space>'] = cmp.mapping.complete(),
+"      ['<C-e>'] = cmp.mapping.abort(),
+"      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+"    }),
+"    sources = cmp.config.sources({
+"      { name = 'nvim_lsp' },
+"      { name = 'vsnip' }, -- For vsnip users.
+"      -- { name = 'luasnip' }, -- For luasnip users.
+"      -- { name = 'ultisnips' }, -- For ultisnips users.
+"      -- { name = 'snippy' }, -- For snippy users.
+"    }, {
+"      { name = 'buffer' },
+"    })
+"  })
 
-  -- Set configuration for specific filetype.
-  cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-    }, {
-      { name = 'buffer' },
-    })
-  })
+"  -- Set configuration for specific filetype.
+"  cmp.setup.filetype('gitcommit', {
+"    sources = cmp.config.sources({
+"      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+"    }, {
+"      { name = 'buffer' },
+"    })
+"  })
 
-  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline({ '/', '?' }, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-      { name = 'buffer' }
-    }
-  })
+"  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+"  cmp.setup.cmdline({ '/', '?' }, {
+"    mapping = cmp.mapping.preset.cmdline(),
+"    sources = {
+"      { name = 'buffer' }
+"    }
+"  })
 
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
-    })
-  })
+"  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+"  cmp.setup.cmdline(':', {
+"    mapping = cmp.mapping.preset.cmdline(),
+"    sources = cmp.config.sources({
+"      { name = 'path' }
+"    }, {
+"      { name = 'cmdline' }
+"    })
+"  })
 
-  -- Set up lspconfig.
-  local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-  require('lspconfig')['bashls'].setup {
-    capabilities = capabilities
-  }
-  require('lspconfig')['vimls'].setup {
-    capabilities = capabilities
-  }
-  require('lspconfig')['cssls'].setup {
-    capabilities = capabilities
-  }
-  require('lspconfig')['html'].setup {
-    capabilities = capabilities
-  }
-  require('lspconfig')['jsonls'].setup {
-    capabilities = capabilities
-  }
-  --[[
-  require('lspconfig').ltex.setup {
-    settings = {
-      ltex = {
-        language = "en-US",
-        disabledRules = {['en-US'] = {"TOO_LONG_SENTENCE", "PROFANITY", "MORFOLOGIK_RULE_EN_US"}},
-        dictionary = {
-          ['en-US'] = {"dotfiles"}
-        }
-      }
-    }
-  }
-  ]]--
-  require('lspconfig').jsonls.setup {
-    settings = {
-      json = {
-        schemas = require('schemastore').json.schemas(),
-        validate = { enable = true },
-      },
-    },
-  }
-  require('lspconfig')['pylsp'].setup {
-    capabilities = capabilities,
-    settings = {
-      pylsp = {
-        plugins = {
-          pycodestyle = {
-            ignore = {'W391', 'E501', 'E302', 'F401', 'E401', 'E265'},
-            maxLineLength = 100
-          }
-        }
-      }
-    }
-  }
-EOF
-"}}}
+"  -- Set up lspconfig.
+"  local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+"  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+"  require('lspconfig')['bashls'].setup {
+"    capabilities = capabilities
+"  }
+"  require('lspconfig')['vimls'].setup {
+"    capabilities = capabilities
+"  }
+"  require('lspconfig')['cssls'].setup {
+"    capabilities = capabilities
+"  }
+"  require('lspconfig')['html'].setup {
+"    capabilities = capabilities
+"  }
+"  require('lspconfig')['jsonls'].setup {
+"    capabilities = capabilities
+"  }
+"  require('lspconfig')['tsserver'].setup {
+"    capabilities = capabilities,
+"    filetypes = {"typescript", "typescriptreact", "typescript.tsx"}
+"  }
+"  --[[
+"  require('lspconfig').ltex.setup {
+"    settings = {
+"      ltex = {
+"        language = "en-US",
+"        disabledRules = {['en-US'] = {"TOO_LONG_SENTENCE", "PROFANITY", "MORFOLOGIK_RULE_EN_US"}},
+"        dictionary = {
+"          ['en-US'] = {"dotfiles"}
+"        }
+"      }
+"    }
+"  }
+"  ]]--
+"  require('lspconfig').jsonls.setup {
+"    settings = {
+"      json = {
+"        schemas = require('schemastore').json.schemas(),
+"        validate = { enable = true },
+"      },
+"    },
+"  }
+"  require('lspconfig')['pylsp'].setup {
+"    capabilities = capabilities,
+"    settings = {
+"      pylsp = {
+"        plugins = {
+"          pycodestyle = {
+"            ignore = {'W391', 'E501', 'E302', 'F401', 'E401', 'E265'},
+"            maxLineLength = 100
+"          }
+"        }
+"      }
+"    }
+"  }
+"EOF
+""}}}
