@@ -24,6 +24,7 @@
 #Add `~/bin` to the `$PATH`
 # export PATH="$PATH:$HOME/bin";
 export FLAVOURS_CONFIG_FILE="$HOME/.config/flavours/config.toml";
+export LUA_PATH="./?.lua;;"
 
 #Set up Go env
 # export GOPATH="$HOME/go";
