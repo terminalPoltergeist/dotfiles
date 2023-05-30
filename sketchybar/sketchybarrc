@@ -6,7 +6,7 @@ source "$HOME/dotfiles/sketchybar/icons.sh"
 ITEM_DIR="$HOME/dotfiles/sketchybar/items"
 PLUGIN_DIR="$HOME/dotfiles/sketchybar/plugins"
 
-FONT="Hack Nerd Font"
+FONT="Comic Mono"
 
 ##### Bar Appearance #####
 # https://felixkratz.github.io/SketchyBar/config/bar
@@ -26,9 +26,9 @@ sketchybar --bar height=32            \
 
 sketchybar --default updates=when_shown                    \
                      drawing=on                            \
-                     icon.font="Hack Nerd Font:Bold:14.0"  \
+                     icon.font="$FONT:Bold:14.0"  \
                      icon.color=0xffffffff                 \
-                     label.font="Hack Nerd Font:Bold:14.0" \
+                     label.font="$FONT:Bold:14.0" \
                      label.color=0xffffffff                \
                      label.padding_left=4                  \
                      label.padding_right=4                 \

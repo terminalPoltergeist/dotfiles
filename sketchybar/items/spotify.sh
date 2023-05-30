@@ -1,19 +1,21 @@
 #!/bin/bash
 
 SPOTIFY_EVENT="com.spotify.client.PlaybackStateChanged"
+FONT="Comic Mono"
 
 spotify_title=(
   icon.drawing=off
   padding_left=0
   padding_right=0
   label.drawing=on
-  label.font="$FONT:Heavy:15.0"
+  label.font="$FONT:Bold:15.0"
   label.color="$GREY"
   script="$PLUGIN_DIR/spotify.sh"
 )
 
 spotify_play=(
-  icon=􀊔 \
+  icon.font="Hack Nerd Font:Bold:15.0" \
+  icon=󰐌 \
   background.height=10 \
   background.corner_radius=20 \
   width=10 \
@@ -33,7 +35,7 @@ spotify_artist=(
   padding_left=0
   padding_right=0
   label.drawing=on
-  label.font="$FONT:Heavy:15.0"
+  label.font="$FONT:Bold:15.0"
   label.color="$GREY"
 )
 

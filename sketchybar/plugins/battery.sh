@@ -25,6 +25,17 @@ if [[ $CHARGING != "" ]]; then
   ICON="􀢋"; COLOR=$BLUE
 fi
 
+update() {
+  args=()
+  if [ "$SENDER" == "mouse.entered.global" ]; then
+    args+=(--set $NAME label.drawing="on" label="${PERCENTAGE}%")
+  else
+    args+=(--set $NAME label.drawing="off" label="")
+  fi
+  sketchybar -m "${args[@]}"
+}
+update
+
 # The item invoking this script (name $NAME) will get its icon and label
 # updated with the current battery status
-sketchybar --set $NAME icon="$ICON" label="${PERCENTAGE}%" icon.color="$COLOR"
+sketchybar --set $NAME icon="$ICON" icon.color="$COLOR" --subscribe $NAME mouse.entered.global mouse.exited.global
