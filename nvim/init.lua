@@ -424,6 +424,7 @@ require "paq" {
   "yuezk/vim-js",
   "HerringtonDarkholme/yats.vim",
   "maxmellon/vim-jsx-pretty",
+  "mustache/vim-mustache-handlebars"
 }
 
 --cmp setup{{{
