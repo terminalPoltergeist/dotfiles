@@ -18,7 +18,7 @@ window:
   # by DPI and the specified value is always added at both opposing sides.
   padding:
     x: 10
-    y: 25
+    y: 23
   opacity: 1
 
 scrolling:
