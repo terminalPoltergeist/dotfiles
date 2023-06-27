@@ -414,7 +414,6 @@ require "paq" {
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-vsnip",
   "hrsh7th/vim-vsnip",
-  -- {"iamcco/markdown-preview.nvim", run = function() vim.fn['mkdp#util#install']() end },
   "wakatime/vim-wakatime",
   "nvim-lua/plenary.nvim",
   "nvim-telescope/telescope.nvim",
