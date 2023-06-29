@@ -32,3 +32,4 @@ file = "/Users/jacknemitz/dotfiles/sketchybar/colors.sh"
 template = "sketchybar"
 start = "# Start flavours"
 end = "# End flavours"
+rewrite = true

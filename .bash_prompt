@@ -33,6 +33,7 @@ export PS1;                             # Exports the prompt global
 prompt_git() {
     local s='';
     local branchName='';
+    local author='';
 
     # Check if the current directory is in a Git repository.
     $(git rev-parse --is-inside-work-tree &>/dev/null);
@@ -50,6 +51,7 @@ prompt_git() {
         # Thanks, @paulirish!
         # https://github.com/paulirish/dotfiles/blob/dd33151f/.bash_prompt#L110-L123
         repoUrl="$(git config --get remote.origin.url)";
+        author=" as $(git config user.name)";
         if grep -q 'chromium/src.git' <<< "${repoUrl}"; then
             s+='*';
         else
@@ -77,6 +79,6 @@ prompt_git() {
         branchName="";
     fi;
 
-    echo -e "${1}${branchName}${2}${s}";
+    echo -e "${1}${branchName}${2}${s}${author}";
 
 }

@@ -115,24 +115,24 @@ vim.keymap.set("n","FB", ":Telescope buffers<cr>")
 -- based on
 -- base16-vim (https://github.com/chriskempson/base16-vim)
 -- by Chris Kempson (https://github.com/chriskempson)
--- Nord scheme by arcticicestudio
+-- Gruvbox dark, pale scheme by Jack Nemitz
 
-local gui00 = "#2E3440"
-local gui01 = "#3B4252"
-local gui02 = "#434C5E"
-local gui03 = "#4C566A"
-local gui04 = "#D8DEE9"
-local gui05 = "#E5E9F0"
-local gui06 = "#ECEFF4"
-local gui07 = "#8FBCBB"
-local gui08 = "#BF616A"
-local gui09 = "#D08770"
-local gui0A = "#EBCB8B"
-local gui0B = "#A3BE8C"
-local gui0C = "#88C0D0"
-local gui0D = "#81A1C1"
-local gui0E = "#B48EAD"
-local gui0F = "#5E81AC"
+local gui00 = "#323232"
+local gui01 = "#404040"
+local gui02 = "#4e4e4e"
+local gui03 = "#5a5a5a"
+local gui04 = "#9e9e9e"
+local gui05 = "#e5c8ab"
+local gui06 = "#e0d0af"
+local gui07 = "#f1e2bc"
+local gui08 = "#d76b6d"
+local gui09 = "#ffc37f"
+local gui0A = "#ffd780"
+local gui0B = "#b4c08f"
+local gui0C = "#85ad85"
+local gui0D = "#83adad"
+local gui0E = "#d485ad"
+local gui0F = "#d65d0e"
 
 local cterm00 = 0
 local cterm03 = 8
@@ -155,7 +155,7 @@ vim.cmd [[
   highlight clear
   syntax reset
 ]]
-vim.g.colors_name = "base16-nord"
+vim.g.colors_name = "base16-desatgruv-dark-pale"
 
 -- Vim editor colors                    fg bg ctermfg ctermbg attr guisp
 vim.api.nvim_set_hl(0, 'Normal', { fg = gui05, bg = gui00, ctermfg = cterm05, ctermbg = cterm00 })
@@ -414,7 +414,6 @@ require "paq" {
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-vsnip",
   "hrsh7th/vim-vsnip",
-  -- {"iamcco/markdown-preview.nvim", run = function() vim.fn['mkdp#util#install']() end },
   "wakatime/vim-wakatime",
   "nvim-lua/plenary.nvim",
   "nvim-telescope/telescope.nvim",
@@ -424,6 +423,7 @@ require "paq" {
   "yuezk/vim-js",
   "HerringtonDarkholme/yats.vim",
   "maxmellon/vim-jsx-pretty",
+  "mustache/vim-mustache-handlebars"
 }
 
 --cmp setup{{{
@@ -503,8 +503,8 @@ _G.tab_complete = function()
     end
 end
 
-vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.tab_complete()", {expr = true})
 -- }}}
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
