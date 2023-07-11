@@ -439,14 +439,32 @@ cmp.setup({
       end,
     },
     window = {
-      -- completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.abort(),
+      ["<Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        -- elseif luasnip.expand_or_jumpable() then
+          -- luasnip.expand_or_jump()
+        else
+          fallback()
+        end
+      end, {"i", "s"}),
+      ["<S-Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        -- elseif luasnip.jumpable(-1) then
+          -- luasnip.jump(-1)
+        else
+          fallback()
+        end
+      end, {"i", "s"}),
+      ['<C-k>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-j>'] = cmp.mapping.scroll_docs(4),
+      -- ['<M-Space>'] = cmp.mapping.complete(),
+      ['<C-a>'] = cmp.mapping.abort(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
@@ -553,7 +571,11 @@ lspconfig.jsonls.setup {
 }
 lspconfig.tsserver.setup {
   capabilities = capabilities,
+  cmd = {"typescript-language-server", "--stdio"},
   filetypes = {"typescript", "typescriptreact", "typescript.tsx"}
+}
+lspconfig.tailwindcss.setup{
+  capabilities = capabilities
 }
 --}}}
 
