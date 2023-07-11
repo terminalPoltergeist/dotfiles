@@ -39,3 +39,4 @@ update
 # The item invoking this script (name $NAME) will get its icon and label
 # updated with the current battery status
 sketchybar --set $NAME icon="$ICON" icon.color="$COLOR" --subscribe $NAME mouse.entered.global mouse.exited.global
+# sketchybar --set $NAME icon="$ICON" label="${PERCENTAGE}%" icon.color="$COLOR"
