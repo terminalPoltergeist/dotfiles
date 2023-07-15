@@ -152,7 +152,7 @@ function git_comm() {
         --foreground 153 --border none \
         --align left --width 50 --margin "0 0 0 2" --padding "0 1" \
         "  • $inp";
-      what="$what"$'  - '"$inp";
+      what="$what"$'\n  - '"$inp";
     fi;
   done;
   why=$'|Why:\n';
@@ -169,7 +169,7 @@ function git_comm() {
         --foreground 153 --border none \
         --align left --width 50 --margin "0 0 0 2" --padding "0 1" \
         "  • $inp";
-      why="$why"$'  - '"$inp";
+      why="$why"$'\n  - '"$inp";
     fi;
   done;
   next=$'|Next:\n';
@@ -186,17 +186,18 @@ function git_comm() {
         --foreground 153 --border none \
         --align left --width 50 --margin "0 0 0 2" --padding "0 1" \
         "  • $inp";
-      next="$next"$'  - '"$inp";
+      next="$next"$'\n  - '"$inp";
     fi;
   done;
   echo "$title" > commit.tmp;
+  # count numbe of characters in variable..
   if [ ${#what} -ne 7 ]; then
     echo $'\n'"$what" >> commit.tmp;
   fi;
   if [ ${#why} -ne 6 ]; then
     echo $'\n'"$why" >> commit.tmp;
   fi;
-  if [ ${#next} -ne 5 ]; then
+  if [ ${#next} -ne 7 ]; then
     echo $'\n'"$next" >> commit.tmp;
   fi;
   until gum confirm --affirmative "Commit" --negative "Edit" --selected.background 110 "Commit changes?"; ss=$?; [[ $ss -eq 0 ]]
