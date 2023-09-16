@@ -49,7 +49,8 @@ vim.g.python2_host_prog = '/Users/jacknemitz/.pyenv/shims/python'
 vim.o.foldmethod = "marker"
 vim.keymap.set('', '<leader>e', "T<Space>cE()<Esc>PT<Space>lvEhyhi[]<Esc>P")
 vim.keymap.set('', '<leader>r', ":%s/<br>/\r/g<CR>")
--- nnoremap("<leader>cc", ':execute "set colorcolumn=" . (&colorcolumn == "" ? "72" : "")<CR>')
+vim.keymap.set('', '<leader>cs', ':execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>')
+vim.keymap.set('', '<leader>cl', ':execute "set colorcolumn=" . (&colorcolumn == "" ? "120" : "")<CR>')
 -- vim.api.nvim_set_hl(0, "MatchParen", {cterm=underline, ctermbg=NONE, ctermfg=NONE})
 -- vim.api.nvim_set_hl(0,"MatchParen", {gui=underline, guibg=NONE, guifg=NONE})
 -- vim.api.nvim_set_hl(0,"VertSplit", {cterm=NONE})
@@ -89,6 +90,7 @@ vim.api.nvim_set_hl(0, "SpellBad", {ctermfg=009, ctermbg=011})
 -- let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 -- autocmd FileType ocaml source /Users/jacknemitz/.opam/csci2041/share/typerex/ocp-indent/ocp-indent.vim
 -- filetype plugin indent on
+vim.cmd('let g:instant_markdown_autostart = 0')
 
 ---------------------------------------------------
 --	Key Mappings
@@ -430,7 +432,9 @@ require "paq" {
   "yuezk/vim-js",
   "HerringtonDarkholme/yats.vim",
   "maxmellon/vim-jsx-pretty",
-  "mustache/vim-mustache-handlebars"
+  "mustache/vim-mustache-handlebars",
+  "instant-markdown/vim-instant-markdown"
+  -- { 'iamcco/markdown-preview.nvim', run = function() vim.fn['mkdp#util#install']() end }
 }
 
 --cmp setup{{{
@@ -472,7 +476,7 @@ cmp.setup({
       ['<C-j>'] = cmp.mapping.scroll_docs(4),
       -- ['<M-Space>'] = cmp.mapping.complete(),
       ['<C-a>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },

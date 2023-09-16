@@ -22,7 +22,6 @@
 "-------------------------------------------------
 "	General Settings
 "-------------------------------------------------
-
 " set expandtab                                                                        
 " set shiftwidth=2
 " set tabstop=2
@@ -564,6 +563,8 @@ endif
 
 call plug#begin('~/.config/nvim/plugins/')
 
+" Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " source ~/dotfiles/nvim/plugins/commentary.vim
 " source ~/dotfiles/nvim/plugins/airline.vim
 " source ~/dotfiles/nvim/plugins/syntastic.vim
