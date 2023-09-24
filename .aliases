@@ -64,7 +64,7 @@ alias firefox='open -a Firefox'
 alias spotpl='spotify play';
 alias spotpa='spotify pause';
 alias spicetify='~/.spicetify/spicetify';
-
+alias pjava='processing-java --sketch=$PWD --run';
 alias vim="vim -S ~/.vim/.vimrc";                                      # opens vim by sources .vimrc 
 
 ###############################################
