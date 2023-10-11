@@ -1,6 +1,7 @@
 #!/bin/bash
 
 FRONT_APP_SCRIPT='sketchybar --set $NAME label="$INFO"'
+FONT='Comic Mono'
 
 front_app=(
   icon.drawing=off

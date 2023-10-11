@@ -1,17 +1,17 @@
-export BLACK=0xff323232
-export WHITE=0xffe0d0af
-export RED=0xffd76b6d
-export GREEN=0xffb4c08f
-export BLUE=0xff85ad85
-export YELLOW=0xffffd780
-export ORANGE=0xffffc37f
-export MAGENTA=0xffd485ad
-export GREY=0xff9e9e9e
+export BLACK=0xff121212
+export WHITE=0xff999999
+export RED=0xffa06666
+export GREEN=0xff5f8766
+export BLUE=0xff5f8787
+export YELLOW=0xff8477a4
+export ORANGE=0xffddb699
+export MAGENTA=0xffa06666
+export GREY=0xff999999
 export TRANSPARENT=0x00000000
 
 # General bar colors
-export BAR_COLOR=0xff5a5a5a
+export BAR_COLOR=0xff444444
 export ICON_COLOR=$WHITE # Color of all icons
 export LABEL_COLOR=$WHITE # Color of all labels
-export BACKGROUND_1=0xBF404040
-export BACKGROUND_2=0xff4e4e4e
+export BACKGROUND_1=0xBF222222
+export BACKGROUND_2=0xff333333

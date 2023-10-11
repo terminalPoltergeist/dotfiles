@@ -42,7 +42,7 @@ sketchybar --default updates=when_shown                    \
 
 # Left Items
 source "$ITEM_DIR/spaces.sh"
-source "$ITEM_DIR/yabai.sh"
+# source "$ITEM_DIR/yabai.sh"
 source "$ITEM_DIR/front_app.sh"
 
 # source "$ITEM_DIR/github.sh"

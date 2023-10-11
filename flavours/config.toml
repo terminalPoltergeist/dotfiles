@@ -23,8 +23,11 @@ file = "/Users/jacknemitz/dotfiles/tmux/tmux.conf"
 template = "tmux"
 
 [[item]]
-file = "/Users/jacknemitz/.spicetify/Themes/Vaporwave/color.ini"
+file = "/Users/jacknemitz/.config/spicetify/Themes/Custom/color.ini"
 template = "spicetify"
+# subtemplate = "default"
+start = "# Start flavours"
+end = "# End flavours"
 rewrite = true
 
 [[item]]
@@ -33,3 +36,9 @@ template = "sketchybar"
 start = "# Start flavours"
 end = "# End flavours"
 rewrite = true
+
+[[item]]
+file = "/Users/jacknemitz/Desktop/projects/jacknemitz.com/tailwind.config.js"
+template = "jacknemitz.com"
+start = "// Start flavours"
+end = "// End flavours"

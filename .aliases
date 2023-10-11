@@ -19,9 +19,7 @@
 #/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-## some of these scripts are inspired from a youtube video on bash dotfiles that I can no longer find
-
-alias sourcebash='clear && source ~/dotfiles/.bash_profile';                    # sources all config files 
+alias sourcebash='clear && source ~/dotfiles/.bash_profile';
 
 ###############################################
 ############ Navigation Shortcuts #############
@@ -31,12 +29,12 @@ alias ..='cd ..';
 alias ...='cd ../..';
 alias ....='cd ../../..';
 alias .....='cd ../../../..';
-## some of the following commands are specific to my folder structure, modify to fit your needs
 alias dl='cd ~/Downloads';
 alias dt='cd ~/Desktop';
 alias school='cd ~/Desktop/school';
 alias projects='cd ~/Desktop/projects';
 alias root='cd /';
+alias dots='cd ~/dotfiles';
 
 ###############################################
 ################ Git Shortcuts ################
@@ -54,25 +52,20 @@ alias gg="git log --graph --abbrev-commit --decorate --format=format:'%C(bold bl
 ################ App Shortcuts ################
 ###############################################
 
-## again, these commands are tailored for my use, add/remove commands as you need them
-alias sbl='open -a "/Applications/Sublime Text.app"';
-alias brackets='open -a "/Applications/Brackets.app"';
-alias intellij='open -a "/Applications/IntelliJ IDEA CE.app"';
-alias safari='open -a Safari'
-alias firefox='open -a Firefox'
 ## spotify shortcuts
 alias spotpl='spotify play';
 alias spotpa='spotify pause';
 alias spicetify='~/.spicetify/spicetify';
+## processing-java
 alias pjava='processing-java --sketch=$PWD --run';
-alias vim="vim -S ~/.vim/.vimrc";                                      # opens vim by sources .vimrc 
+alias v='nvim';
+alias vim="vim -S ~/.vim/.vimrc";
 
 ###############################################
 ################ SSH Shortcuts ################
 ###############################################
 
-## The following commands ssh to remote servers, I placed the actual ssh commands in the private "servers.sh" file
-alias atlas="source ./scripts/servers.sh && atlas";
+alias atlas="source /Users/jacknemitz/dotfiles/scripts/servers.sh && atlas";
 alias webserver="source /Users/jacknemitz/dotfiles/scripts/servers.sh && webserver";
 
 ###############################################
@@ -84,6 +77,7 @@ alias webserver="source /Users/jacknemitz/dotfiles/scripts/servers.sh && webserv
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
+# Also from a video
 # Stuff I never really use but cannot delete either because of http://xkcd.com/530/
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume output volume 100'"
@@ -91,6 +85,7 @@ alias pumpitup="osascript -e 'set volume output volume 100'"
 ## found solution online. runs shell script to lock screen via applescript.
 alias afk="~/dotfiles/scripts/lockscreen.sh"
 alias AFK="~/dotfiles/scripts/lockscreen.sh && pmset displaysleepnow"
+# alias AFK="~/dotfiles/scripts/lockscreen.sh"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 alias please='sudo';

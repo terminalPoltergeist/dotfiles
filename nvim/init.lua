@@ -9,8 +9,7 @@
 --              |___________________________|
 --            ,---\_____     []     _______/------,
 --          /         /______________\           /|
---        /___________________________________ /  | ___
---        |                                   |   |    )
+--        /___________________________________ /  | ___ |
 --        |  _ _ _                 [-------]  |   |   (
 --        |  o o o                 [-------]  |  /    _)_
 --        |__________________________________ |/     /  /
@@ -24,6 +23,7 @@
 ---------------------------------------------------
 
 vim.cmd('source ~/dotfiles/nvim/init.vim')
+vim.cmd('source ~/dotfiles/nvim/functions.vim')
 
 vim.o.expandtab = true
 vim.o.shiftwidth = 2
@@ -37,12 +37,14 @@ vim.o.number = true
 vim.o.confirm = true
 vim.o.cursorline = true
 vim.o.autoindent = true
-vim.o.cmdheight = 2
+vim.o.cmdheight = 1
 vim.o.updatetime = 300
 vim.o.signcolumn = 'number'
 vim.o.linebreak = true
 vim.o.swapfile = false
+vim.api.nvim_create_autocmd('BufEnter', {command = 'set concealcursor=""'})
 vim.o.incsearch = true
+vim.o.termguicolors = true
 vim.o.clipboard = "unnamedplus"
 vim.g.python3_host_prog = '/Users/jacknemitz/.pyenv/shims/python3'
 vim.g.python2_host_prog = '/Users/jacknemitz/.pyenv/shims/python'
@@ -91,6 +93,9 @@ vim.api.nvim_set_hl(0, "SpellBad", {ctermfg=009, ctermbg=011})
 -- autocmd FileType ocaml source /Users/jacknemitz/.opam/csci2041/share/typerex/ocp-indent/ocp-indent.vim
 -- filetype plugin indent on
 vim.cmd('let g:instant_markdown_autostart = 0')
+vim.cmd('let g:goyo_width = 120')
+vim.cmd('let g:pencil#conceallevel = 2')
+vim.cmd('let g:pencil#concealcursor = "c"')
 
 ---------------------------------------------------
 --	Key Mappings
@@ -106,6 +111,8 @@ vim.keymap.set("","<Leader>n", ":NERDTreeToggle<cr><Leader>j")
 vim.keymap.set("n", "<Leader>b", ":ls<CR>:b<Space>", {noremap = true})
 -- toggle spell checking
 vim.keymap.set("","<Leader>s", ":call ToggleSpellCheck()<CR>", {noremap = true, silent = true})
+-- toggle Goyo
+vim.keymap.set("","<Leader>g", ":call ToggleGoyo()<CR>", {noremap = true, silent = true})
 -- yank entire line after cursor
 vim.keymap.set("","Y", "y$")
 -- map page scroll
@@ -116,6 +123,7 @@ vim.keymap.set("","<Leader>nb", ":set nolinebreak<CR>", {noremap = true})
 vim.keymap.set("n","<space>", "za", {noremap = true})
 vim.keymap.set("n","FF", ":Telescope find_files<cr>")
 vim.keymap.set("n","FB", ":Telescope buffers<cr>")
+vim.keymap.set("n", "<Leader>f", ":Rg<CR>", {noremap = true, silent = true})
 
 -- colors via Flavours{{{
 -- Start flavours
@@ -124,260 +132,260 @@ vim.keymap.set("n","FB", ":Telescope buffers<cr>")
 -- based on
 -- base16-vim (https://github.com/chriskempson/base16-vim)
 -- by Chris Kempson (https://github.com/chriskempson)
--- Gruvbox dark, pale scheme by Jack Nemitz
+-- scheme01 scheme by terminalPoltergeist mod. from metalelf0's black-metal
 
-local gui00 = "#323232"
-local gui01 = "#404040"
-local gui02 = "#4e4e4e"
-local gui03 = "#5a5a5a"
-local gui04 = "#9e9e9e"
-local gui05 = "#e5c8ab"
-local gui06 = "#e0d0af"
-local gui07 = "#f1e2bc"
-local gui08 = "#d76b6d"
-local gui09 = "#ffc37f"
-local gui0A = "#ffd780"
-local gui0B = "#b4c08f"
-local gui0C = "#85ad85"
-local gui0D = "#83adad"
-local gui0E = "#d485ad"
-local gui0F = "#d65d0e"
+local gui00 = "#121212"
+local gui01 = "#222222"
+local gui02 = "#333333"
+local gui03 = "#444444"
+local gui04 = "#999999"
+local gui05 = "#c1c1c1"
+local gui06 = "#999999"
+local gui07 = "#c1c1c1"
+local gui08 = "#a06666"
+local gui09 = "#ddb699"
+local gui0A = "#8477a4"
+local gui0B = "#5f8766"
+local gui0C = "#5f8787"
+local gui0D = "#87775f"
+local gui0E = "#FFFFFF"
+local gui0F = "#FFFFFF"
 
-local cterm00 = 0
-local cterm03 = 8
-local cterm05 = 7
-local cterm07 = 15
-local cterm08 = 1
-local cterm0A = 3
-local cterm0B = 2
-local cterm0C = 6
-local cterm0D = 4
-local cterm0E = 5
-local cterm01 = 10
-local cterm02 = 11
-local cterm04 = 12
-local cterm06 = 13
-local cterm09 = 9
-local cterm0F = 14
+-- local cterm00 = "#121212"
+-- local cterm03 = "#222222"
+-- local cterm05 = "#333333"
+-- local cterm07 = "#444444"
+-- local cterm08 = "#999999"
+-- local cterm0A = "#c1c1c1"
+-- local cterm0B = "#999999"
+-- local cterm0C = "#c1c1c1"
+-- local cterm0D = "#a06666"
+-- local cterm0E = "#ddb699"
+-- local cterm01 = "#8477a4"
+-- local cterm02 = "#5f8766"
+-- local cterm04 = "#5f8787"
+-- local cterm06 = "#87775f"
+-- local cterm09 = "#a06666"
+-- local cterm0F = "#dd9999"
 
 vim.cmd [[
   highlight clear
   syntax reset
 ]]
-vim.g.colors_name = "base16-desatgruv-dark-pale"
+vim.g.colors_name = "base16-scheme01"
 
 -- Vim editor colors                    fg bg ctermfg ctermbg attr guisp
-vim.api.nvim_set_hl(0, 'Normal', { fg = gui05, bg = gui00, ctermfg = cterm05, ctermbg = cterm00 })
+vim.api.nvim_set_hl(0, 'Normal', { fg = gui07, bg = gui00 })
 vim.api.nvim_set_hl(0, 'Bold', { bold = true })
-vim.api.nvim_set_hl(0, 'Debug', { fg = gui08, ctermfg = cterm08 })
-vim.api.nvim_set_hl(0, 'Directory', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'Error', { fg = gui00, bg = gui08, ctermfg = cterm00, ctermbg = cterm08 })
-vim.api.nvim_set_hl(0, 'ErrorMsg', { fg = gui08, bg = gui00, ctermfg = cterm08, ctermbg = cterm00 })
-vim.api.nvim_set_hl(0, 'Exception', { fg = gui08, ctermfg = cterm08 })
-vim.api.nvim_set_hl(0, 'FoldColumn', { fg = gui0C, bg = gui01, ctermfg = cterm0C, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'Folded', { fg = gui03, bg = gui01, ctermfg = cterm03, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'IncSearch', { fg = gui01, bg = gui09, ctermfg = cterm01, ctermbg = cterm09 })
+vim.api.nvim_set_hl(0, 'Debug', { fg = gui08 })
+vim.api.nvim_set_hl(0, 'Directory', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'Error', { fg = gui00, bg = gui08 })
+vim.api.nvim_set_hl(0, 'ErrorMsg', { fg = gui08, bg = gui00 })
+vim.api.nvim_set_hl(0, 'Exception', { fg = gui08 })
+vim.api.nvim_set_hl(0, 'FoldColumn', { fg = gui0C, bg = gui01 })
+vim.api.nvim_set_hl(0, 'Folded', { fg = gui03, bg = gui01 })
+vim.api.nvim_set_hl(0, 'IncSearch', { fg = gui01, bg = gui03 })
 vim.api.nvim_set_hl(0, 'Italic', {})
-vim.api.nvim_set_hl(0, 'Macro', { fg = gui08, ctermfg = cterm08 })
-vim.api.nvim_set_hl(0, 'MatchParen', { bg = gui03, ctermbg = cterm03 })
-vim.api.nvim_set_hl(0, 'ModeMsg', { fg = gui0B, ctermfg = cterm0B })
-vim.api.nvim_set_hl(0, 'MoreMsg', { fg = gui0B, ctermfg = cterm0B })
-vim.api.nvim_set_hl(0, 'Question', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'Search', { fg = gui01, bg = gui0A, ctermfg = cterm01, ctermbg = cterm0A })
-vim.api.nvim_set_hl(0, 'Substitute', { fg = gui01, bg = gui0A, ctermfg = cterm01, ctermbg = cterm0A })
-vim.api.nvim_set_hl(0, 'SpecialKey', { fg = gui03, ctermfg = cterm03 })
-vim.api.nvim_set_hl(0, 'TooLong', { fg = gui08, ctermfg = cterm08 })
-vim.api.nvim_set_hl(0, 'Underlined', { fg = gui08, ctermfg = cterm08 })
-vim.api.nvim_set_hl(0, 'Visual', { bg = gui02, ctermbg = cterm02 })
-vim.api.nvim_set_hl(0, 'VisualNOS', { fg = gui08, ctermfg = cterm08 })
-vim.api.nvim_set_hl(0, 'WarningMsg', { fg = gui08, ctermfg = cterm08 })
-vim.api.nvim_set_hl(0, 'WildMenu', { fg = gui08, bg = gui0A, ctermfg = cterm08 })
-vim.api.nvim_set_hl(0, 'Title', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'Conceal', { fg = gui0D, bg = gui00, ctermfg = cterm0D, ctermbg = cterm00 })
-vim.api.nvim_set_hl(0, 'Cursor', { fg = gui00, bg = gui05, ctermfg = cterm00, ctermbg = cterm05 })
-vim.api.nvim_set_hl(0, 'NonText', { fg = gui03, ctermfg = cterm03 })
--- vim.api.nvim_set_hl(0, 'LineNr', { fg = gui03, bg = gui00, ctermfg = cterm03, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'SignColumn', { fg = gui03, bg = gui00, ctermfg = cterm03, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'StatusLine', { fg = gui04, bg = gui02, ctermfg = cterm04, ctermbg = cterm02 })
-vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = gui03, bg = gui01, ctermfg = cterm03, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'VertSplit', { fg = gui02, bg = gui02, ctermfg = cterm02, ctermbg = cterm02 })
-vim.api.nvim_set_hl(0, 'ColorColumn', { bg = gui00, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'CursorColumn', { bg = gui01, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'CursorLine', { bg = gui01, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = gui04, bg = gui01, ctermfg = cterm04, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = gui01, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'PMenu', { fg = gui05, bg = gui01, ctermfg = cterm05, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'PMenuSel', { fg = gui01, bg = gui05, ctermfg = cterm01, ctermbg = cterm05 })
-vim.api.nvim_set_hl(0, 'TabLine', { fg = gui03, bg = gui01, ctermfg = cterm03, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'TabLineFill', { fg = gui03, bg = gui01, ctermfg = cterm03, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'TabLineSel', { fg = gui0B, bg = gui01, ctermfg = cterm0B, ctermbg = cterm01 })
+vim.api.nvim_set_hl(0, 'Macro', { fg = gui08 })
+vim.api.nvim_set_hl(0, 'MatchParen', { bg = gui0B })
+vim.api.nvim_set_hl(0, 'ModeMsg', { fg = gui0B })
+vim.api.nvim_set_hl(0, 'MoreMsg', { fg = gui0B })
+vim.api.nvim_set_hl(0, 'Question', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'Search', { fg = gui01, bg = gui0A })
+vim.api.nvim_set_hl(0, 'Substitute', { fg = gui01, bg = gui0A })
+vim.api.nvim_set_hl(0, 'SpecialKey', { fg = gui03 })
+vim.api.nvim_set_hl(0, 'TooLong', { fg = gui08 })
+vim.api.nvim_set_hl(0, 'Underlined', { fg = gui08 })
+vim.api.nvim_set_hl(0, 'Visual', { bg = gui03 })
+vim.api.nvim_set_hl(0, 'VisualNOS', { fg = gui08 })
+vim.api.nvim_set_hl(0, 'WarningMsg', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'WildMenu', { fg = gui08, bg = gui0A })
+vim.api.nvim_set_hl(0, 'Title', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'Conceal', { fg = gui0D, bg = gui00 })
+vim.api.nvim_set_hl(0, 'Cursor', { fg = gui00, bg = gui05 })
+vim.api.nvim_set_hl(0, 'NonText', { fg = gui03 })
+vim.api.nvim_set_hl(0, 'LineNr', { fg = gui04, bg = gui00 })
+vim.api.nvim_set_hl(0, 'SignColumn', { fg = gui03, bg = gui00 })
+vim.api.nvim_set_hl(0, 'StatusLine', { fg = gui0A, bg = gui02 })
+vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = gui03, bg = gui01 })
+vim.api.nvim_set_hl(0, 'VertSplit', { fg = gui02, bg = gui02 })
+vim.api.nvim_set_hl(0, 'ColorColumn', { bg = gui00 })
+vim.api.nvim_set_hl(0, 'CursorColumn', { bg = gui00 })
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = gui02 })
+vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = gui08, bg = gui00 })
+vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = gui01 })
+vim.api.nvim_set_hl(0, 'PMenu', { fg = gui05, bg = gui01 })
+vim.api.nvim_set_hl(0, 'PMenuSel', { fg = gui01, bg = gui05 })
+vim.api.nvim_set_hl(0, 'TabLine', { fg = gui03, bg = gui01 })
+vim.api.nvim_set_hl(0, 'TabLineFill', { fg = gui03, bg = gui01 })
+vim.api.nvim_set_hl(0, 'TabLineSel', { fg = gui0B, bg = gui01 })
 
 -- Standard syntax highlighting
-vim.api.nvim_set_hl(0, 'Boolean', { fg = gui09, ctermfg = cterm09 })
-vim.api.nvim_set_hl(0, 'Character', { fg = gui08, ctermfg = cterm08 })
-vim.api.nvim_set_hl(0, 'Comment', { fg = gui03, ctermfg = cterm03 })
-vim.api.nvim_set_hl(0, 'Conditional', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'Constant', { fg = gui09, ctermfg = cterm09 })
-vim.api.nvim_set_hl(0, 'Define', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'Delimiter', { fg = gui0F, ctermfg = cterm0F })
-vim.api.nvim_set_hl(0, 'Float', { fg = gui09, ctermfg = cterm09 })
-vim.api.nvim_set_hl(0, 'Function', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'Identifier', { fg = gui08, ctermfg = cterm08 })
-vim.api.nvim_set_hl(0, 'Include', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'Keyword', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'Label', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'Number', { fg = gui09, ctermfg = cterm09 })
-vim.api.nvim_set_hl(0, 'Operator', { fg = gui05, ctermfg = cterm05 })
-vim.api.nvim_set_hl(0, 'PreProc', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'Repeat', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'Special', { fg = gui0C, ctermfg = cterm0C })
-vim.api.nvim_set_hl(0, 'SpecialChar', { fg = gui0F, ctermfg = cterm0F })
-vim.api.nvim_set_hl(0, 'Statement', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'StorageClass', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'String', { fg = gui0B, ctermfg = cterm0B })
-vim.api.nvim_set_hl(0, 'Structure', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'Tag', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'Todo', { fg = gui0A, bg = gui01, ctermfg = cterm0A, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'Type', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'Typedef', { fg = gui0A, ctermfg = cterm0A })
+vim.api.nvim_set_hl(0, 'Boolean', { fg = gui08 })
+vim.api.nvim_set_hl(0, 'Character', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'Comment', { fg = gui04 })
+vim.api.nvim_set_hl(0, 'Conditional', { fg = gui09 })
+vim.api.nvim_set_hl(0, 'Constant', { fg = gui0B })
+vim.api.nvim_set_hl(0, 'Define', { fg = gui0C })
+vim.api.nvim_set_hl(0, 'Delimiter', { fg = gui08 })
+vim.api.nvim_set_hl(0, 'Float', { fg = gui09 })
+vim.api.nvim_set_hl(0, 'Function', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'Identifier', { fg = gui07 })
+vim.api.nvim_set_hl(0, 'Include', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'Keyword', { fg = gui0C })
+vim.api.nvim_set_hl(0, 'Label', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'Number', { fg = gui09 })
+vim.api.nvim_set_hl(0, 'Operator', { fg = gui05 })
+vim.api.nvim_set_hl(0, 'PreProc', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'Repeat', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'Special', { fg = gui0C })
+vim.api.nvim_set_hl(0, 'SpecialChar', { fg = gui08 })
+vim.api.nvim_set_hl(0, 'Statement', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'StorageClass', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'String', { fg = gui0C })
+vim.api.nvim_set_hl(0, 'Structure', { fg = gui0C })
+vim.api.nvim_set_hl(0, 'Tag', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'Todo', { fg = gui0A, bg = gui01 })
+vim.api.nvim_set_hl(0, 'Type', { fg = gui0C })
+vim.api.nvim_set_hl(0, 'Typedef', { fg = gui08 })
 
 -- C highlighting
-vim.api.nvim_set_hl(0, 'cOperator', { fg = gui0C, ctermfg = cterm0C })
-vim.api.nvim_set_hl(0, 'cPreCondit', { fg = gui0E, ctermfg = cterm0E })
+vim.api.nvim_set_hl(0, 'cOperator', { fg = gui0C })
+vim.api.nvim_set_hl(0, 'cPreCondit', { fg = gui0E })
 
 -- C# highlighting
-vim.api.nvim_set_hl(0, 'csClass', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'csAttribute', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'csModifier', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'csType', { fg = gui08, ctermfg = cterm08 })
-vim.api.nvim_set_hl(0, 'csUnspecifiedStatement', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'csContextualStatement', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'csNewDecleration', { fg = gui08, ctermfg = cterm08 })
+vim.api.nvim_set_hl(0, 'csClass', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'csAttribute', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'csModifier', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'csType', { fg = gui08 })
+vim.api.nvim_set_hl(0, 'csUnspecifiedStatement', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'csContextualStatement', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'csNewDecleration', { fg = gui08 })
 
 -- CSS highlighting
-vim.api.nvim_set_hl(0, 'cssBraces', { fg = gui05, ctermfg = cterm05 })
-vim.api.nvim_set_hl(0, 'cssClassName', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'cssColor', { fg = gui0C, ctermfg = cterm0C })
+vim.api.nvim_set_hl(0, 'cssBraces', { fg = gui05 })
+vim.api.nvim_set_hl(0, 'cssClassName', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'cssColor', { fg = gui0C })
 
 -- Diff highlighting
-vim.api.nvim_set_hl(0, 'DiffAdd', { fg = gui0B, bg = gui01, ctermfg =  cterm0B, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'DiffChange', { fg = gui03, bg = gui01, ctermfg =  cterm03, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'DiffDelete', { fg = gui08, bg = gui01, ctermfg =  cterm08, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'DiffText', { fg = gui0D, bg = gui01, ctermfg =  cterm0D, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'DiffAdded', { fg = gui0B, bg = gui00, ctermfg =  cterm0B, ctermbg = cterm00 })
-vim.api.nvim_set_hl(0, 'DiffFile', { fg = gui08, bg = gui00, ctermfg =  cterm08, ctermbg = cterm00 })
-vim.api.nvim_set_hl(0, 'DiffNewFile', { fg = gui0B, bg = gui00, ctermfg =  cterm0B, ctermbg = cterm00 })
-vim.api.nvim_set_hl(0, 'DiffLine', { fg = gui0D, bg = gui00, ctermfg =  cterm0D, ctermbg = cterm00 })
-vim.api.nvim_set_hl(0, 'DiffRemoved', { fg = gui08, bg = gui00, ctermfg =  cterm08, ctermbg = cterm00 })
+vim.api.nvim_set_hl(0, 'DiffAdd', { fg = gui0B, bg = gui01 })
+vim.api.nvim_set_hl(0, 'DiffChange', { fg = gui03, bg = gui01 })
+vim.api.nvim_set_hl(0, 'DiffDelete', { fg = gui08, bg = gui01 })
+vim.api.nvim_set_hl(0, 'DiffText', { fg = gui0D, bg = gui01 })
+vim.api.nvim_set_hl(0, 'DiffAdded', { fg = gui0B, bg = gui00 })
+vim.api.nvim_set_hl(0, 'DiffFile', { fg = gui08, bg = gui00 })
+vim.api.nvim_set_hl(0, 'DiffNewFile', { fg = gui0B, bg = gui00 })
+vim.api.nvim_set_hl(0, 'DiffLine', { fg = gui0D, bg = gui00 })
+vim.api.nvim_set_hl(0, 'DiffRemoved', { fg = gui08, bg = gui00 })
 
 -- Git highlighting
-vim.api.nvim_set_hl(0, 'gitcommitOverflow', { fg = gui08, ctermfg = cterm08 })
-vim.api.nvim_set_hl(0, 'gitcommitSummary', { fg = gui0B, ctermfg = cterm0B })
-vim.api.nvim_set_hl(0, 'gitcommitComment', { fg = gui03, ctermfg = cterm03 })
-vim.api.nvim_set_hl(0, 'gitcommitUntracked', { fg = gui03, ctermfg = cterm03 })
-vim.api.nvim_set_hl(0, 'gitcommitDiscarded', { fg = gui03, ctermfg = cterm03 })
-vim.api.nvim_set_hl(0, 'gitcommitSelected', { fg = gui03, ctermfg = cterm03 })
-vim.api.nvim_set_hl(0, 'gitcommitHeader', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'gitcommitSelectedType', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'gitcommitUnmergedType', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'gitcommitDiscardedType', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'gitcommitBranch', { fg = gui09, ctermfg = cterm09, bold = true })
-vim.api.nvim_set_hl(0, 'gitcommitUntrackedFile', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'gitcommitUnmergedFile', { fg = gui08, ctermfg = cterm08, bold = true })
-vim.api.nvim_set_hl(0, 'gitcommitDiscardedFile', { fg = gui08, ctermfg = cterm08, bold = true })
-vim.api.nvim_set_hl(0, 'gitcommitSelectedFile', { fg = gui0B, ctermfg = cterm0B, bold = true })
+vim.api.nvim_set_hl(0, 'gitcommitOverflow', { fg = gui08 })
+vim.api.nvim_set_hl(0, 'gitcommitSummary', { fg = gui0B })
+vim.api.nvim_set_hl(0, 'gitcommitComment', { fg = gui03 })
+vim.api.nvim_set_hl(0, 'gitcommitUntracked', { fg = gui03 })
+vim.api.nvim_set_hl(0, 'gitcommitDiscarded', { fg = gui03 })
+vim.api.nvim_set_hl(0, 'gitcommitSelected', { fg = gui03 })
+vim.api.nvim_set_hl(0, 'gitcommitHeader', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'gitcommitSelectedType', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'gitcommitUnmergedType', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'gitcommitDiscardedType', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'gitcommitBranch', { fg = gui09 })
+vim.api.nvim_set_hl(0, 'gitcommitUntrackedFile', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'gitcommitUnmergedFile', { fg = gui08 })
+vim.api.nvim_set_hl(0, 'gitcommitDiscardedFile', { fg = gui08 })
+vim.api.nvim_set_hl(0, 'gitcommitSelectedFile', { fg = gui0B })
 
 -- GitGutter highlighting
-vim.api.nvim_set_hl(0, 'GitGutterAdd', { fg = gui0B, bg = gui00, ctermfg = cterm0B, ctermbg = cterm00 })
-vim.api.nvim_set_hl(0, 'GitGutterChange', { fg = gui0D, bg = gui00, ctermfg = cterm0D, ctermbg = cterm00 })
-vim.api.nvim_set_hl(0, 'GitGutterDelete', { fg = gui08, bg = gui00, ctermfg = cterm08, ctermbg = cterm00 })
-vim.api.nvim_set_hl(0, 'GitGutterChangeDelete', { fg = gui0E, bg = gui00, ctermfg = cterm0E, ctermbg = cterm00 })
+vim.api.nvim_set_hl(0, 'GitGutterAdd', { fg = gui0B, bg = gui00 })
+vim.api.nvim_set_hl(0, 'GitGutterChange', { fg = gui0D, bg = gui00 })
+vim.api.nvim_set_hl(0, 'GitGutterDelete', { fg = gui08, bg = gui00 })
+vim.api.nvim_set_hl(0, 'GitGutterChangeDelete', { fg = gui0E, bg = gui00 })
 
 -- HTML highlighting
-vim.api.nvim_set_hl(0, 'htmlBold', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'htmlItalic', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'htmlEndTag', { fg = gui05, ctermfg = cterm05 })
-vim.api.nvim_set_hl(0, 'htmlTag', { fg = gui05, ctermfg = cterm05 })
+vim.api.nvim_set_hl(0, 'htmlBold', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'htmlItalic', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'htmlEndTag', { fg = gui05 })
+vim.api.nvim_set_hl(0, 'htmlTag', { fg = gui0D })
 
 -- JavaScript highlighting
-vim.api.nvim_set_hl(0, 'javaScript', { fg = gui05, ctermfg = cterm05 })
-vim.api.nvim_set_hl(0, 'javaScriptBraces', { fg = gui05, ctermfg = cterm05 })
-vim.api.nvim_set_hl(0, 'javaScriptNumber', { fg = gui09, ctermfg = cterm09 })
+vim.api.nvim_set_hl(0, 'javaScript', { fg = gui05 })
+vim.api.nvim_set_hl(0, 'javaScriptBraces', { fg = gui05 })
+vim.api.nvim_set_hl(0, 'javaScriptNumber', { fg = gui09 })
 
 -- pangloss/vim-javascript highlighting
-vim.api.nvim_set_hl(0, 'jsOperator', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'jsStatement', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'jsReturn', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'jsThis', { fg = gui08, ctermfg = cterm08 })
-vim.api.nvim_set_hl(0, 'jsClassDefinition', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'jsFunction', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'jsFuncName', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'jsFuncCall', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'jsClassFuncName', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'jsClassMethodType', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'jsRegexpString', { fg = gui0C, ctermfg = cterm0C })
-vim.api.nvim_set_hl(0, 'jsGlobalObjects', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'jsGlobalNodeObjects', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'jsExceptions', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'jsBuiltins', { fg = gui0A, ctermfg = cterm0A })
+vim.api.nvim_set_hl(0, 'jsOperator', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'jsStatement', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'jsReturn', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'jsThis', { fg = gui08 })
+vim.api.nvim_set_hl(0, 'jsClassDefinition', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'jsFunction', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'jsFuncName', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'jsFuncCall', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'jsClassFuncName', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'jsClassMethodType', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'jsRegexpString', { fg = gui0C })
+vim.api.nvim_set_hl(0, 'jsGlobalObjects', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'jsGlobalNodeObjects', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'jsExceptions', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'jsBuiltins', { fg = gui0A })
 
 -- LSP highlighting
-vim.api.nvim_set_hl(0, 'LspDiagnosticsDefaultError', { fg = gui08, ctermfg = cterm08 })
-vim.api.nvim_set_hl(0, 'LspDiagnosticsDefaultWarning', { fg = gui09, ctermfg = cterm09 })
-vim.api.nvim_set_hl(0, 'LspDiagnosticsDefaultHnformation', { fg = gui05, ctermfg = cterm05 })
-vim.api.nvim_set_hl(0, 'LspDiagnosticsDefaultHint', { fg = gui03, ctermfg = cterm03 })
+vim.api.nvim_set_hl(0, 'LspDiagnosticsDefaultError', { fg = gui08 })
+vim.api.nvim_set_hl(0, 'LspDiagnosticsDefaultWarning', { fg = gui09 })
+vim.api.nvim_set_hl(0, 'LspDiagnosticsDefaultHnformation', { fg = gui05 })
+vim.api.nvim_set_hl(0, 'LspDiagnosticsDefaultHint', { fg = gui03 })
 
 -- Mail highlighting
-vim.api.nvim_set_hl(0, 'mailQuoted1', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'mailQuoted2', { fg = gui0B, ctermfg = cterm0B })
-vim.api.nvim_set_hl(0, 'mailQuoted3', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'mailQuoted4', { fg = gui0C, ctermfg = cterm0C })
-vim.api.nvim_set_hl(0, 'mailQuoted5', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'mailQuoted6', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'mailURL', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'mailEmail', { fg = gui0D, ctermfg = cterm0D })
+vim.api.nvim_set_hl(0, 'mailQuoted1', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'mailQuoted2', { fg = gui0B })
+vim.api.nvim_set_hl(0, 'mailQuoted3', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'mailQuoted4', { fg = gui0C })
+vim.api.nvim_set_hl(0, 'mailQuoted5', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'mailQuoted6', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'mailURL', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'mailEmail', { fg = gui0D })
 
 -- Markdown highlighting
-vim.api.nvim_set_hl(0, 'markdownCode', { fg = gui0B, ctermfg = cterm0B })
-vim.api.nvim_set_hl(0, 'markdownError', { fg = gui05, bg = gui00, ctermfg = cterm05, ctermbg = cterm00 })
-vim.api.nvim_set_hl(0, 'markdownCodeBlock', { fg = gui0B, ctermfg = cterm0B })
-vim.api.nvim_set_hl(0, 'markdownHeadingDelimiter', { fg = gui0D, ctermfg = cterm0D })
+vim.api.nvim_set_hl(0, 'markdownCode', { fg = gui0B })
+vim.api.nvim_set_hl(0, 'markdownError', { fg = gui05, bg = gui00 })
+vim.api.nvim_set_hl(0, 'markdownCodeBlock', { fg = gui0B })
+vim.api.nvim_set_hl(0, 'markdownHeadingDelimiter', { fg = gui0D })
 
 -- NERDTree highlighting
-vim.api.nvim_set_hl(0, 'NERDTreeDirSlash', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'NERDTreeExecFile', { fg = gui05, ctermfg = cterm05 })
+vim.api.nvim_set_hl(0, 'NERDTreeDirSlash', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'NERDTreeExecFile', { fg = gui05 })
 
 -- PHP highlighting
-vim.api.nvim_set_hl(0, 'phpMemberSelector', { fg = gui05, ctermfg = cterm05 })
-vim.api.nvim_set_hl(0, 'phpComparison', { fg = gui05, ctermfg = cterm05 })
-vim.api.nvim_set_hl(0, 'phpParent', { fg = gui05, ctermfg = cterm05 })
-vim.api.nvim_set_hl(0, 'phpMethodsVar', { fg = gui0C, ctermfg = cterm0C })
+vim.api.nvim_set_hl(0, 'phpMemberSelector', { fg = gui05 })
+vim.api.nvim_set_hl(0, 'phpComparison', { fg = gui05 })
+vim.api.nvim_set_hl(0, 'phpParent', { fg = gui05 })
+vim.api.nvim_set_hl(0, 'phpMethodsVar', { fg = gui0C })
 
 -- Python highlighting
-vim.api.nvim_set_hl(0, 'pythonOperator', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'pythonRepeat', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'pythonInclude', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'pythonStatement', { fg = gui0E, ctermfg = cterm0E })
+vim.api.nvim_set_hl(0, 'pythonOperator', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'pythonRepeat', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'pythonInclude', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'pythonStatement', { fg = gui0E })
 
 -- Ruby highlighting
-vim.api.nvim_set_hl(0, 'rubyAttribute', { fg = gui0D, ctermfg = cterm0D })
-vim.api.nvim_set_hl(0, 'rubyConstant', { fg = gui0A, ctermfg = cterm0A })
-vim.api.nvim_set_hl(0, 'rubyInterpolationDelimiter', { fg = gui0F, ctermfg = cterm0F })
-vim.api.nvim_set_hl(0, 'rubyRegexp', { fg = gui0C, ctermfg = cterm0C })
-vim.api.nvim_set_hl(0, 'rubySymbol', { fg = gui0B, ctermfg = cterm0B })
-vim.api.nvim_set_hl(0, 'rubyStringDelimiter', { fg = gui0B, ctermfg = cterm0B })
+vim.api.nvim_set_hl(0, 'rubyAttribute', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'rubyConstant', { fg = gui0A })
+vim.api.nvim_set_hl(0, 'rubyInterpolationDelimiter', { fg = gui0F })
+vim.api.nvim_set_hl(0, 'rubyRegexp', { fg = gui0C })
+vim.api.nvim_set_hl(0, 'rubySymbol', { fg = gui0B })
+vim.api.nvim_set_hl(0, 'rubyStringDelimiter', { fg = gui0B })
 
 -- SASS highlighting
-vim.api.nvim_set_hl(0, 'sassidChar', { fg = gui08, ctermfg = cterm08 })
-vim.api.nvim_set_hl(0, 'sassClassChar', { fg = gui09, ctermfg = cterm09 })
-vim.api.nvim_set_hl(0, 'sassInclude', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'sassMixing', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'sassMixinName', { fg = gui0D, ctermfg = cterm0D })
+vim.api.nvim_set_hl(0, 'sassidChar', { fg = gui08 })
+vim.api.nvim_set_hl(0, 'sassClassChar', { fg = gui09 })
+vim.api.nvim_set_hl(0, 'sassInclude', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'sassMixing', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'sassMixinName', { fg = gui0D })
 
 -- Signify highlighting
-vim.api.nvim_set_hl(0, 'SignifySignAdd', { fg = gui0B, bg = gui01, ctermfg = cterm0B, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'SignifySignChange', { fg = gui0D, bg = gui01, ctermfg = cterm0D, ctermbg = cterm01 })
-vim.api.nvim_set_hl(0, 'SignifySignDelete', { fg = gui08, bg = gui01, ctermfg = cterm08, ctermbg = cterm01 })
+vim.api.nvim_set_hl(0, 'SignifySignAdd', { fg = gui0B, bg = gui01 })
+vim.api.nvim_set_hl(0, 'SignifySignChange', { fg = gui0D, bg = gui01 })
+vim.api.nvim_set_hl(0, 'SignifySignDelete', { fg = gui08, bg = gui01 })
 
 -- Spelling highlighting
 vim.api.nvim_set_hl(0, 'SpellBad', { undercurl = true })
@@ -386,19 +394,19 @@ vim.api.nvim_set_hl(0, 'SpellCap', { undercurl = true })
 vim.api.nvim_set_hl(0, 'SpellRare', { undercurl = true })
 
 -- Startify highlighting
-vim.api.nvim_set_hl(0, 'StartifyBracket', { fg = gui03, ctermfg = cterm03 })
-vim.api.nvim_set_hl(0, 'StartifyFile', { fg = gui07, ctermfg = cterm07 })
-vim.api.nvim_set_hl(0, 'StartifyFooter', { fg = gui03, ctermfg = cterm03 })
-vim.api.nvim_set_hl(0, 'StartifyHeader', { fg = gui0B, ctermfg = cterm0B })
-vim.api.nvim_set_hl(0, 'StartifyNumber', { fg = gui09, ctermfg = cterm09 })
-vim.api.nvim_set_hl(0, 'StartifyPath', { fg = gui03, ctermfg = cterm03 })
-vim.api.nvim_set_hl(0, 'StartifySection', { fg = gui0E, ctermfg = cterm0E })
-vim.api.nvim_set_hl(0, 'StartifySelect', { fg = gui0C, ctermfg = cterm0C })
-vim.api.nvim_set_hl(0, 'StartifySlash', { fg = gui03, ctermfg = cterm03 })
-vim.api.nvim_set_hl(0, 'StartifySpecial', { fg = gui03, ctermfg = cterm03 })
+vim.api.nvim_set_hl(0, 'StartifyBracket', { fg = gui03 })
+vim.api.nvim_set_hl(0, 'StartifyFile', { fg = gui07 })
+vim.api.nvim_set_hl(0, 'StartifyFooter', { fg = gui03 })
+vim.api.nvim_set_hl(0, 'StartifyHeader', { fg = gui0B })
+vim.api.nvim_set_hl(0, 'StartifyNumber', { fg = gui09 })
+vim.api.nvim_set_hl(0, 'StartifyPath', { fg = gui03 })
+vim.api.nvim_set_hl(0, 'StartifySection', { fg = gui0E })
+vim.api.nvim_set_hl(0, 'StartifySelect', { fg = gui0C })
+vim.api.nvim_set_hl(0, 'StartifySlash', { fg = gui03 })
+vim.api.nvim_set_hl(0, 'StartifySpecial', { fg = gui03 })
 
 -- Java highlighting
-vim.api.nvim_set_hl(0, 'javaOperator', { fg = gui0D, ctermfg = cterm0D })
+vim.api.nvim_set_hl(0, 'javaOperator', { fg = gui0D })
 
 -- vim: filetype=lua
 -- End flavours
@@ -433,9 +441,39 @@ require "paq" {
   "HerringtonDarkholme/yats.vim",
   "maxmellon/vim-jsx-pretty",
   "mustache/vim-mustache-handlebars",
-  "instant-markdown/vim-instant-markdown"
+  "instant-markdown/vim-instant-markdown",
+  "junegunn/fzf",
+  "junegunn/fzf.vim",
+  "startup-nvim/startup.nvim",
+  "junegunn/goyo.vim",
+  "preservim/vim-pencil",
   -- { 'iamcco/markdown-preview.nvim', run = function() vim.fn['mkdp#util#install']() end }
 }
+
+-- require('fzf').setup({
+--   dir = '/usr/local/bin/fzf',
+-- })
+
+require"startup".setup()
+
+require('telescope').setup({
+  defaults = {
+    layout_strategy = "bottom_pane",
+    results_title = false,
+    sorting_strategy = "ascending",
+    layout_config = {
+        center = {
+            width = 0.9,
+            height = 0.5,
+            },
+        preview_width = 0.65,
+        preview_cutoff = 80,
+        -- other layout configuration here
+        },
+    -- other defaults configuration here
+    },
+  -- other configuration values here
+})
 
 --cmp setup{{{
 local cmp = require'cmp'
@@ -588,6 +626,43 @@ lspconfig.tsserver.setup {
 lspconfig.tailwindcss.setup{
   capabilities = capabilities
 }
+lspconfig.gopls.setup({
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    require("shared").on_attach(client, bufnr)
+
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      pattern = {
+        "*.go"
+      },
+      command = [[lua OrgImports(1000)]]
+    })
+  end,
+  cmd = { "gopls" },
+  settings = {
+    gopls = {
+      analyses = {
+        nilness = true,
+        unusedparams = true,
+        unusedwrite = true,
+        useany = true,
+      },
+      experimentalPostfixCompletions = true,
+      gofumpt = true,
+      staticcheck = true,
+      usePlaceholders = true,
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
+      }
+    },
+  },
+})
 --}}}
 
 require('nvim-ts-autotag').setup()
