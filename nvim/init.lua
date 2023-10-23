@@ -3,7 +3,7 @@
 --              | |                       | |
 --              | |     Jack Nemitz       | |
 --              | |      .dotfiles        | |
---              | |      init.vim         | |
+--              | |      init.lua         | |
 --              | |                       | |
 --              |  \_____________________/  |
 --              |___________________________|
@@ -17,61 +17,60 @@
 --  /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
 --/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
---
+
+local cmd = vim.cmd
+local o = vim.o
+local k = vim.keymap
+local api = vim.api
+
+cmd('source ~/dotfiles/nvim/init.vim')
+cmd('source ~/dotfiles/nvim/functions.vim')
+
 ---------------------------------------------------
 --	General Settings
 ---------------------------------------------------
-
-vim.cmd('source ~/dotfiles/nvim/init.vim')
-vim.cmd('source ~/dotfiles/nvim/functions.vim')
-
-vim.o.expandtab = true
-vim.o.shiftwidth = 2
-vim.o.tabstop = 2
-vim.o.hidden = true
-vim.o.mouse = 'a'
-vim.o.scrolloff = 6
-vim.o.sidescrolloff = 6
-vim.o.relativenumber = true
-vim.o.number = true
-vim.o.confirm = true
-vim.o.cursorline = true
-vim.o.autoindent = true
-vim.o.cmdheight = 1
-vim.o.updatetime = 300
-vim.o.signcolumn = 'number'
-vim.o.linebreak = true
-vim.o.swapfile = false
-vim.api.nvim_create_autocmd('BufEnter', {command = 'set concealcursor=""'})
-vim.o.incsearch = true
-vim.o.termguicolors = true
-vim.o.clipboard = "unnamedplus"
+--{{{options
+o.expandtab = true
+o.shiftwidth = 2
+o.tabstop = 2
+o.hidden = true
+o.mouse = 'a'
+o.scrolloff = 6
+o.sidescrolloff = 6
+o.relativenumber = true
+o.number = true
+o.confirm = true
+o.cursorline = true
+o.autoindent = true
+o.cmdheight = 1
+o.updatetime = 300
+o.signcolumn = 'number'
+o.linebreak = true
+o.swapfile = false
+o.incsearch = true
+o.termguicolors = true
+o.clipboard = "unnamedplus"
 vim.g.python3_host_prog = '/Users/jacknemitz/.pyenv/shims/python3'
 vim.g.python2_host_prog = '/Users/jacknemitz/.pyenv/shims/python'
-vim.o.foldmethod = "marker"
-vim.keymap.set('', '<leader>e', "T<Space>cE()<Esc>PT<Space>lvEhyhi[]<Esc>P")
-vim.keymap.set('', '<leader>r', ":%s/<br>/\r/g<CR>")
-vim.keymap.set('', '<leader>cs', ':execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>')
-vim.keymap.set('', '<leader>cl', ':execute "set colorcolumn=" . (&colorcolumn == "" ? "120" : "")<CR>')
+o.foldmethod = "marker"
+k.set('', '<leader>e', "T<Space>cE()<Esc>PT<Space>lvEhyhi[]<Esc>P")
+k.set('', '<leader>r', ":%s/<br>/\r/g<CR>")
+k.set('', '<leader>cs', ':execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>')
+k.set('', '<leader>cl', ':execute "set colorcolumn=" . (&colorcolumn == "" ? "120" : "")<CR>')
 -- vim.api.nvim_set_hl(0, "MatchParen", {cterm=underline, ctermbg=NONE, ctermfg=NONE})
 -- vim.api.nvim_set_hl(0,"MatchParen", {gui=underline, guibg=NONE, guifg=NONE})
 -- vim.api.nvim_set_hl(0,"VertSplit", {cterm=NONE})
-vim.api.nvim_set_hl(0,"ColorColumn", {ctermbg=0})
+api.nvim_set_hl(0,"ColorColumn", {ctermbg=0})
 -- vim.api.nvim_set_hl(0,"clear", {SignColumn})
-
-vim.api.nvim_set_keymap('n', '<leader>do', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>d[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>d]', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
--- The following command requires plug-ins "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", and optionally "kyazdani42/nvim-web-devicons" for icon support
-vim.api.nvim_set_keymap('n', '<leader>dd', '<cmd>Telescope diagnostics<CR>', { noremap = true, silent = true })
--- If you don't want to use the telescope plug-in but still want to see all the errors/warnings, comment out the telescope line and uncomment this:
--- vim.api.nvim_set_keymap('n', '<leader>dd', '<cmd>lua vim.diagnostic.setloclist()<CR>', { noremap = true, silent = true })
+api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":set concealcursor= | :set conceallevel=3"})
+api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":set syntax=markdown"})
+--}}}
 
 ---------------------------------------------------
 --   Plugin Specific Settings
 ---------------------------------------------------
-
-local _general = vim.api.nvim_create_augroup("_general", {clear = true})
+--{{{plugin settings
+local _general = api.nvim_create_augroup("_general", {clear = true})
 -- vim.api.nvim_create_autocmd({"bufenter"},{
 --   pattern = "*",
 --   command = "if (winnr("$") ==1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif",
@@ -84,47 +83,60 @@ local _general = vim.api.nvim_create_augroup("_general", {clear = true})
 -- vim.o.NERDTreeDirArrows = 1
 -- vim.o.NERDTreeWinSize = 35
 -- vim.g.NERDTreeWinPos = "right"
-vim.api.nvim_set_hl(0, "clear", {SpellBad})
-vim.api.nvim_set_hl(0, "SpellBad", {ctermfg=009, ctermbg=011})
+api.nvim_set_hl(0, "clear", {SpellBad})
+api.nvim_set_hl(0, "SpellBad", {ctermfg=009, ctermbg=011})
 --OCaml setup
 -- set rtp+=<SHARE_DIR>/merlin/vim
 -- set rtp^="/Users/jacknemitz/.opam/csci2041/share/ocp-indent/vim"
 -- let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 -- autocmd FileType ocaml source /Users/jacknemitz/.opam/csci2041/share/typerex/ocp-indent/ocp-indent.vim
 -- filetype plugin indent on
-vim.cmd('let g:instant_markdown_autostart = 0')
-vim.cmd('let g:goyo_width = 120')
-vim.cmd('let g:pencil#conceallevel = 2')
-vim.cmd('let g:pencil#concealcursor = "c"')
+cmd('let g:instant_markdown_autostart = 0')
+cmd('let g:goyo_width = 80')
+cmd('let g:pencil#conceallevel = 3')
+cmd('let g:pencil#concealcursor = ""')
+cmd('let g:pencil#wrapModeDefault = "soft"')
+--}}}
 
 ---------------------------------------------------
 --	Key Mappings
 ---------------------------------------------------
-
+--{{{key mappings
 -- quicker escape
-vim.keymap.set("i", "jj", "<esc>")
+k.set("i", "jj", "<esc>")
 -- open new buffer with file under cursor
-vim.keymap.set("", "gf", ":edit <cfile><cr>")
+k.set("", "gf", ":edit <cfile><cr>")
 -- toggle nerdtree file manager
-vim.keymap.set("","<Leader>n", ":NERDTreeToggle<cr><Leader>j")
+k.set("","<Leader>n", ":NERDTreeToggle<cr><Leader>j")
 -- list buffers then prompt for buffer
-vim.keymap.set("n", "<Leader>b", ":ls<CR>:b<Space>", {noremap = true})
+k.set("n", "<Leader>b", ":ls<CR>:b<Space>", {noremap = true})
 -- toggle spell checking
-vim.keymap.set("","<Leader>s", ":call ToggleSpellCheck()<CR>", {noremap = true, silent = true})
+k.set("","<Leader>s", ":call ToggleSpellCheck()<CR>", {noremap = true, silent = true})
 -- toggle Goyo
-vim.keymap.set("","<Leader>g", ":call ToggleGoyo()<CR>", {noremap = true, silent = true})
+k.set("","<Leader>g", ":call ToggleGoyo()<CR>", {noremap = true, silent = true})
 -- yank entire line after cursor
-vim.keymap.set("","Y", "y$")
+k.set("","Y", "y$")
 -- map page scroll
-vim.keymap.set("","<C-j>", "<C-e>")
-vim.keymap.set("","<C-k>", "<C-y>")
-vim.keymap.set("","<Leader>lb", ":set linebreak<CR>", {noremap = true})
-vim.keymap.set("","<Leader>nb", ":set nolinebreak<CR>", {noremap = true})
-vim.keymap.set("n","<space>", "za", {noremap = true})
-vim.keymap.set("n","FF", ":Telescope find_files<cr>")
-vim.keymap.set("n","FB", ":Telescope buffers<cr>")
-vim.keymap.set("n", "<Leader>f", ":Rg<CR>", {noremap = true, silent = true})
+-- vim.keymap.set("","<C-j>", "<C-e>")
+-- vim.keymap.set("","<C-k>", "<C-y>")
+k.set("","<Leader>lb", ":set linebreak<CR>", {noremap = true})
+k.set("","<Leader>nb", ":set nolinebreak<CR>", {noremap = true})
+k.set("n","<space>", "za", {noremap = true})
+k.set("n","FF", ":Telescope find_files<cr>")
+k.set("n","FB", ":Telescope buffers<cr>")
+k.set("n", "<Leader>f", ":Rg<CR>", {noremap = true, silent = true})
+api.nvim_set_keymap('n', '<leader>do', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<leader>d[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<leader>d]', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
+-- The following command requires plug-ins "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", and optionally "kyazdani42/nvim-web-devicons" for icon support
+api.nvim_set_keymap('n', '<leader>dd', '<cmd>Telescope diagnostics<CR>', { noremap = true, silent = true })
+-- If you don't want to use the telescope plug-in but still want to see all the errors/warnings, comment out the telescope line and uncomment this:
+-- vim.api.nvim_set_keymap('n', '<leader>dd', '<cmd>lua vim.diagnostic.setloclist()<CR>', { noremap = true, silent = true })
+--}}}
 
+---------------------------------------------------
+--	Colors
+---------------------------------------------------
 -- colors via Flavours{{{
 -- Start flavours
 -- base16-nvim (https://github.com/wincent/base16-nvim)
@@ -176,7 +188,7 @@ vim.g.colors_name = "base16-scheme01"
 
 -- Vim editor colors                    fg bg ctermfg ctermbg attr guisp
 vim.api.nvim_set_hl(0, 'Normal', { fg = gui07, bg = gui00 })
-vim.api.nvim_set_hl(0, 'Bold', { bold = true })
+vim.api.nvim_set_hl(0, 'Bold', { fg = gui08, bold = true })
 vim.api.nvim_set_hl(0, 'Debug', { fg = gui08 })
 vim.api.nvim_set_hl(0, 'Directory', { fg = gui0D })
 vim.api.nvim_set_hl(0, 'Error', { fg = gui00, bg = gui08 })
@@ -185,7 +197,7 @@ vim.api.nvim_set_hl(0, 'Exception', { fg = gui08 })
 vim.api.nvim_set_hl(0, 'FoldColumn', { fg = gui0C, bg = gui01 })
 vim.api.nvim_set_hl(0, 'Folded', { fg = gui03, bg = gui01 })
 vim.api.nvim_set_hl(0, 'IncSearch', { fg = gui01, bg = gui03 })
-vim.api.nvim_set_hl(0, 'Italic', {})
+vim.api.nvim_set_hl(0, 'Italic', { fg=gui09 })
 vim.api.nvim_set_hl(0, 'Macro', { fg = gui08 })
 vim.api.nvim_set_hl(0, 'MatchParen', { bg = gui0B })
 vim.api.nvim_set_hl(0, 'ModeMsg', { fg = gui0B })
@@ -200,7 +212,7 @@ vim.api.nvim_set_hl(0, 'Visual', { bg = gui03 })
 vim.api.nvim_set_hl(0, 'VisualNOS', { fg = gui08 })
 vim.api.nvim_set_hl(0, 'WarningMsg', { fg = gui0A })
 vim.api.nvim_set_hl(0, 'WildMenu', { fg = gui08, bg = gui0A })
-vim.api.nvim_set_hl(0, 'Title', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'Title', { fg = gui0F })
 vim.api.nvim_set_hl(0, 'Conceal', { fg = gui0D, bg = gui00 })
 vim.api.nvim_set_hl(0, 'Cursor', { fg = gui00, bg = gui05 })
 vim.api.nvim_set_hl(0, 'NonText', { fg = gui03 })
@@ -346,10 +358,16 @@ vim.api.nvim_set_hl(0, 'mailURL', { fg = gui0D })
 vim.api.nvim_set_hl(0, 'mailEmail', { fg = gui0D })
 
 -- Markdown highlighting
-vim.api.nvim_set_hl(0, 'markdownCode', { fg = gui0B })
+vim.api.nvim_set_hl(0, 'markdownCode', { fg = gui0D })
 vim.api.nvim_set_hl(0, 'markdownError', { fg = gui05, bg = gui00 })
-vim.api.nvim_set_hl(0, 'markdownCodeBlock', { fg = gui0B })
-vim.api.nvim_set_hl(0, 'markdownHeadingDelimiter', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'markdownCodeBlock', { fg = gui0D })
+vim.api.nvim_set_hl(0, 'markdownHeadingDelimiter', { fg = gui0F })
+vim.api.nvim_set_hl(0, '@text.title.1.markdown', { fg = gui08 })
+vim.api.nvim_set_hl(0, '@text.title.2.markdown', { fg = gui09 })
+vim.api.nvim_set_hl(0, '@text.title.3.markdown', { fg = gui0A })
+vim.api.nvim_set_hl(0, '@text.title.4.markdown', { fg = gui0B })
+vim.api.nvim_set_hl(0, '@text.title.5.markdown', { fg = gui0C })
+vim.api.nvim_set_hl(0, '@text.title.6.markdown', { fg = gui0D })
 
 -- NERDTree highlighting
 vim.api.nvim_set_hl(0, 'NERDTreeDirSlash', { fg = gui0D })
@@ -412,6 +430,10 @@ vim.api.nvim_set_hl(0, 'javaOperator', { fg = gui0D })
 -- End flavours
 -- }}}
 
+---------------------------------------------------
+--	Plugins
+---------------------------------------------------
+--{{{plugins
 require "paq" {
   "savq/paq-nvim",
   "tpope/vim-commentary",
@@ -449,13 +471,11 @@ require "paq" {
   "preservim/vim-pencil",
   -- { 'iamcco/markdown-preview.nvim', run = function() vim.fn['mkdp#util#install']() end }
 }
-
--- require('fzf').setup({
---   dir = '/usr/local/bin/fzf',
--- })
+--}}}
 
 require"startup".setup()
 
+-- {{{telescope config
 require('telescope').setup({
   defaults = {
     layout_strategy = "bottom_pane",
@@ -470,10 +490,22 @@ require('telescope').setup({
         preview_cutoff = 80,
         -- other layout configuration here
         },
-    -- other defaults configuration here
-    },
+    -- other defaults configuration here },
   -- other configuration values here
+  }
 })
+---}}}
+
+--{{{treesitter config
+require('nvim-treesitter.configs').setup{
+  ensure_installed = { "c", "lua", "vim", "tsx", "markdown" },
+  sync_install = false,
+  auto_install = true,
+  highlight= {
+    enable=true,
+  }
+}
+--}}}
 
 --cmp setup{{{
 local cmp = require'cmp'
@@ -557,7 +589,7 @@ cmp.setup({
 -- make TAB complete vsnip if available!
 -- FOUND: https://github.com/hrsh7th/nvim-cmp/issues/750#issuecomment-1024984115
 local t = function(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
+    return api.nvim_replace_termcodes(str, true, true, true)
 end
 
 _G.tab_complete = function()
@@ -570,14 +602,16 @@ _G.tab_complete = function()
     end
 end
 
-vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.tab_complete()", {expr = true})
+api.nvim_set_keymap("i", "<S-Tab>", "v:lua.tab_complete()", {expr = true})
+api.nvim_set_keymap("s", "<S-Tab>", "v:lua.tab_complete()", {expr = true})
 -- }}}
+
+--lspconfig{{{
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
---lspconfig{{{
 local lspconfig = require('lspconfig')
+
 lspconfig.lua_ls.setup({
   on_attach = custom_attach,
   settings = {
@@ -603,6 +637,11 @@ lspconfig.lua_ls.setup({
     },
   },
 })
+
+lspconfig.marksman.setup{
+  capabilities = capabilities
+}
+
 lspconfig.bashls.setup {
   capabilities = capabilities
 }
@@ -631,7 +670,7 @@ lspconfig.gopls.setup({
   on_attach = function(client, bufnr)
     require("shared").on_attach(client, bufnr)
 
-    vim.api.nvim_create_autocmd("BufWritePre", {
+    api.nvim_create_autocmd("BufWritePre", {
       pattern = {
         "*.go"
       },
