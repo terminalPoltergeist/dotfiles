@@ -7,7 +7,5 @@ gitconfig/.gitconfig
 scripts/servers.sh
 ssh/config
 docs/
-assets/*
-!assets/output-onlinepngtools.png
 todo.md
 path
