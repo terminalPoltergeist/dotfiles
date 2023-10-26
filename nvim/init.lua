@@ -23,7 +23,7 @@ local o = vim.o
 local k = vim.keymap
 local api = vim.api
 
-cmd('source ~/dotfiles/nvim/init.vim')
+-- cmd('source ~/dotfiles/nvim/init.vim')
 cmd('source ~/dotfiles/nvim/functions.vim')
 
 ---------------------------------------------------
@@ -31,6 +31,7 @@ cmd('source ~/dotfiles/nvim/functions.vim')
 ---------------------------------------------------
 --{{{options
 o.expandtab = true
+o.wrap = false
 o.shiftwidth = 2
 o.tabstop = 2
 o.hidden = true
@@ -62,7 +63,7 @@ k.set('', '<leader>cl', ':execute "set colorcolumn=" . (&colorcolumn == "" ? "12
 -- vim.api.nvim_set_hl(0,"VertSplit", {cterm=NONE})
 api.nvim_set_hl(0,"ColorColumn", {ctermbg=0})
 -- vim.api.nvim_set_hl(0,"clear", {SignColumn})
-api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":set concealcursor= | :set conceallevel=3"})
+api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":set concealcursor= | :set conceallevel=2"})
 api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":set syntax=markdown"})
 --}}}
 
