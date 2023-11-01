@@ -65,6 +65,7 @@ api.nvim_set_hl(0,"ColorColumn", {ctermbg=0})
 -- vim.api.nvim_set_hl(0,"clear", {SignColumn})
 api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":set concealcursor= | :set conceallevel=2"})
 api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":set syntax=markdown"})
+api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":source ~/dotfiles/nvim/syntaxFiles/concealments.vim"})
 --}}}
 
 ---------------------------------------------------
@@ -94,7 +95,7 @@ api.nvim_set_hl(0, "SpellBad", {ctermfg=009, ctermbg=011})
 -- filetype plugin indent on
 cmd('let g:instant_markdown_autostart = 0')
 cmd('let g:goyo_width = 80')
-cmd('let g:pencil#conceallevel = 3')
+cmd('let g:pencil#conceallevel = 2')
 cmd('let g:pencil#concealcursor = ""')
 cmd('let g:pencil#wrapModeDefault = "soft"')
 --}}}
@@ -117,6 +118,11 @@ k.set("","<Leader>s", ":call ToggleSpellCheck()<CR>", {noremap = true, silent = 
 k.set("","<Leader>g", ":call ToggleGoyo()<CR>", {noremap = true, silent = true})
 -- yank entire line after cursor
 k.set("","Y", "y$")
+-- beter word motion
+k.set("", "w", "W")
+k.set("", "W", "w")
+k.set("", "b", "B")
+k.set("", "B", "b")
 -- map page scroll
 -- vim.keymap.set("","<C-j>", "<C-e>")
 -- vim.keymap.set("","<C-k>", "<C-y>")
@@ -665,6 +671,18 @@ lspconfig.tsserver.setup {
 }
 lspconfig.tailwindcss.setup{
   capabilities = capabilities
+}
+lspconfig.pylsp.setup{
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = {
+          ignore = {'W391', 'E722'},
+          maxLineLength = 100
+        }
+      }
+    }
+  }
 }
 lspconfig.gopls.setup({
   capabilities = capabilities,
