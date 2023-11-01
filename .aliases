@@ -35,6 +35,7 @@ alias school='cd ~/Desktop/school';
 alias projects='cd ~/Desktop/projects';
 alias root='cd /';
 alias dots='cd ~/dotfiles';
+alias notes='cd ~/Desktop/notes';
 
 ###############################################
 ################ Git Shortcuts ################
@@ -60,6 +61,7 @@ alias spicetify='~/.spicetify/spicetify';
 alias pjava='processing-java --sketch=$PWD --run';
 alias v='nvim';
 alias vim="vim -S ~/.vim/.vimrc";
+alias vzf='v $(fzf)'; # fuzzy search and open the result
 
 ###############################################
 ################ SSH Shortcuts ################
