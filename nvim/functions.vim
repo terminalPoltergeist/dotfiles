@@ -41,3 +41,9 @@ function! ToggleGoyo()
     echo "Goyo ON"
   endif
 endfunction
+
+"function! Open()
+"  let @/=eval('\v((\[\[.*\]\])+.*\[\[)@<=(.{-}%#.{-})(\]\])@=')
+"  echo @/
+"  "echo eval('%s/\v(\[\[)@<=(.*%#.*)(\]\])@=')
+"endfunction

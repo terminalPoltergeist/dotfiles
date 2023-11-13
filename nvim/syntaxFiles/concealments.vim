@@ -23,3 +23,5 @@ syn match Normal '\v(\[.*\])@<=(\(.*\))' conceal
 syn match Normal '\v(\[\[)(.+\]\])@=' conceal
 " match ]] if preceded by one or more characters and [[
 syn match Normal '\v(\[\[.+)@<=\]\]' conceal
+
+" syn match Normal '\v(\[\[)@<=(.*%#.*)(\]\])@=' conceal
