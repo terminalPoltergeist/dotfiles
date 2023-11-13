@@ -63,9 +63,9 @@ k.set('', '<leader>cl', ':execute "set colorcolumn=" . (&colorcolumn == "" ? "12
 -- vim.api.nvim_set_hl(0,"VertSplit", {cterm=NONE})
 api.nvim_set_hl(0,"ColorColumn", {ctermbg=0})
 -- vim.api.nvim_set_hl(0,"clear", {SignColumn})
-api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":set concealcursor= | :set conceallevel=2"})
-api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":Pencil"})
-api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":source ~/dotfiles/nvim/syntaxFiles/concealments.vim"})
+api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = ":set concealcursor= | :set conceallevel=2"})
+api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = ":Pencil"})
+api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = ":source ~/dotfiles/nvim/syntaxFiles/concealments.vim"})
 api.nvim_create_autocmd('QuitPre', {pattern = {"*.md", "*.mdx"}, command = ":qa"}) -- quit vim when closing goyo
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = "Goyo"})
 --}}}
@@ -96,7 +96,7 @@ api.nvim_set_hl(0, "SpellBad", {ctermfg=009, ctermbg=011})
 -- autocmd FileType ocaml source /Users/jacknemitz/.opam/csci2041/share/typerex/ocp-indent/ocp-indent.vim
 -- filetype plugin indent on
 cmd('let g:instant_markdown_autostart = 0')
-cmd('let g:goyo_width = 120')
+cmd('let g:goyo_width = 80')
 cmd('let g:pencil#conceallevel = 2')
 cmd('let g:pencil#concealcursor = ""')
 cmd('let g:pencil#wrapModeDefault = "soft"')
