@@ -65,7 +65,7 @@ api.nvim_set_hl(0,"ColorColumn", {ctermbg=0})
 -- vim.api.nvim_set_hl(0,"clear", {SignColumn})
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = ":set concealcursor= | :set conceallevel=2"})
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = ":Pencil"})
-api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = ":source ~/dotfiles/nvim/syntaxFiles/concealments.vim"})
+api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":source ~/dotfiles/nvim/syntaxFiles/concealments.vim"})
 api.nvim_create_autocmd('QuitPre', {pattern = {"*.md", "*.mdx"}, command = ":qa"}) -- quit vim when closing goyo
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = "Goyo"})
 --}}}
