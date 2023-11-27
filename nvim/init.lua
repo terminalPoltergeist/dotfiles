@@ -36,7 +36,7 @@ o.shiftwidth = 2
 o.tabstop = 2
 o.hidden = true
 o.mouse = 'a'
-o.scrolloff = 6
+o.scrolloff = 8
 o.sidescrolloff = 6
 o.relativenumber = true
 o.number = true
@@ -68,6 +68,9 @@ api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = ":Pe
 api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":source ~/dotfiles/nvim/syntaxFiles/concealments.vim"})
 api.nvim_create_autocmd('QuitPre', {pattern = {"*.md", "*.mdx"}, command = ":qa"}) -- quit vim when closing goyo
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = "Goyo"})
+api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*"}, command = ":set tabstop=4"})
+api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*"}, command = ":set shiftwidth=4"})
+api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*"}, command = ":IndentLinesDisable | IndentLinesEnable"}) -- hacky way to get indent guides looking good
 --}}}
 
 ---------------------------------------------------
@@ -135,6 +138,7 @@ k.set("n","<space>", "za", {noremap = true})
 k.set("n","FF", ":Telescope find_files<cr>")
 k.set("n","FB", ":Telescope buffers<cr>")
 k.set("n", "<Leader>f", ":Rg<CR>", {noremap = true, silent = true})
+k.set("i", "<C-f>", "<esc>:call InsertFile()<CR>", {noremap = true})
 api.nvim_set_keymap('n', '<leader>do', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
 api.nvim_set_keymap('n', '<leader>d[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
 api.nvim_set_keymap('n', '<leader>d]', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })

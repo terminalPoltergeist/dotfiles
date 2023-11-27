@@ -47,3 +47,7 @@ endfunction
 "  echo @/
 "  "echo eval('%s/\v(\[\[)@<=(.*%#.*)(\]\])@=')
 "endfunction
+
+" function InsertFile()
+"   Files /Users/jacknemitz/Desktop/notes/
+" endfunction
