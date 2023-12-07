@@ -60,7 +60,7 @@ alias spicetify='~/.spicetify/spicetify';
 ## processing-java
 alias pjava='processing-java --sketch=$PWD --run';
 alias v='nvim';
-alias vim="vim -S ~/.vim/.vimrc";
+# alias vim="vim -S ~/.vim/.vimrc";
 alias vzf='v $(fzf)'; # fuzzy search and open the result
 
 ###############################################
