@@ -65,12 +65,12 @@ api.nvim_set_hl(0,"ColorColumn", {ctermbg=0})
 -- vim.api.nvim_set_hl(0,"clear", {SignColumn})
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = ":set concealcursor= | :set conceallevel=2"})
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = ":Pencil"})
+api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = "Goyo"})
 api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":source ~/dotfiles/nvim/syntaxFiles/concealments.vim"})
 api.nvim_create_autocmd('QuitPre', {pattern = {"*.md", "*.mdx"}, command = ":qa"}) -- quit vim when closing goyo
-api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = "Goyo"})
-api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*"}, command = ":set tabstop=4"})
-api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*"}, command = ":set shiftwidth=4"})
-api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*"}, command = ":IndentLinesDisable | IndentLinesEnable"}) -- hacky way to get indent guides looking good
+api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*", "*.pde"}, command = ":set tabstop=4"})
+api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*", "*.pde"}, command = ":set shiftwidth=4"})
+api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*", "*.pde"}, command = ":IndentLinesDisable | IndentLinesEnable"}) -- hacky way to get indent guides looking good
 --}}}
 
 ---------------------------------------------------
@@ -125,13 +125,17 @@ k.set("","<Leader>g", ":call ToggleGoyo()<CR>", {noremap = true, silent = true})
 -- yank entire line after cursor
 k.set("","Y", "y$")
 -- beter word motion
-k.set("", "w", "W")
-k.set("", "W", "w")
-k.set("", "b", "B")
-k.set("", "B", "b")
+-- maybe this wasn't such a good idea?
+-- k.set("", "w", "W")
+-- k.set("", "W", "w")
+-- k.set("", "b", "B")
+-- k.set("", "B", "b")
 -- map page scroll
 -- vim.keymap.set("","<C-j>", "<C-e>")
 -- vim.keymap.set("","<C-k>", "<C-y>")
+-- these next two were from Primeagen
+k.set("", "<C-u>", "<C-u>zz")
+k.set("", "<C-d>", "<C-d>zz")
 k.set("","<Leader>lb", ":set linebreak<CR>", {noremap = true})
 k.set("","<Leader>nb", ":set nolinebreak<CR>", {noremap = true})
 k.set("n","<space>", "za", {noremap = true})
@@ -271,7 +275,7 @@ vim.api.nvim_set_hl(0, 'StorageClass', { fg = gui0A })
 vim.api.nvim_set_hl(0, 'String', { fg = gui0C })
 vim.api.nvim_set_hl(0, 'Structure', { fg = gui0C })
 vim.api.nvim_set_hl(0, 'Tag', { fg = gui0A })
-vim.api.nvim_set_hl(0, 'todo', { fg = gui0A, bg = gui01 })
+vim.api.nvim_set_hl(0, 'Todo', { fg = gui0A, bg = gui01 })
 vim.api.nvim_set_hl(0, 'Type', { fg = gui0C })
 vim.api.nvim_set_hl(0, 'Typedef', { fg = gui08 })
 
