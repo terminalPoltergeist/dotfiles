@@ -34,12 +34,10 @@ export LUA_PATH="./?.lua;;"
 export GPG_TTY=${tty}
 gpgconf --launch gpg-agent
 
-export APOLLO="apollo.cselabs.umn.edu"
-
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/dotfiles/.{path,bash_prompt,bashrc,exports,aliases,functions,extra}; do
+for file in ~/dotfiles/.{path,bash_prompt,aliases,bashrc,exports,functions,extra}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
