@@ -16,7 +16,7 @@ syn match urltext '\v\[@<!\[(.*\]\(.*\))@=' conceal
 " match ] if preceded by [ and any number of characters and paired with (*)
 syn match urlText '\v(\[.*)@<=\](\(.*\))@=' conceal
 " match (*any characters*) if preceded by [*any characters*]
-syn match Normal '\v(\[.*\])@<=(\(.*\))' conceal
+syn match Normal '\v(\[.*\])@<=(\(.{-}\))' conceal
 
 " match/conceal backlinks
 " match [[ if followed by one or more characters and ]]
