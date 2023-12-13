@@ -22,11 +22,11 @@
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 
-PS1="\e[1;33m<\u>\e[0m";                # Adds username to prompt with 1;31 color scheme
+PS1="\e[1;33m\u\e[0m";                # Adds username to prompt with 1;31 color scheme
 PS1+=" \e[1;37m@\e[0m ";               # Adds '@' after username with 1;37 color scheme
 PS1+="\e[1;35m\w\e[0m";                 # Adds cwd after '@' with 1;34 color scheme
-PS1+="\e[1;36m\$(prompt_git)\e[0m - ";  # Adds current git repo info with 1;32 color scheme
-PS1+="\@\n$ ";                          # Adds time and newline to prompt w/ '$' prompt character
+PS1+="\e[1;36m\$(prompt_git)\e[0m\n$ ";  # Adds current git repo info with 1;32 color scheme
+# PS1+="\@\n$ ";                          # Adds time and newline to prompt w/ '$' prompt character
 export PS1;                             # Exports the prompt global
 
 # I got this function online but can't remember where. It basically provides information for a git repo in the cmd line prompt when in a git repo. The function is called above in the prompt customization.
