@@ -23,6 +23,9 @@
 
 #Add `~/bin` to the `$PATH`
 export PATH="$PATH:$HOME/bin";
+for d in $HOME/bin/*/; do
+  export PATH="$PATH:$d"
+done
 export FLAVOURS_CONFIG_FILE="$HOME/.config/flavours/config.toml";
 export LUA_PATH="./?.lua;;"
 
