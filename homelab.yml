@@ -1,0 +1,7 @@
+---
+- name: server-config
+  hosts: homelab
+
+  roles:
+    - { role: ufw, become: yes }
+    - tmux

@@ -1,0 +1,6 @@
+---
+- name: workstation-config
+  hosts: workstation
+
+  roles:
+    - tmux

@@ -1,0 +1,11 @@
+---
+- name: Install ufw
+  apt:
+    name: ufw
+    state: latest
+
+- name: Enable rate-limiting
+  community.general.ufw:
+    rule: limit
+    port: ssh
+    proto: tcp
