@@ -19,7 +19,7 @@ start = "-- Start flavours"
 end = "-- End flavours"
 
 [[item]]
-file = "/Users/jacknemitz/dotfiles/tmux/tmux.conf"
+file = "/Users/jacknemitz/.tmux.conf"
 template = "tmux"
 
 [[item]]
