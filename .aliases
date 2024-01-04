@@ -56,7 +56,6 @@ alias gg="git log --graph --abbrev-commit --decorate --format=format:'%C(bold bl
 ## spotify shortcuts
 alias spotpl='spotify play';
 alias spotpa='spotify pause';
-alias spicetify='~/.spicetify/spicetify';
 ## processing-java
 alias pjava='processing-java --sketch=$PWD --run';
 alias v='nvim';
