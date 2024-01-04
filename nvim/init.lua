@@ -487,7 +487,8 @@ require "paq" {
   "startup-nvim/startup.nvim",
   "junegunn/goyo.vim",
   "preservim/vim-pencil",
-  -- { 'iamcco/markdown-preview.nvim', run = function() vim.fn['mkdp#util#install']() end }
+  -- { 'iamcco/markdown-preview.nvim', run = function() vim.fn['mkdp#util#install']() end },
+  -- "ThePrimeagen/vim-be-good",
 }
 --}}}
 
@@ -538,8 +539,8 @@ cmp.setup({
       end,
     },
     window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
       ["<Tab>"] = cmp.mapping(function(fallback)
