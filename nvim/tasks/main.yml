@@ -23,16 +23,17 @@
   file:
     path: "{{ ansible_env.HOME }}/.config/nvim/lua"
     state: directory
-- name: Copy init.lua
+- name: Copy configs
   copy:
     src: "{{ role_path }}/files/"
     dest: "{{ ansible_env.HOME }}/.config/nvim/lua/"
     owner: "{{ ansible_user_id }}"
     mode: '0644'
-- name: Link init.lua
+  when: ansible_host != "localhost"
+- name: Link configs
   file:
-    src: "{{ role_path }}/files/init.lua"
-    dest: "{{ ansible_env.HOME }}/.config/nvim/lua/init.lua"
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_env.HOME }}/.config/nvim/lua"
     state: link
     force: True
   when: ansible_host == "localhost"

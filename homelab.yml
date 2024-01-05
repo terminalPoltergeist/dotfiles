@@ -3,6 +3,6 @@
   hosts: homelab
 
   roles:
-    # - { role: ufw, become: yes }
-    # - tmux
+    - { role: ufw, become: yes }
+    - tmux
     - nvim
