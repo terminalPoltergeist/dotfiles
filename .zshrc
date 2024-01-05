@@ -62,6 +62,15 @@ export light_cyan='5f8787'
 export light_white='c1c1c1'
 # End flavours
 
+zmodload -i zsh/complist
+
+bindkey -M menuselect '^M' .accept-line
+zstyle ':completion:::::default' menu yes select
+bindkey '^[[Z' reverse-menu-complete
+zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==02=01}:${(s.:.)LS_COLORS}")'
+zstyle ':completion:*' special-dirs true
+zstyle ':completion:*' insert-tab false
+
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
@@ -69,12 +78,6 @@ for file in ~/dotfiles/.{path,prompt,aliases,functions,extra}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
-
-zstyle ':completion:::::default' menu yes select
-bindkey -M menuselect '^M' .accept-line
-bindkey '^[[Z' reverse-menu-complete
-zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==02=01}:${(s.:.)LS_COLORS}")'
-zstyle ':completion:*' special-dirs true
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
