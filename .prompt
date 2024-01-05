@@ -29,9 +29,9 @@ setopt prompt_subst # enable variable expansion
 # # PS1+="\@\n$ ";                          # Adds time and newline to prompt w/ '$' prompt character
 NEWLINE=$'\n'
 PS1='%B%F{red}%n'
-PS1+='%F{white} @ '
-PS1+='%F{yellow} %~ '
-PS1+='%F{blue}$(prompt_git) '
+PS1+='%F{white} @'
+PS1+='%F{yellow} %~'
+PS1+='%F{blue}$(prompt_git)'
 PS1+='%F{white}%@${NEWLINE}$ '
 export PS1;                             # Exports the prompt global
 
