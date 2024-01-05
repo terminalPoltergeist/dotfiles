@@ -23,8 +23,7 @@ local o = vim.o
 local k = vim.keymap
 local api = vim.api
 
--- cmd('source ~/dotfiles/nvim/init.vim')
-cmd('source ~/dotfiles/nvim/files/functions.vim')
+cmd('source ~/.config/nvim/lua/functions.vim')
 
 ---------------------------------------------------
 --	General Settings
