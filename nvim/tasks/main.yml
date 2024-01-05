@@ -1,0 +1,34 @@
+- name: Install neovim - local
+  package:
+    name: neovim
+    state: present
+  when: ansible_host == "localhost"
+- name: Install neovim - remote
+  package:
+    name: neovim
+    state: present
+  become: yes
+  when: ansible_host != "localhost"
+- name: Create config directory
+  file:
+    path: "{{ ansible_env.HOME }}/.config/nvim"
+    state: directory
+- name: Create init.vim
+  shell: cd ~/.config/nvim && echo "lua require(\"init\")" > init.vim
+- name: Create lua directory
+  file:
+    path: "{{ ansible_env.HOME }}/.config/nvim/lua"
+    state: directory
+- name: Copy init.lua
+  copy:
+    src: "{{ role_path }}/files/"
+    dest: "{{ ansible_env.HOME }}/.config/nvim/lua/"
+    owner: "{{ ansible_user_id }}"
+    mode: '0644'
+  when: ansible_host != "localhost"
+- name: Link init.lua
+  file:
+    src: "{{ role_path }}/files/init.lua"
+    dest: "{{ ansible_env.HOME }}/.config/nvim/lua/init.lua"
+    state: link
+  when: ansible_host == "localhost"

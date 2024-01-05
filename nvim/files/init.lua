@@ -24,7 +24,7 @@ local k = vim.keymap
 local api = vim.api
 
 -- cmd('source ~/dotfiles/nvim/init.vim')
-cmd('source ~/dotfiles/nvim/functions.vim')
+cmd('source ~/dotfiles/nvim/files/functions.vim')
 
 ---------------------------------------------------
 --	General Settings
