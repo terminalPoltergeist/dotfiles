@@ -15,6 +15,10 @@
     state: directory
 - name: Create init.vim
   shell: cd ~/.config/nvim && echo "lua require(\"init\")" > init.vim
+  register: result
+  changed_when: False
+  failed_when: result.rc != 0
+  ignore_errors: True
 - name: Create lua directory
   file:
     path: "{{ ansible_env.HOME }}/.config/nvim/lua"
