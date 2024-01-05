@@ -13,7 +13,7 @@ subtemplate = "custom"
 # end = "\" End flavours"
 
 [[item]]
-file = "/Users/jacknemitz/dotfiles/nvim/init.lua"
+file = "/Users/jacknemitz/.config/nvim/lua/init.lua"
 template = "nvim"
 start = "-- Start flavours"
 end = "-- End flavours"
@@ -42,3 +42,9 @@ file = "/Users/jacknemitz/Desktop/projects/jacknemitz.com/tailwind.config.js"
 template = "jacknemitz.com"
 start = "// Start flavours"
 end = "// End flavours"
+
+[[item]]
+file = "/Users/jacknemitz/.zshrc"
+template = "zsh"
+start = "# Start flavours"
+end = "# End flavours"

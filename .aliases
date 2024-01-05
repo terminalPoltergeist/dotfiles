@@ -19,7 +19,7 @@
 #/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-alias sourcebash='clear && source ~/dotfiles/.bash_profile';
+alias sourcery='clear && source ~/dotfiles/.zshrc';
 
 ###############################################
 ############ Navigation Shortcuts #############
