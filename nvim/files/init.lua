@@ -76,6 +76,7 @@ api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*", "*.pde"}, command = ":I
 --   Plugin Specific Settings
 ---------------------------------------------------
 --{{{plugin settings
+api.nvim_create_autocmd('BufRead,BufNewFile', {pattern = {"inventory.yml", "hosts.yml"}, command = ":set filetype=yaml.ansible"})
 local _general = api.nvim_create_augroup("_general", {clear = true})
 -- vim.api.nvim_create_autocmd({"bufenter"},{
 --   pattern = "*",
@@ -103,6 +104,11 @@ cmd('let g:pencil#conceallevel = 2')
 cmd('let g:pencil#concealcursor = ""')
 cmd('let g:pencil#wrapModeDefault = "soft"')
 cmd('let g:pencil#cursorwrap = 0    " 0=disable, 1=enable (def)')
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+--   callback = function()
+--     require("lint").try_lint()
+--   end,
+-- })
 --}}}
 
 ---------------------------------------------------
@@ -486,6 +492,8 @@ require "paq" {
   "startup-nvim/startup.nvim",
   "junegunn/goyo.vim",
   "preservim/vim-pencil",
+  "pearofducks/ansible-vim",
+  -- "mfussenegger/nvim-lint"
   -- { 'iamcco/markdown-preview.nvim', run = function() vim.fn['mkdp#util#install']() end },
   -- "ThePrimeagen/vim-be-good",
 }
@@ -658,6 +666,20 @@ lspconfig.lua_ls.setup({
 
 lspconfig.marksman.setup{
   capabilities = capabilities
+}
+
+lspconfig.ansiblels.setup{
+  capabilities = capabilities,
+  -- on_attach = function(client, bufnr)
+  --   require("shared").on_attach(client, bufnr)
+
+  --   api.nvim_create_autocmd("BufWritePre", {
+  --     pattern = {
+  --       "*.yml"
+  --     },
+  --     command = [[lua OrgImports(1000)]]
+  --   })
+  -- end,
 }
 
 lspconfig.bashls.setup {
