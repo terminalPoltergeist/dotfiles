@@ -19,6 +19,7 @@
   ansible.builtin.find:
     paths: "{{ ansible_parent_role_paths[0] }}/files"
     file_type: any
+    hidden: true
   register: files
 - name: Copy configs
   ansible.builtin.copy:

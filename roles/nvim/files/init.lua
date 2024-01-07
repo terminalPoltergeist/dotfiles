@@ -167,47 +167,47 @@ api.nvim_set_keymap('n', '<leader>dd', '<cmd>Telescope diagnostics<CR>', { norem
 -- based on
 -- base16-vim (https://github.com/chriskempson/base16-vim)
 -- by Chris Kempson (https://github.com/chriskempson)
--- Gruvbox light, soft scheme by Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
+-- scheme01 scheme by terminalPoltergeist mod. from metalelf0's black-metal
 
-local gui00 = "#f2e5bc"
-local gui01 = "#ebdbb2"
-local gui02 = "#d5c4a1"
-local gui03 = "#bdae93"
-local gui04 = "#665c54"
-local gui05 = "#504945"
-local gui06 = "#3c3836"
-local gui07 = "#282828"
-local gui08 = "#9d0006"
-local gui09 = "#af3a03"
-local gui0A = "#b57614"
-local gui0B = "#79740e"
-local gui0C = "#427b58"
-local gui0D = "#076678"
+local gui00 = "#121212"
+local gui01 = "#222222"
+local gui02 = "#333333"
+local gui03 = "#444444"
+local gui04 = "#999999"
+local gui05 = "#c1c1c1"
+local gui06 = "#999999"
+local gui07 = "#c1c1c1"
+local gui08 = "#a06666"
+local gui09 = "#ddb699"
+local gui0A = "#8477a4"
+local gui0B = "#5f8766"
+local gui0C = "#5f8787"
+local gui0D = "#87775f"
 local gui0E = "#FFFFFF"
 local gui0F = "#FFFFFF"
 
--- local cterm00 = "#f2e5bc"
--- local cterm03 = "#ebdbb2"
--- local cterm05 = "#d5c4a1"
--- local cterm07 = "#bdae93"
--- local cterm08 = "#665c54"
--- local cterm0A = "#504945"
--- local cterm0B = "#3c3836"
--- local cterm0C = "#282828"
--- local cterm0D = "#9d0006"
--- local cterm0E = "#af3a03"
--- local cterm01 = "#b57614"
--- local cterm02 = "#79740e"
--- local cterm04 = "#427b58"
--- local cterm06 = "#076678"
--- local cterm09 = "#8f3f71"
--- local cterm0F = "#d65d0e"
+-- local cterm00 = "#121212"
+-- local cterm03 = "#222222"
+-- local cterm05 = "#333333"
+-- local cterm07 = "#444444"
+-- local cterm08 = "#999999"
+-- local cterm0A = "#c1c1c1"
+-- local cterm0B = "#999999"
+-- local cterm0C = "#c1c1c1"
+-- local cterm0D = "#a06666"
+-- local cterm0E = "#ddb699"
+-- local cterm01 = "#8477a4"
+-- local cterm02 = "#5f8766"
+-- local cterm04 = "#5f8787"
+-- local cterm06 = "#87775f"
+-- local cterm09 = "#a06666"
+-- local cterm0F = "#dd9999"
 
 vim.cmd [[
   highlight clear
   syntax reset
 ]]
-vim.g.colors_name = "base16-gruvbox-light-soft"
+vim.g.colors_name = "base16-scheme01"
 
 -- Vim editor colors                    fg bg ctermfg ctermbg attr guisp
 vim.api.nvim_set_hl(0, 'Normal', { fg = gui07, bg = gui00 })
