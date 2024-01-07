@@ -28,40 +28,40 @@ scrolling:
   multiplier: 3
 
 # Start flavours
-# Base16 scheme01 - alacritty color config
-# terminalPoltergeist mod. from metalelf0's black-metal
+# Base16 Gruvbox light, soft - alacritty color config
+# Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
 colors:
   # Default colors
   primary:
-    background: '#121212'
-    foreground: '#c1c1c1'
+    background: '#f2e5bc'
+    foreground: '#282828'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
-    text: '#c1c1c1'
-    cursor: '#a06666'
+    text: '#282828'
+    cursor: '#9d0006'
 
   # Normal colors
   normal:
-    black:   '#121212'
-    red:     '#a06666'
-    green:   '#ddb699'
-    yellow:  '#8477a4'
-    blue:    '#5f8766'
-    magenta: '#5f8787'
-    cyan:    '#87775f'
-    white:   '#c1c1c1'
+    black:   '#f2e5bc'
+    red:     '#9d0006'
+    green:   '#af3a03'
+    yellow:  '#b57614'
+    blue:    '#79740e'
+    magenta: '#427b58'
+    cyan:    '#076678'
+    white:   '#282828'
 
   # Bright colors
   bright:
-    black:   '#333333'
-    red:     '#a06666'
-    green:   '#ddb699'
-    yellow:  '#8477a4'
-    blue:    '#5f8766'
-    magenta: '#5f8787'
-    cyan:    '#87775f'
-    white:   '#c1c1c1'
+    black:   '#d5c4a1'
+    red:     '#9d0006'
+    green:   '#af3a03'
+    yellow:  '#b57614'
+    blue:    '#79740e'
+    magenta: '#427b58'
+    cyan:    '#076678'
+    white:   '#282828'
 draw_bold_text_with_bright_colors: true
 # End flavours
 

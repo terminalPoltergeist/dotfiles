@@ -1,0 +1,36 @@
+- name: Install tmux
+  community.general.homebrew:
+    name: tmux
+    state: present
+- name: Create plugins directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.tmux/plugins"
+    state: directory
+    mode: '0755'
+  register: plugins
+# tpm is a plugin manager for tmux
+- name: Get latest tpm version
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/tmux-plugins/tpm/tags
+    method: GET
+    return_content: true
+    status_code: 200
+    body_format: json
+  register: result
+- name: Get current tpm version
+  ansible.builtin.shell: "cd {{ ansible_env.HOME }}/.tmux/plugins/tpm && git tag | awk 'END{print}'"
+  register: current
+  changed_when: false
+  failed_when: current.rc != 0
+  ignore_errors: true
+- name: Install tpm
+  ansible.builtin.git:
+    repo: "https://github.com/tmux-plugins/tpm.git"
+    dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
+    version: "{{ result.json[0].name }}"
+  when: (current.rc != 0) or (result.json[0].name != current.stdout_lines[0])
+- name: Link config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/tmux.conf"
+    dest: "{{ ansible_env.HOME }}/.tmux.conf"
+    state: link

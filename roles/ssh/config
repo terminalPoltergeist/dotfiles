@@ -1,0 +1,66 @@
+Host cselabs
+    HostName apollo.cselabs.umn.edu
+    User nemit031
+    IdentityFile ~/.ssh/id_rsa_cse
+
+# Default GitHub
+Host github.com
+  HostName github.com
+  User terminalPoltergeist
+  IdentityFile ~/.ssh/id_rsa
+
+# UMN github alias
+Host github.umn.edu
+  HostName github.umn.edu
+  User nemit031
+  IdentityFile ~/.ssh/id_rsa_umn
+
+Host carlyle
+  HostName 192.168.50.13
+  User jack
+  IdentityFile ~/.ssh/id_rsa_homeLab
+  Port 2202
+
+Host lpt-tst
+  HostName lpt-prov-tools-tst.oit.umn.edu
+  User nemit031
+  IdentityFile ~/.ssh/id_rsa_umn
+
+Host lpt02
+  HostName lpt-prov-tools-02.oit.umn.edu
+  User nemit031
+  IdentityFile ~/.ssh/id_rsa_umn
+
+Host *.cselabs.umn.edu
+  User nemit031
+  IdentityFile ~/.ssh/id_rsa_cse
+
+Host *.oit.umn.edu
+  User nemit031
+  IdentityFile ~/.ssh/id_rsa_umn
+
+Host aristotle
+  HostName 134.209.70.1
+  User jack
+  IdentityFile ~/.ssh/id_rsa_homeLab
+  Port 2201
+
+Host brunelli
+  HostName 134.209.128.198
+  User jack
+  IdentityFile ~/.ssh/id_rsa_homeLab
+
+Host nemit031-rhel9
+  HostName lpt-rhel9-nemit031-dev-01.oit.umn.edu
+  User nemit031
+  IdentityFile ~/.ssh/id_rsa_umn
+
+Host nemit031-awx-customer
+  HostName heat-nemit031-awx-customer-tst.oit.umn.edu
+  User nemit031
+  IdentityFile ~/.ssh/id_rsa_umn
+
+Host msi
+  HostName login.msi.umn.edu
+  User nemit031
+  IdentityFile ~/.ssh/id_rsa_cse

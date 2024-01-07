@@ -1,0 +1,29 @@
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+
+[user]
+	name = terminalPoltergeist
+  email = jack.nemitz@yahoo.com
+  signingkey = 4928EEED
+
+[core]
+	excludesfile = /Users/jacknemitz/.gitignore_global
+	editor = nvim
+
+[commit]
+  template = ~/dotfiles/gitconfig/git-templates/.git-commit-template
+  gpgSign = true
+
+[credential]
+	helper = store
+
+[init]
+	defaultBranch = main
+	templatedir = ~/dotfiles/gitconfig/git-templates
+
+[push]
+	autoSetupRemote = true
+
+[color "diff"]
+  old = red
+  new = green

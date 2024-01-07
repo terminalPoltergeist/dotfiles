@@ -1,0 +1,23 @@
+# This set of tasks are meant to be included in other roles.
+# example:
+# - name: Sync configs
+#   ansible.builtin.include_role:
+#     name: env
+#     tasks_from: linkConfig
+# When the dev_machine host/inventory variable is set to true config files will be symlinked from their role's source files.
+# When dev_machine is set to false or not set, config files will be copied to their expected location in the filesystem.
+# This allows for seamless local development of this repository
+- name: Copy configs
+  ansible.builtin.copy:
+    src: "{{ ansible_parent_role_paths[0] }}/files/"
+    dest: "{{ ansible_env.HOME }}/.config/{{ ansible_parent_role_names[0] }}/"
+    owner: "{{ ansible_user_id }}"
+    mode: '0755'
+  when: dev_machine is undefined or not dev_machine
+- name: Link configs
+  ansible.builtin.file:
+    src: "{{ ansible_parent_role_paths[0] }}/files"
+    dest: "{{ ansible_env.HOME }}/.config/{{ ansible_parent_role_names[0] }}"
+    state: link
+    force: true
+  when: dev_machine is defined and dev_machine

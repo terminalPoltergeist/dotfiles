@@ -3,6 +3,7 @@
   hosts: homelab
 
   roles:
-    - { role: ufw, become: yes }
+    - zsh
+    - { role: ufw, become: yes } # need to be super to configure firewall
     - tmux
     - nvim

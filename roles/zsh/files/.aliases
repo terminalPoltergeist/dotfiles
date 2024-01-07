@@ -19,7 +19,7 @@
 #/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-alias sourcery='clear && source ~/dotfiles/.zshrc';
+alias sourcery='clear && source ~/.config/zsh/.zshrc';
 
 ###############################################
 ############ Navigation Shortcuts #############

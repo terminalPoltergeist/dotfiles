@@ -3,5 +3,6 @@
   hosts: workstation
 
   roles:
+    - zsh
     - tmux
     - nvim

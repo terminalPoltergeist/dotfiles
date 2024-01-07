@@ -5,6 +5,8 @@ workstation:
       ansible_user: jacknemitz
       ansible_connection: local
       ansible_python_interpreter: /usr/local/bin/python3.12
+  vars:
+    dev_machine: true # when set roles will symlink their config files to [role_name]/files/[config_name]
 homelab:
   hosts:
     carlyle:
