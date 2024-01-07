@@ -29,8 +29,14 @@
     dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
     version: "{{ result.json[0].name }}"
   when: (current.rc != 0) or (result.json[0].name != current.stdout_lines[0])
-- name: Link config
-  ansible.builtin.file:
-    src: "{{ role_path }}/files/tmux.conf"
-    dest: "{{ ansible_env.HOME }}/.tmux.conf"
-    state: link
+- name: Sync configs
+  ansible.builtin.include_role:
+    name: env
+    tasks_from: linkConfig
+  vars:
+    config_dir: "{{ ansible_env.HOME }}"
+# - name: Link config
+#   ansible.builtin.file:
+#     src: "{{ ansible_env.HOME }}/.config/tmux/tmux.conf"
+#     dest: "{{ ansible_env.HOME }}/.tmux.conf"
+#     state: link

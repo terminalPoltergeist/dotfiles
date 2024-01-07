@@ -32,7 +32,7 @@
   when: (current.rc != 0) or (result.json[0].name != current.stdout_lines[0])
 - name: Copy config
   ansible.builtin.copy:
-    src: "{{ role_path }}/files/tmux.conf"
+    src: "{{ role_path }}/files/.tmux.conf"
     dest: "{{ ansible_env.HOME }}/.tmux.conf"
     owner: "{{ ansible_user_id }}"
     mode: '0644'

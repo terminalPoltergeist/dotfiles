@@ -4,20 +4,34 @@
 #   ansible.builtin.include_role:
 #     name: env
 #     tasks_from: linkConfig
+#   vars:
+#     config_dir: "{{ ansible_env.HOME }}/.config"
 # When the dev_machine host/inventory variable is set to true config files will be symlinked from their role's source files.
 # When dev_machine is set to false or not set, config files will be copied to their expected location in the filesystem.
+# All files in [role]/files/ will be synced to {{ config_dir }}
+# If config_dir is not set, it defaults to {{ ansible_env.HOME }}/.config }}
 # This allows for seamless local development of this repository
+- name: Set config_dir
+  ansible.builtin.set_fact:
+    config_dir: "{{ ansible_env.HOME }}/.config/{{ ansible_parent_role_names[0] }}"
+  when: config_dir is undefined
+- name: Find files
+  ansible.builtin.find:
+    paths: "{{ ansible_parent_role_paths[0] }}/files"
+    file_type: any
+  register: files
 - name: Copy configs
   ansible.builtin.copy:
-    src: "{{ ansible_parent_role_paths[0] }}/files/"
-    dest: "{{ ansible_env.HOME }}/.config/{{ ansible_parent_role_names[0] }}/"
+    src: "{{ item.path }}"
+    dest: "{{ config_dir }}/{{ item.path | basename }}"
     owner: "{{ ansible_user_id }}"
     mode: '0755'
   when: dev_machine is undefined or not dev_machine
 - name: Link configs
   ansible.builtin.file:
-    src: "{{ ansible_parent_role_paths[0] }}/files"
-    dest: "{{ ansible_env.HOME }}/.config/{{ ansible_parent_role_names[0] }}"
+    src: "{{ item.path }}"
+    dest: "{{ config_dir }}/{{ item.path | basename }}"
     state: link
     force: true
+  with_items: "{{ files.files }}"
   when: dev_machine is defined and dev_machine

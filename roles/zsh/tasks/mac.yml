@@ -16,20 +16,6 @@
   ansible.builtin.include_role:
     name: env
     tasks_from: linkConfig
-# - name: Copy configs
-#   ansible.builtin.copy:
-#     src: "{{ role_path }}/files/"
-#     dest: "{{ ansible_env.HOME }}/.config/zsh/"
-#     owner: "{{ ansible_user_id }}"
-#     mode: '0755'
-#   when: dev_machine is undefined or not dev_machine
-# - name: Link configs
-#   ansible.builtin.file:
-#     src: "{{ role_path }}/files"
-#     dest: "{{ ansible_env.HOME }}/.config/zsh"
-#     state: link
-#     force: true
-#   when: dev_machine is defined and dev_machine
 - name: Link .zshrc
   ansible.builtin.file:
     src: "{{ ansible_env.HOME }}/.config/zsh/.zshrc"

@@ -18,9 +18,15 @@
     path: "{{ ansible_env.HOME }}/.config/nvim/lua"
     state: directory
     mode: '0755'
-- name: Link configs
-  ansible.builtin.file:
-    src: "{{ role_path }}/files"
-    dest: "{{ ansible_env.HOME }}/.config/nvim/lua"
-    state: link
-    force: true
+- name: Sync configs
+  ansible.builtin.include_role:
+    name: env
+    tasks_from: linkConfig
+  vars:
+    config_dir: "{{ ansible_env.HOME }}/.config/nvim/lua"
+# - name: Link configs
+#   ansible.builtin.file:
+#     src: "{{ role_path }}/files"
+#     dest: "{{ ansible_env.HOME }}/.config/nvim/lua"
+#     state: link
+#     force: true
