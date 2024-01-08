@@ -1,6 +1,8 @@
-- name: Link config
-  ansible.builtin.file:
-    src: "{{ role_path }}/files/config.toml"
-    dest: "{{ ansible_env.HOME }}/.config/flavours/config.toml"
-    state: link
-    force: true
+- name: Install flavours
+  community.general.homebrew:
+    name: flavours
+    state: present
+- name: Sync configs
+  ansible.builtin.include_role:
+    name: env
+    tasks_from: linkConfig

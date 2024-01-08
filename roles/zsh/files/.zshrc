@@ -38,28 +38,28 @@ gpgconf --launch gpg-agent
 # Start flavours
 # base16-shell (https://github.com/chriskempson/base16-shell)
 # Base16 Zsh template by terminalPoltergeist (https://github.com/terminalPoltergeist)
-# Gruvbox light, soft scheme by Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
+# scheme01 scheme by terminalPoltergeist mod. from metalelf0's black-metal
 
-export background='#f2e5bc'
-export foreground='#504945'
-export text='#f2e5bc'
-export cursor='#504945'
-export black='#f2e5bc'
-export red='#9d0006'
-export green='#79740e'
-export yellow='#b57614'
-export blue='#076678'
-export magenta='#8f3f71'
-export cyan='#427b58'
-export white='#504945'
-export light_black='bdae93'
-export light_red='9d0006'
-export light_green='79740e'
-export light_yellow='b57614'
-export light_blue='076678'
-export light_magenta='8f3f71'
-export light_cyan='427b58'
-export light_white='282828'
+export background='#121212'
+export foreground='#c1c1c1'
+export text='#121212'
+export cursor='#c1c1c1'
+export black='#121212'
+export red='#a06666'
+export green='#5f8766'
+export yellow='#8477a4'
+export blue='#87775f'
+export magenta='#a06666'
+export cyan='#5f8787'
+export white='#c1c1c1'
+export light_black='444444'
+export light_red='a06666'
+export light_green='5f8766'
+export light_yellow='8477a4'
+export light_blue='87775f'
+export light_magenta='a06666'
+export light_cyan='5f8787'
+export light_white='c1c1c1'
 # End flavours
 
 zmodload -i zsh/complist
@@ -92,8 +92,12 @@ complete -W "NSGlobalDomain" defaults;
 
 export EDITOR=nvim
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
 neofetch
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
 uptime

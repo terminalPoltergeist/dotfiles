@@ -9,7 +9,7 @@
 # When the dev_machine host/inventory variable is set to true config files will be symlinked from their role's source files.
 # When dev_machine is set to false or not set, config files will be copied to their expected location in the filesystem.
 # All files in [role]/files/ will be synced to {{ config_dir }}
-# If config_dir is not set, it defaults to {{ ansible_env.HOME }}/.config }}
+# If config_dir is not set, it defaults to {{ ansible_env.HOME }}/.config/
 # This allows for seamless local development of this repository
 - name: Set config_dir
   ansible.builtin.set_fact:

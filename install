@@ -1,0 +1,202 @@
+#!/bin/bash
+#              ,---------------------------,
+#              |  /---------------------\  |
+#              | |                       | |
+#              | |     Jack Nemitz       | |
+#              | |      .dotfiles        | |
+#              | |      install.sh       | |
+#              | |                       | |
+#              |  \_____________________/  |
+#              |___________________________|
+#            ,---\_____     []     _______/------,
+#          /         /______________\           /|
+#        /___________________________________ /  | ___
+#        |                                   |   |    )
+#        |  _ _ _                 [-------]  |   |   (
+#        |  o o o                 [-------]  |  /    _)_
+#        |__________________________________ |/     /  /
+#    /-------------------------------------/|      ( )/
+#  /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
+#/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+# This script bootstraps a new system
+# Most steps are idempotent; they will only run if not configured properly
+# To run `source install`
+
+################################################################################
+## Set some tmp variables for this script                                      #
+################################################################################
+
+HEADER="
+              ,---------------------------,
+              |  /---------------------\  |
+              | |                       | |
+              | |     Jack Nemitz       | |
+              | |      .dotfiles        | |
+              | |      install.sh       | |
+              | |                       | |
+              |  \_____________________/  |
+              |___________________________|
+            ,---\_____     []     _______/------,
+          /         /______________\           /|
+        /___________________________________ /  | ___
+        |                                   |   |    )
+        |  _ _ _                 [-------]  |   |   (
+        |  o o o                 [-------]  |  /    _)_
+        |__________________________________ |/     /  /
+    /-------------------------------------/|      ( )/
+  /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
+/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+"
+
+RED='\033[1;31m'
+YELLOW='\033[1;33m'
+GREEN='\033[1;32m'
+BLUE="\\033[38;5;27m"
+NC='\033[0m'
+
+CHECK_MARK="${GREEN}\xE2\x9C\x94${NC}"
+X_MARK="${RED}\xE2\x9C\x96${NC}"
+PIN="${RED}\xF0\x9F\x93\x8C${NC}"
+CLOCK="${GREEN}\xE2\x8C\x9B${NC}"
+HOT="${RED}\xF0\x9F\x94\xA5${NC}"
+WARNING="${RED}\xF0\x9F\x9A\xA8${NC}"
+
+platform=$(uname -a | cut -d ' ' -f 4) # get some info about the machine
+
+case $platform in
+  *"Ubuntu"*)
+    OS="Ubuntu"
+  ;;
+  *"Darwin"*)
+    OS="Mac"
+  ;;
+  *)
+    echo -e "${X_MARK} Could not detect OS... breaking"
+    exit 1
+  ;;
+esac
+
+echo -e "${YELLOW}${HEADER}${NC}"
+sleep 0.5
+echo -e "${CHECK_MARK} Detected ${OS} OS..."
+sleep 0.5
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  echo "Install script must be sourced. Try source install."
+  exit 1
+fi
+
+################################################################################
+## Install dependencies and apps                                               #
+################################################################################
+
+echo -e "${YELLOW}
+################################################################################
+Installing dependencies and apps for ${OS}
+################################################################################${NC}"
+
+case $OS in
+  "Mac")
+    case $SHELL in
+      *"zsh"*)
+        rc="$HOME/.zshrc.tmp"
+      ;;
+      *"bash"*)
+        rc="$HOME/.bashrc.tmp"
+      ;;
+    esac
+
+    _=$(which brew)
+    if [ $? -ne 0 ]; then
+      echo -e "${CLOCK}Installing Homebrew package manager..."
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 2>&1 > /dev/null
+    fi
+    sleep 0.2
+    echo -e "${CHECK_MARK} Homebrew installed!"
+
+    _=$(which python3)
+    if [ $? -ne 0 ]; then
+      echo -e "${CLOCK}Installing python3..."
+      brew install python3 2>&1 > /dev/null
+    fi
+    sleep 0.2
+    echo -e "${CHECK_MARK} Python3 installed!"
+
+    _=$(which pip)
+    if [ $? -ne 0 ]; then
+      echo -e "${CLOCK}Installing pip"
+      curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+      python3 get-pip.py
+      rm get-pip.py
+    fi
+    sleep 0.2
+    echo -e "${CHECK_MARK} pip installed!"
+
+    _=$(which pyenv)
+    if [ $? -ne 0 ]; then
+      echo -e "${CLOCK}Installing pyenv..."
+      brew install pyenv 2>&1 > /dev/null
+    fi
+    sleep 0.2
+    echo -e "${CHECK_MARK} pyenv installed!"
+
+    if [ -z $PYENV_ROOT ]; then
+      echo -e "${CLOCK} Configuring pyenv"
+      echo 'export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"' > $rc
+    fi
+    echo -e "${CHECK_MARK} pyenv configured!"
+
+    if [[ $(pyenv version) == *"system"* ]]; then
+      echo -e "${CLOCK}Setting global python version..."
+      _=$(pyenv global 3.12.1 > /dev/null 2>&1)
+      if [[ $? -ne 0 ]]; then
+        echo -e "${CLOCK}Installing python 3.12.1..."
+        pyenv install 3.12.1 > /dev/null 2>&1
+        echo -e "${CHECK_MARK} Installed python 3.12.1!"
+        pyenv global 3.12.1
+      fi
+    fi
+    sleep 0.2
+    echo -e "${PIN} Using python version $(pyenv version)"
+
+    _=$(which pyenv-virtualenv)
+    if [ $? -ne 0 ]; then
+      echo -e "${CLOCK}Installing virtualenv for pyenv..."
+      brew install pyenv-virtualenv 2>&1 > /dev/null
+    fi
+    sleep 0.2
+    echo -e "${CHECK_MARK} pyenv-virtualenv installed!"
+
+    _=$(pyenv virtualenvs | grep "ansible")
+    if [ $? -ne 0 ]; then
+      echo -e "${CLOCK}Creating ansible virtual env..."
+      pyenv virtualenv 3.12.1 ansible
+      echo -e "${CHECK_MARK} Created ansible venv!"
+    else
+      echo -e "${CHECK_MARK} Found ansible venv!"
+    fi
+    if [[ -z $VIRTUAL_ENV ]]; then
+      echo -e "${CLOCK}Activating ansible venv..."
+      source $rc
+      pyenv activate ansible
+    fi
+    echo -e "${PIN} Using ansible python virtual envirionemnt"
+
+    if [[ -d $HOME/dotfiles ]]; then
+      mkdir "$HOME/dotfiles$RANDOM"
+    fi
+
+    [[ -f $rc ]] && rm $rc
+  ;;
+  *)
+    # implement this later
+    echo -e "${WARNING} Not configured to install apps for ${OS}..."
+  ;;
+esac

@@ -1,0 +1,8 @@
+- name: Detect Homebrew
+  ansible.builtin.shell: which brew
+  register: brew
+  changed_when: false
+  ignore_errors: true
+- name: Install Homebrew
+  ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  when: brew.failed
