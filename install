@@ -142,16 +142,16 @@ case $OS in
     sleep 0.2
     echo -e "${CHECK_MARK} pyenv installed!"
 
-    if [ -z $PYENV_ROOT ]; then
-      echo -e "${CLOCK} Configuring pyenv"
-      echo 'export PYENV_ROOT="$HOME/.pyenv"
+    # if [ -z $PYENV_ROOT ]; then
+    #   echo -e "${CLOCK} Configuring pyenv"
+    echo 'export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"' > $rc
-    fi
-    echo -e "${CHECK_MARK} pyenv configured!"
+    # fi
+    # echo -e "${CHECK_MARK} pyenv configured!"
 
     if [[ $(pyenv version) == *"system"* ]]; then
       echo -e "${CLOCK}Setting global python version..."
