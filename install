@@ -198,6 +198,8 @@ eval "$(pyenv virtualenv-init -)"' > $rc
       # git clone --quiet "https://github.com/terminalPoltergeist/dotfiles.git" "${dir}" 2>&1 > /dev/null
       echo -e "${CLOCK}Updating ${HOME}/dotfiles from terminalPoltergeist/dotfiles.git..."
       git -C "$HOME/dotfiles" pull --quiet > /dev/null
+      echo -e "${CLOCK}Installing pip dependencies..."
+      pip install -r "$HOME/dotfiles/requirements.txt" 2>&1 > /dev/null
     fi
 
     [[ -f $rc ]] && rm $rc
