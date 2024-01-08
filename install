@@ -142,16 +142,13 @@ case $OS in
     sleep 0.2
     echo -e "${CHECK_MARK} pyenv installed!"
 
-    # if [ -z $PYENV_ROOT ]; then
-    #   echo -e "${CLOCK} Configuring pyenv"
+    # make sure pyenv is configured correctly
     echo 'export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"' > $rc
-# eval "$(pyenv virtualenv-init -)"' > $rc
-    # fi
-    # echo -e "${CHECK_MARK} pyenv configured!"
+    source $rc
 
     if [[ $(pyenv version) == *"system"* ]]; then
       echo -e "${CLOCK}Setting global python version..."
@@ -176,6 +173,7 @@ eval "$(pyenv init -)"' > $rc
 
     _=$(pyenv virtualenvs | grep "ansible")
     if [ $? -ne 0 ]; then
+      echo "ansible" > "${HOME}/dotfiles/.python-version"
       echo -e "${CLOCK}Creating ansible virtual env..."
       pyenv virtualenv 3.12.1 ansible
       echo -e "${CHECK_MARK} Created ansible venv!"
@@ -185,7 +183,6 @@ eval "$(pyenv init -)"' > $rc
     if [[ -z $VIRTUAL_ENV ]]; then
       echo -e "${CLOCK}Activating ansible venv..."
       source $rc
-      pyenv virtualenv-init -
       pyenv activate ansible
     fi
     echo -e "${PIN} Using ansible python virtual envirionemnt"
