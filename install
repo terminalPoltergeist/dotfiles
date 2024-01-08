@@ -148,8 +148,8 @@ case $OS in
 export PATH="$PYENV_ROOT/bin:$PATH"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"' > $rc
+eval "$(pyenv init -)"' > $rc
+# eval "$(pyenv virtualenv-init -)"' > $rc
     # fi
     # echo -e "${CHECK_MARK} pyenv configured!"
 
@@ -185,6 +185,7 @@ eval "$(pyenv virtualenv-init -)"' > $rc
     if [[ -z $VIRTUAL_ENV ]]; then
       echo -e "${CLOCK}Activating ansible venv..."
       source $rc
+      pyenv virtualenv-init -
       pyenv activate ansible
     fi
     echo -e "${PIN} Using ansible python virtual envirionemnt"
