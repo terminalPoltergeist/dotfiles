@@ -190,7 +190,14 @@ eval "$(pyenv virtualenv-init -)"' > $rc
     echo -e "${PIN} Using ansible python virtual envirionemnt"
 
     if [[ -d $HOME/dotfiles ]]; then
-      mkdir "$HOME/dotfiles$RANDOM"
+      # uid=$RANDOM
+      # dir="$HOME/dotfiles-$uid"
+      # mkdir $dir
+      # echo -e "${WARNING} ${HOME}/dotfiles already exists... cloning to ${dir} instead"
+      # echo -e "${CLOCK}Cloning terminalPoltergeist/dotfiles.git to ${dir}..."
+      # git clone --quiet "https://github.com/terminalPoltergeist/dotfiles.git" "${dir}" 2>&1 > /dev/null
+      echo -e "${CLOCK}Updating ${HOME}/dotfiles from terminalPoltergeist/dotfiles.git..."
+      git -C "$HOME/dotfiles" pull --quiet > /dev/null
     fi
 
     [[ -f $rc ]] && rm $rc
