@@ -23,7 +23,7 @@ setopt prompt_subst # enable variable expansion
 NEWLINE=$'\n'
 PS1='$(prompt_ssh)$(prompt_venv)%B%F{red}%n'
 PS1+='%F{white} @'
-PS1+='%F{yellow} %~'
+PS1+='%F{yellow} %~ '
 PS1+='%F{blue}$(prompt_git)'
 PS1+='%F{white}%@${NEWLINE}$ '
 export PS1;                             # Exports the prompt global
@@ -58,7 +58,7 @@ prompt_git() {
     # Get the short symbolic ref. If HEAD isn’t a symbolic ref, get a
     # tracking remote branch or tag. Otherwise, get the
     # short SHA for the latest commit, or give up.
-    branchName=" on $(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
+    branchName="on $(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
       git describe --all --exact-match HEAD 2> /dev/null || \
       git rev-parse --short HEAD 2> /dev/null || \
       echo '(unknown)')";
@@ -83,7 +83,7 @@ prompt_git() {
       fi
     fi
 
-    author=" as $(git config user.name)";
+    author=" as $(git config user.name) ";
     if grep -q 'chromium/src.git' <<< "${repoUrl}"; then
       s+='*';
     else
