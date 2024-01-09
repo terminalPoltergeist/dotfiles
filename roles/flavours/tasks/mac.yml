@@ -6,3 +6,5 @@
   ansible.builtin.include_role:
     name: env
     tasks_from: linkConfig
+  vars:
+    config_dir: "{{ ansible_env.HOME }}/.config/flavours/base16"

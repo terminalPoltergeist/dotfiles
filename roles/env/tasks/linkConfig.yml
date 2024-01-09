@@ -11,10 +11,6 @@
 # All files in [role]/files/ will be synced to {{ config_dir }}
 # If config_dir is not set, it defaults to {{ ansible_env.HOME }}/.config/
 # This allows for seamless local development of this repository
-- name: Set config_dir
-  ansible.builtin.set_fact:
-    config_dir: "{{ ansible_env.HOME }}/.config/{{ ansible_parent_role_names[0] }}"
-  when: config_dir is undefined
 - name: Find files
   ansible.builtin.find:
     paths: "{{ ansible_parent_role_paths[0] }}/files"

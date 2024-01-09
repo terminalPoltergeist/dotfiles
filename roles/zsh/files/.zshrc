@@ -24,7 +24,7 @@ export PATH="$PATH:$HOME/.local/bin";
 # for d in $HOME/bin/*/; do
 #   export PATH="$PATH:$d"
 # done
-export FLAVOURS_CONFIG_FILE="$HOME/.config/flavours/config.toml";
+export FLAVOURS_CONFIG_FILE="$HOME/.config/flavours/base16/config.toml";
 export LUA_PATH="./?.lua;;"
 
 #Set up Go env
@@ -38,7 +38,7 @@ gpgconf --launch gpg-agent
 # Start flavours
 # base16-shell (https://github.com/chriskempson/base16-shell)
 # Base16 Zsh template by terminalPoltergeist (https://github.com/terminalPoltergeist)
-# scheme01 scheme by terminalPoltergeist mod. from metalelf0's black-metal
+# scheme01 scheme by terminalPoltergeist
 
 export background='#121212'
 export foreground='#c1c1c1'
@@ -46,20 +46,20 @@ export text='#121212'
 export cursor='#c1c1c1'
 export black='#121212'
 export red='#a06666'
-export green='#5f8766'
-export yellow='#8477a4'
-export blue='#87775f'
-export magenta='#a06666'
-export cyan='#5f8787'
+export green='#5f87a9'
+export yellow='#ddb699'
+export blue='#5f8787'
+export magenta='#87775f'
+export cyan='#8477a4'
 export white='#c1c1c1'
-export light_black='444444'
-export light_red='a06666'
-export light_green='5f8766'
-export light_yellow='8477a4'
-export light_blue='87775f'
-export light_magenta='a06666'
-export light_cyan='5f8787'
-export light_white='c1c1c1'
+export light_black='#444444'
+export light_red='#a06666'
+export light_green='#5f87a9'
+export light_yellow='#ddb699'
+export light_blue='#5f8787'
+export light_magenta='#87775f'
+export light_cyan='#8477a4'
+export light_white='#c1c1c1'
 # End flavours
 
 zmodload -i zsh/complist

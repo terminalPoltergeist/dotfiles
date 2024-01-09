@@ -167,7 +167,7 @@ api.nvim_set_keymap('n', '<leader>dd', '<cmd>Telescope diagnostics<CR>', { norem
 -- based on
 -- base16-vim (https://github.com/chriskempson/base16-vim)
 -- by Chris Kempson (https://github.com/chriskempson)
--- scheme01 scheme by terminalPoltergeist mod. from metalelf0's black-metal
+-- scheme01 scheme by terminalPoltergeist
 
 local gui00 = "#121212"
 local gui01 = "#222222"
@@ -178,13 +178,13 @@ local gui05 = "#c1c1c1"
 local gui06 = "#999999"
 local gui07 = "#c1c1c1"
 local gui08 = "#a06666"
-local gui09 = "#ddb699"
-local gui0A = "#8477a4"
-local gui0B = "#5f8766"
-local gui0C = "#5f8787"
-local gui0D = "#87775f"
-local gui0E = "#FFFFFF"
-local gui0F = "#FFFFFF"
+local gui09 = "#5f8766"
+local gui0A = "#ddb699"
+local gui0B = "#5f87a9"
+local gui0C = "#8477a4"
+local gui0D = "#5f8787"
+local gui0E = "#87775f"
+local gui0F = "#dd9999"
 
 -- local cterm00 = "#121212"
 -- local cterm03 = "#222222"
@@ -195,12 +195,12 @@ local gui0F = "#FFFFFF"
 -- local cterm0B = "#999999"
 -- local cterm0C = "#c1c1c1"
 -- local cterm0D = "#a06666"
--- local cterm0E = "#ddb699"
--- local cterm01 = "#8477a4"
--- local cterm02 = "#5f8766"
--- local cterm04 = "#5f8787"
--- local cterm06 = "#87775f"
--- local cterm09 = "#a06666"
+-- local cterm0E = "#5f8766"
+-- local cterm01 = "#ddb699"
+-- local cterm02 = "#5f87a9"
+-- local cterm04 = "#8477a4"
+-- local cterm06 = "#5f8787"
+-- local cterm09 = "#87775f"
 -- local cterm0F = "#dd9999"
 
 vim.cmd [[
@@ -277,7 +277,7 @@ vim.api.nvim_set_hl(0, 'Special', { fg = gui0C })
 vim.api.nvim_set_hl(0, 'SpecialChar', { fg = gui08 })
 vim.api.nvim_set_hl(0, 'Statement', { fg = gui0E })
 vim.api.nvim_set_hl(0, 'StorageClass', { fg = gui0A })
-vim.api.nvim_set_hl(0, 'String', { fg = gui0C })
+vim.api.nvim_set_hl(0, 'String', { fg = gui0E })
 vim.api.nvim_set_hl(0, 'Structure', { fg = gui0C })
 vim.api.nvim_set_hl(0, 'Tag', { fg = gui0A })
 vim.api.nvim_set_hl(0, 'Todo', { fg = gui0A, bg = gui01 })

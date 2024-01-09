@@ -1,0 +1,1 @@
+config_dir: "{{ ansible_env.HOME }}/.config/{{ ansible_parent_role_names[0] }}"
