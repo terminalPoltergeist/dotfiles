@@ -1,5 +1,5 @@
 scheme: "scheme01"
-author: "terminalPoltergeist mod. from metalelf0's black-metal"
+author: "terminalPoltergeist"
 
 base00: "121212"
 base01: "222222"
@@ -10,10 +10,10 @@ base05: "c1c1c1"
 base06: "999999"
 base07: "c1c1c1"
 base08: "a06666" # red
-base09: "ddB699" # yellow
-base0A: "8477a4" # purple
-base0B: "5f8766" # green
-base0C: "5f8787" # blue
-base0D: "87775f" # brown
-base0E: "a06666" # red
+base09: "5f8766" # green
+base0A: "ddB699" # yellow
+base0B: "5f87a9" # blue
+base0C: "8477a4" # purple/magenta
+base0D: "5f8787" # cyan
+base0E: "87775f" # brown
 base0F: "dd9999" # pink
