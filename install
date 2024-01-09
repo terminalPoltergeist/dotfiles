@@ -188,12 +188,7 @@ eval "$(pyenv init -)"' > $rc
     echo -e "${PIN} Using ansible python virtual envirionemnt"
 
     if [[ -d $HOME/dotfiles ]]; then
-      # uid=$RANDOM
-      # dir="$HOME/dotfiles-$uid"
-      # mkdir $dir
-      # echo -e "${WARNING} ${HOME}/dotfiles already exists... cloning to ${dir} instead"
-      # echo -e "${CLOCK}Cloning terminalPoltergeist/dotfiles.git to ${dir}..."
-      # git clone --quiet "https://github.com/terminalPoltergeist/dotfiles.git" "${dir}" 2>&1 > /dev/null
+      # what if it doesn't exist?
       echo -e "${CLOCK}Updating ${HOME}/dotfiles from terminalPoltergeist/dotfiles.git..."
       git -C "$HOME/dotfiles" pull --quiet > /dev/null
       echo -e "${CLOCK}Installing pip dependencies..."
@@ -201,6 +196,8 @@ eval "$(pyenv init -)"' > $rc
     fi
 
     [[ -f $rc ]] && rm $rc
+
+    cd $HOME/dotfiles && ansible-playbook local.yml -i inventory.yml -K
   ;;
   *)
     # implement this later
