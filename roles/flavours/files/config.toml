@@ -2,7 +2,7 @@
 shell = "bash -c '{}'"
 
 [[item]]
-file = "/Users/jacknemitz/.config/alacritty/alacritty.yml"
+file = "/Users/jacknemitz/.config/alacritty/alacritty.toml"
 template = "alacritty"
 subtemplate = "custom"
 
