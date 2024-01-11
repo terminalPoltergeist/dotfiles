@@ -1,0 +1,6 @@
+- name: Copy keys
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/"
+    dest: "{{ ansible_env.HOME }}/.ssh"
+    mode: '0600'
+  no_log: true

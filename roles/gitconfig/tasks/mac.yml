@@ -1,0 +1,20 @@
+- name: Install git
+  community.general.homebrew:
+    name: git
+    state: present
+- name: Sync configs
+  ansible.builtin.include_role:
+    name: env
+    tasks_from: linkConfig
+  vars:
+    config_dir: "{{ ansible_env.HOME }}"
+    files: 
+      - ".gitconfig"
+- name: Sync configs
+  ansible.builtin.include_role:
+    name: env
+    tasks_from: linkConfig
+  vars:
+    # config_dir: "{{ ansible_env.HOME }}"
+    files: 
+      - ".gitignore_global"

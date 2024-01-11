@@ -6,23 +6,40 @@
 #     tasks_from: linkConfig
 #   vars:
 #     config_dir: "{{ ansible_env.HOME }}/.config"
+#     files:
+#       - "*.py"
+#       - ".gitignore"
 # When the dev_machine host/inventory variable is set to true config files will be symlinked from their role's source files.
 # When dev_machine is set to false or not set, config files will be copied to their expected location in the filesystem.
-# All files in [role]/files/ will be synced to {{ config_dir }}
-# If config_dir is not set, it defaults to {{ ansible_env.HOME }}/.config/
 # This allows for seamless local development of this repository
+# Both {{ config_dir }} and {{ files }} variables are optional
+# By default, all files in [role]/files/ will be synced to {{ config_dir }}
+# If config_dir is not set, it defaults to {{ ansible_env.HOME }}/.config/
+# If the "files" variable is set, only files matching those patters in [role]/files/ will be synced to {{ config_dir }}
+# The "files" variable can be a single string value or a yaml list of strings
+# "files" uses glob patterns, so "*.py" will match all files ending in ".py"
+
+- name: Create {{ config_dir }}
+  ansible.builtin.file:
+    path: "{{ config_dir }}"
+    state: directory
+    mode: "0755"
 - name: Find files
   ansible.builtin.find:
-    paths: "{{ ansible_parent_role_paths[0] }}/files"
+    paths: "{{ ansible_parent_role_paths[0] }}/files/"
     file_type: any
     hidden: true
-  register: files
+    patterns: "{{ files }}"
+  register: results
 - name: Copy configs
   ansible.builtin.copy:
     src: "{{ item.path }}"
     dest: "{{ config_dir }}/{{ item.path | basename }}"
     owner: "{{ ansible_user_id }}"
     mode: '0755'
+  loop: "{{ results.files }}"
+  loop_control:
+    label: "{{ item.path | basename }} -> {{ config_dir }}/{{ item.path | basename }}"
   when: dev_machine is undefined or not dev_machine
 - name: Link configs
   ansible.builtin.file:
@@ -30,5 +47,7 @@
     dest: "{{ config_dir }}/{{ item.path | basename }}"
     state: link
     force: true
-  with_items: "{{ files.files }}"
+  loop: "{{ results.files }}"
+  loop_control:
+    label: "{{ item.path | basename }} -> {{ config_dir }}/{{ item.path | basename }}"
   when: dev_machine is defined and dev_machine

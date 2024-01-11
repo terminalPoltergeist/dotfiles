@@ -51,11 +51,13 @@ HEADER="
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 "
 
-RED='\033[1;31m'
-YELLOW='\033[1;33m'
-GREEN='\033[1;34m'
+DOTS_DIR="$HOME/dotfiles"
+
+RED="\033[1;31m"
+YELLOW="\033[1;33m"
+GREEN="\033[1;34m"
 BLUE="\\033[38;5;27m"
-NC='\033[0m'
+NC="\033[0m"
 
 CHECK_MARK="${GREEN}\xE2\x9C\x94${NC}"
 X_MARK="${RED}\xE2\x9C\x96${NC}"
@@ -173,7 +175,7 @@ eval "$(pyenv init -)"' > $rc
 
     _=$(pyenv virtualenvs | grep "ansible")
     if [ $? -ne 0 ]; then
-      echo "ansible" > "${HOME}/dotfiles/.python-version"
+      echo "ansible" > "$DOTS_DIR/.python-version"
       echo -e "${CLOCK}Creating ansible virtual env..."
       pyenv virtualenv 3.12.1 ansible
       echo -e "${CHECK_MARK} Created ansible venv!"
@@ -187,17 +189,17 @@ eval "$(pyenv init -)"' > $rc
     fi
     echo -e "${PIN} Using ansible python virtual envirionemnt"
 
-    if [[ -d $HOME/dotfiles ]]; then
+    if [[ -d $DOTS_DIR ]]; then
       # what if it doesn't exist?
-      echo -e "${CLOCK}Updating ${HOME}/dotfiles from terminalPoltergeist/dotfiles.git..."
-      git -C "$HOME/dotfiles" pull --quiet > /dev/null
+      echo -e "${CLOCK}Updating $DOTS_DIR from terminalPoltergeist/dotfiles.git..."
+      git -C "$DOTS_DIR" pull --quiet > /dev/null
       echo -e "${CLOCK}Installing pip dependencies..."
-      pip install -r "$HOME/dotfiles/requirements.txt" 2>&1 > /dev/null
+      pip install -r "$DOTS_DIR/requirements.txt" 2>&1 > /dev/null
     fi
 
     [[ -f $rc ]] && rm $rc
 
-    cd $HOME/dotfiles && ansible-playbook local.yml -i inventory.yml -K
+    cd $DOTS_DIR && ansible-playbook local.yml -i inventory.yml -K
   ;;
   *)
     # implement this later

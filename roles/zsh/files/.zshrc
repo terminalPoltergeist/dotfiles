@@ -19,11 +19,7 @@
 #/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-#Add `~/bin` to the `$PATH`
-export PATH="$PATH:$HOME/.local/bin";
-# for d in $HOME/bin/*/; do
-#   export PATH="$PATH:$d"
-# done
+source $HOME/dotfiles/path
 export FLAVOURS_CONFIG_FILE="$HOME/.config/flavours/base16/config.toml";
 export LUA_PATH="./?.lua;;"
 
@@ -34,6 +30,8 @@ export LUA_PATH="./?.lua;;"
 # export PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
 export GPG_TTY=${tty}
 gpgconf --launch gpg-agent
+
+export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 
 # Start flavours
 # base16-shell (https://github.com/chriskempson/base16-shell)
@@ -62,19 +60,41 @@ export light_cyan='#8477a4'
 export light_white='#c1c1c1'
 # End flavours
 
-zmodload -i zsh/complist
+# unclear on the correct way to load the completion module.. this works for now
+zmodload zsh/complist
+# autoload -Uz compinit; compinit
+setopt globdots
 
-bindkey -M menuselect '^M' .accept-line
-zstyle ':completion:::::default' menu yes select
-bindkey '^[[Z' reverse-menu-complete
-zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==02=01}:${(s.:.)LS_COLORS}")'
+# zstyle contexts
+# contexts are defined by ':competion:<func>:<completer>:<command>:<argument>:<tag>'
+# ':completion:' is used for all completion syles
+# elements (such as <func> or <tag>) can be omitted if not set, but colons will remain
+# ex. ':completion:*default' which matches every function and uses the default completer
+# <completer> specifies which type of completion to do, some (not all) options include [complete, approximate, matches]
+# <command> is simply a command
+# <tag> specifies WHAT can be completed in the current context
+#   `zstyle ':competion:....' tag-order ...` will allow you to specify the precedence for tags
+#   ex. will list only local-directories if your match is ambiguous, ie. `cd <tab>` will show only local-directories, `cd a<tab>` will show only local-directories that start with "a", if there are none it will show sub-directories of directories in cdpath that start with "a"
+#     zsyle ':competion:*:cd:*' tag-order local-directories path-directories
+#
+# zstyle configs are of the form `zstyle <context> <style> <pattern>` where <context> is described above
+
+zstyle ':completion:*' completer _complete _correct _ignored  _approximate # specifies to first try generic completion, then spelling corrections, then any matches that were ignored with ignored-patterns, then approximate completion
+zstyle ':completion:*' max-errors 2 # specifies a maximum of 2 incorrect characters to form an approximate match defined above
+zstyle ':completion:*' ignored-patterns '[./][../]' # ignore ./ and ../
+zstyle ':completion:*' menu select
 zstyle ':completion:*' special-dirs true
 zstyle ':completion:*' insert-tab false
+zstyle ':completion:*' file-sort access # sort the completion menu by last access time
+zstyle ':completion:*:default' list-colors 'ex=01;31:di=01;36:*.gitignore=01;33' # colorize completion menu
+
+bindkey -M menuselect '^M' .accept-line # carriage return accepts the completed line (instead of just inserting the completion, it runs the command)
+bindkey '^[[Z' reverse-menu-complete # shift-tab navigates backwards through completion menu
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.config/zsh/.{path,prompt,aliases,functions,extra}; do
+for file in ~/.config/zsh/.{prompt,aliases,functions}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -93,9 +113,9 @@ complete -W "NSGlobalDomain" defaults;
 export EDITOR=nvim
 
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+# export PATH="$PYENV_ROOT/bin:$PATH"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-eval "$(pyenv init --path)"
+# eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)" # this auto-activates venvs per project, disabled because it slows down the propmpt
 

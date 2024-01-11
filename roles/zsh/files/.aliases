@@ -61,6 +61,7 @@ alias pjava='processing-java --sketch=$PWD --run';
 alias v='nvim';
 # alias vim="vim -S ~/.vim/.vimrc";
 alias vzf='v $(fzf)'; # fuzzy search and open the result
+alias helpme='cd /Users/jacknemitz/Desktop/notes/zettlekasten && vzf'
 
 ###############################################
 ################ SSH Shortcuts ################
@@ -84,8 +85,8 @@ alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume output volume 100'"
 # Lock the screen (when going AFK) !!bigsur changed file location, need to rewrite path!!
 ## found solution online. runs shell script to lock screen via applescript.
-alias afk="~/dotfiles/scripts/lockscreen.sh"
-alias AFK="~/dotfiles/scripts/lockscreen.sh && pmset displaysleepnow"
+alias afk="~/dotfiles/scripts/lockscreen"
+alias AFK="~/dotfiles/scripts/lockscreen && pmset displaysleepnow"
 # alias AFK="~/dotfiles/scripts/lockscreen.sh"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
@@ -101,7 +102,7 @@ fi
 
 # List all files colorized in long format, including dot files
 alias la="ls -gAhFolh ${colorflag}"
-# List all files colorized in long format, excluding dot files
+# List all files colorized, excluding dot files
 alias ls="ls -hF ${colorflag}"
 
 # Always use color output for `ls`
