@@ -30,5 +30,5 @@
 - name: Set shell
   ansible.builtin.user:
     name: "{{ ansible_user }}"
-    shell: "{{ zsh.stdout_lines }}"
+    shell: "/bin/zsh"
   become: true

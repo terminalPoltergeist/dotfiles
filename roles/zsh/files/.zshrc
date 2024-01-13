@@ -63,7 +63,7 @@ export light_white='#c1c1c1'
 # unclear on the correct way to load the completion module.. this works for now
 zmodload zsh/complist
 # autoload -Uz compinit; compinit
-setopt globdots
+setopt menucomplete globdots
 
 # zstyle contexts
 # contexts are defined by ':competion:<func>:<completer>:<command>:<argument>:<tag>'

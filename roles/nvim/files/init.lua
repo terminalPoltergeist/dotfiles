@@ -62,7 +62,7 @@ k.set('', '<leader>cl', ':execute "set colorcolumn=" . (&colorcolumn == "" ? "12
 -- vim.api.nvim_set_hl(0,"VertSplit", {cterm=NONE})
 api.nvim_set_hl(0,"ColorColumn", {ctermbg=0})
 -- vim.api.nvim_set_hl(0,"clear", {SignColumn})
-api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = ":set concealcursor= | :set conceallevel=2"})
+api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx", "*.json"}, command = ":set concealcursor= | :set conceallevel=2"})
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = ":Pencil"})
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = "Goyo"})
 api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":source ~/dotfiles/nvim/syntaxFiles/concealments.vim"})
@@ -70,16 +70,16 @@ api.nvim_create_autocmd('QuitPre', {pattern = {"*.md", "*.mdx"}, command = ":qa"
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*", "*.pde"}, command = ":set tabstop=4"})
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*", "*.pde"}, command = ":set shiftwidth=4"})
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*", "*.pde"}, command = ":IndentLinesDisable | IndentLinesEnable"}) -- hacky way to get indent guides looking good
-function Sad(line_nr, from, to, fname)
-  vim.cmd(string.format("silent !sed -i '' '%ss/%s/%s/' %s", line_nr, from, to, fname))
-end
-api.nvim_create_user_command("Padd",
-  function()
-    Sad('76', 10, 20, '~/.config/alacritty/alacritty.toml')
-    Sad('77', 10, 20, '~/.config/alacritty/alacritty.toml')
-  end,
-  {}
-)
+-- function Sad(line_nr, from, to, fname)
+--   vim.cmd(string.format("silent !sed -i '' '%ss/%s/%s/' %s", line_nr, from, to, fname))
+-- end
+-- api.nvim_create_user_command("Padd",
+--   function()
+--     Sad('76', 10, 20, '~/.config/alacritty/alacritty.toml')
+--     Sad('77', 10, 20, '~/.config/alacritty/alacritty.toml')
+--   end,
+--   {}
+-- )
 --}}}
 
 ---------------------------------------------------
@@ -173,7 +173,7 @@ vim.api.nvim_set_hl(0, 'ColorColumn', { bg = gui00 })
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = gui00 })
 vim.api.nvim_set_hl(0, 'CursorLine', { bg = gui01 })
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = gui08, bg = gui00 })
-vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = gui01 })
+vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = gui08 })
 vim.api.nvim_set_hl(0, 'PMenu', { fg = gui05, bg = gui01 })
 vim.api.nvim_set_hl(0, 'PMenuSel', { fg = gui01, bg = gui05 })
 vim.api.nvim_set_hl(0, 'TabLine', { fg = gui03, bg = gui01 })
