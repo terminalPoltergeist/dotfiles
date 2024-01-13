@@ -187,6 +187,7 @@ eval "$(pyenv init -)"' > $rc
       source $rc
       pyenv activate ansible
     fi
+    sleep 0.2
     echo -e "${PIN} Using ansible python virtual envirionemnt"
 
     if [[ -d $DOTS_DIR ]]; then
@@ -200,6 +201,8 @@ eval "$(pyenv init -)"' > $rc
     [[ -f $rc ]] && rm $rc
 
     cd $DOTS_DIR && ansible-playbook local.yml -i inventory.yml -K
+
+    source ~/.zshrc
   ;;
   *)
     # implement this later
