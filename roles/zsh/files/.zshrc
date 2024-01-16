@@ -29,6 +29,7 @@ export LUA_PATH="./?.lua;;"
 
 # export PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
 export GPG_TTY=${tty}
+export KEYID="1C49F42B6AAC7CEEB18DEAF60EEBC9431694A88E"
 gpgconf --launch gpg-agent
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
