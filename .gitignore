@@ -1,9 +1,3 @@
 .functions
-nvim/docs/
-.git-credentials
-gitconfig/.gitconfig
-scripts/servers.sh
-ssh/config
-docs/
 todo.md
 path
