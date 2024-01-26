@@ -200,7 +200,7 @@ eval "$(pyenv init -)"' > $rc
 
     [[ -f $rc ]] && rm $rc
 
-    cd $DOTS_DIR && ansible-playbook local.yml -i inventory.yml -K
+    cd $DOTS_DIR && ansible-playbook --ask-vault-password local.yml -i inventory.yml -K
 
     source ~/.zshrc
   ;;
