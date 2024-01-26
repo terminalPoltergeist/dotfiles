@@ -24,11 +24,11 @@ export FLAVOURS_CONFIG_FILE="$HOME/.config/flavours/base16/config.toml";
 export LUA_PATH="./?.lua;;"
 
 #Set up Go env
-# export GOPATH="$HOME/go";
-# export PATH="$PATH:$GOPATH/bin";
+export GOPATH="$HOME/go";
+export PATH="$PATH:$GOPATH/bin";
 
 # export PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
-export GPG_TTY=${tty}
+export GPG_TTY=$(tty)
 export KEYID="1C49F42B6AAC7CEEB18DEAF60EEBC9431694A88E"
 gpgconf --launch gpg-agent
 
@@ -65,6 +65,7 @@ export light_white='#c1c1c1'
 zmodload zsh/complist
 # autoload -Uz compinit; compinit
 setopt menucomplete globdots
+setopt ignoreeof
 
 # zstyle contexts
 # contexts are defined by ':competion:<func>:<completer>:<command>:<argument>:<tag>'

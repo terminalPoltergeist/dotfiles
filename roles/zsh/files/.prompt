@@ -21,7 +21,7 @@
 
 setopt prompt_subst # enable variable expansion
 NEWLINE=$'\n'
-PS1='$(prompt_ssh)$(prompt_venv)%B%F{red}%n'
+PS1='$(prompt_ssh)$(prompt_venv)%F{red}%n'
 PS1+='%F{white} @'
 PS1+='%F{yellow} %~ '
 PS1+='%F{blue}$(prompt_git)'
