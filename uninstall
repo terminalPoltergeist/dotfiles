@@ -21,6 +21,7 @@
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 # This script tears down my development environment
+# work-in-progress
 # To run `source uninstall`
 
 pyenv deactivate
