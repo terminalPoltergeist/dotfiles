@@ -1,7 +1,5 @@
 .functions
-com.googlecode.iterm2.plist
 nvim/docs/
-cseLabMachines.txt
 .git-credentials
 gitconfig/.gitconfig
 scripts/servers.sh
@@ -9,3 +7,4 @@ ssh/config
 docs/
 todo.md
 path
+roles/ssh/files/config
