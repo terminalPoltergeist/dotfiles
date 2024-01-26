@@ -4,7 +4,7 @@
 [user]
 	name = terminalPoltergeist
   email = jack.nemitz@yahoo.com
-  signingkey = 4928EEED
+  signingkey = CDB45764
 
 [core]
 	excludesfile = /Users/jacknemitz/.gitignore_global
