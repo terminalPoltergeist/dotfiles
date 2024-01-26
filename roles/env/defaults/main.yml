@@ -1,3 +1,5 @@
+# sets the config_dir to the name of the role that "included" the env/linkConfig task
 config_dir: "{{ ansible_env.HOME }}/.config/{{ ansible_parent_role_names[0] }}"
+# default to linking/copying all files. see env/linkConfig for example of override
 files:
   - "*"
