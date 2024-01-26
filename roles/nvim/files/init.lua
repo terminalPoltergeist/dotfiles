@@ -65,7 +65,7 @@ api.nvim_set_hl(0,"ColorColumn", {ctermbg=0})
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx", "*.json"}, command = ":set concealcursor= | :set conceallevel=2"})
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = ":Pencil"})
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.md", "*.mdx"}, command = "Goyo"})
-api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":source ~/dotfiles/nvim/syntaxFiles/concealments.vim"})
+api.nvim_create_autocmd('BufEnter', {pattern = {"*.md", "*.mdx"}, command = ":source ~/dotfiles/roles/nvim/files/syntaxFiles/markdown.vim"})
 api.nvim_create_autocmd('QuitPre', {pattern = {"*.md", "*.mdx"}, command = ":qa"}) -- quit vim when closing goyo
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*", "*.pde"}, command = ":set tabstop=4"})
 api.nvim_create_autocmd('VimEnter', {pattern = {"*.ps*", "*.pde"}, command = ":set shiftwidth=4"})
@@ -173,7 +173,7 @@ vim.api.nvim_set_hl(0, 'ColorColumn', { bg = gui00 })
 vim.api.nvim_set_hl(0, 'CursorColumn', { bg = gui00 })
 vim.api.nvim_set_hl(0, 'CursorLine', { bg = gui01 })
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = gui08, bg = gui00 })
-vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = gui08 })
+vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = gui01 })
 vim.api.nvim_set_hl(0, 'PMenu', { fg = gui05, bg = gui01 })
 vim.api.nvim_set_hl(0, 'PMenuSel', { fg = gui01, bg = gui05 })
 vim.api.nvim_set_hl(0, 'TabLine', { fg = gui03, bg = gui01 })
@@ -386,7 +386,7 @@ vim.api.nvim_set_hl(0, 'javaOperator', { fg = gui0D })
 ---------------------------------------------------
 --{{{plugin settings
 api.nvim_create_autocmd('BufRead', {pattern = {"inventory.yml", "hosts.yml"}, command = ":set filetype=yaml.ansible"})
-local _general = api.nvim_create_augroup("_general", {clear = false})
+-- local _general = api.nvim_create_augroup("_general", {clear = false})
 -- vim.api.nvim_create_autocmd({"bufenter"},{
 --   pattern = "*",
 --   command = "if (winnr("$") ==1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif",
@@ -400,7 +400,6 @@ local _general = api.nvim_create_augroup("_general", {clear = false})
 -- vim.o.NERDTreeWinSize = 35
 -- vim.g.NERDTreeWinPos = "right"
 -- api.nvim_set_hl(0, "clear", {SpellBad})
-api.nvim_set_hl(0, "SpellBad", {ctermfg=009, ctermbg=011})
 --OCaml setup
 -- set rtp+=<SHARE_DIR>/merlin/vim
 -- set rtp^="/Users/jacknemitz/.opam/csci2041/share/ocp-indent/vim"
