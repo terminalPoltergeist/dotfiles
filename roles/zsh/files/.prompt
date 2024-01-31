@@ -21,9 +21,8 @@
 
 setopt prompt_subst # enable variable expansion
 NEWLINE=$'\n'
-PS1='$(prompt_ssh)$(prompt_venv)%F{red}%n'
-PS1+='%F{white} @'
-PS1+='%F{yellow} %~ '
+PS1='%F{red}$(prompt_ssh)$(prompt_venv)'
+PS1+='%F{yellow}%~ '
 PS1+='%F{blue}$(prompt_git)'
 PS1+='%F{white}%@${NEWLINE}$ '
 export PS1;                             # Exports the prompt global
@@ -32,7 +31,7 @@ prompt_ssh(){
   session=$(echo $SSH_TTY)
 
   if [[ -n $session ]]; then
-    echo -e ">>>"
+    echo -e "%n %F{white}@ %F{red}%m "
   fi
 }
 
@@ -89,23 +88,27 @@ prompt_git() {
     else
       # Check for uncommitted changes in the index.
       if ! $(git diff --quiet --ignore-submodules --cached); then
-        s+='^';
+        s+='\xF0\x9F\x92\xBE'; # floppy
       fi;
       # Check for unstaged changes.
       if ! $(git diff-files --quiet --ignore-submodules --); then
-        s+='+';
+        s+='\xF0\x9F\x90\x99'; # octopus
       fi;
       # Check for untracked files.
       if [ -n "$(git ls-files --others --exclude-standard)" ]; then
-        s+='?';
+        s+='\xF0\x9F\x93\x8C'; # pin
       fi;
       # Check for stashed files.
       if $(git rev-parse --verify refs/stash &>/dev/null); then
-        s+='$';
+        s+='\xF0\x9F\x92\xBC'; # briefcase
+      fi;
+      # Check for unpushed commits.
+      if [ -n "$(git log @{u}..)" ]; then
+        s+='\xF0\x9F\x9A\x80'; # rocketship
       fi;
     fi;
 
-    [ -n "${s}" ] && s=" [${s}]";
+    [ -n "${s}" ] && s=" ${s}";
 
   else
       branchName="";
