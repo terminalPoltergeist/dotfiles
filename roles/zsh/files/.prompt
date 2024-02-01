@@ -108,12 +108,12 @@ prompt_git() {
       fi;
     fi;
 
-    [ -n "${s}" ] && s=" ${s}";
+    [ -n "${s}" ] && s="${s} ";
 
   else
       branchName="";
   fi;
 
-  echo -e "${1}${branchName}${2}${s}${author}";
+  echo -e "${s}${1}${branchName}${2}${author}";
 
 }
