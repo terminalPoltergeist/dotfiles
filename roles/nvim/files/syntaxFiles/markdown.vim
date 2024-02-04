@@ -42,3 +42,7 @@ hi Bolds gui=bold
 syn match Bolds '\v(\*\*)@<=.{-}(\*\*)@='
 syn match Bold '\v\*' conceal
 " syn match Bolds '\v(\*)@<!\*\*(\*)@!' conceal
+
+hi Highlight guibg=#87775f
+syn match Highlight '\v[==]@<=(.{-})[==]@='
+syn match Highlight '\v[==](.{-})@=[==]' conceal
