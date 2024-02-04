@@ -62,6 +62,7 @@ alias v='nvim';
 # alias vim="vim -S ~/.vim/.vimrc";
 alias vzf='v $(fzf)'; # fuzzy search and open the result
 alias helpme='cd /Users/jacknemitz/Desktop/notes/zettlekasten && vzf'
+alias gpgflush='gpgconf --reload gpg-agent'
 
 ###############################################
 ################ SSH Shortcuts ################

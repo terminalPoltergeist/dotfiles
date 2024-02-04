@@ -24,7 +24,7 @@ NEWLINE=$'\n'
 PS1='%F{red}$(prompt_ssh)$(prompt_venv)'
 PS1+='%F{yellow}%~ '
 PS1+='%F{blue}$(prompt_git)'
-PS1+='%F{white}%@${NEWLINE}$ '
+PS1+='%F{white}%T${NEWLINE}$ '
 export PS1;                             # Exports the prompt global
 
 prompt_ssh(){
@@ -82,7 +82,7 @@ prompt_git() {
       fi
     fi
 
-    author=" as $(git config user.name)";
+    author=" as $(git config user.name) ";
     if grep -q 'chromium/src.git' <<< "${repoUrl}"; then
       s+='*';
     else

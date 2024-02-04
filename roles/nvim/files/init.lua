@@ -407,7 +407,7 @@ api.nvim_create_autocmd('BufRead', {pattern = {"inventory.yml", "hosts.yml"}, co
 -- autocmd FileType ocaml source /Users/jacknemitz/.opam/csci2041/share/typerex/ocp-indent/ocp-indent.vim
 -- filetype plugin indent on
 cmd('let g:instant_markdown_autostart = 0')
-cmd('let g:goyo_width = 80')
+cmd('let g:goyo_width = 95')
 cmd('let g:pencil#conceallevel = 2')
 cmd('let g:pencil#concealcursor = ""')
 cmd('let g:pencil#wrapModeDefault = "soft"')
