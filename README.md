@@ -30,8 +30,6 @@ I have gone through many iterations of this repository, this is the current vers
 
 I use Ansible for managing my configurations. This makes it easier to bootstrap a new system and apply changes idempotently.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 ## Usage
 
 Before running be sure to backup any configurations you want to preserve.
@@ -41,5 +39,3 @@ To run the install script:
 ```bash
 bash -c "$(curl -fSL https://raw.githubusercontent.com/terminalPoltergeist/dotfiles/main/install > .tmp)" && source .tmp && rm .tmp
 ```
-
-<p align="right">(<a href="#top">back to top</a>)</p>
