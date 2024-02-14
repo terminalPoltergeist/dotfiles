@@ -1,17 +1,17 @@
-scheme: "scheme01-soft"
+scheme: "scheme01-light"
 author: "terminalPoltergeist"
 
-base00: "222222"
-base01: "333333"
-base02: "444444"
-base03: "555555"
-base04: "333333"
-base05: "999999"
+base00: "f1f1f1"
+base01: "999999"
+base02: "c1c1c1"
+base03: "999999"
+base04: "121212"
+base05: "222222"
 base06: "333333"
-base07: "999999"
+base07: "444444"
 base08: "a06666" # red
 base09: "5f8766" # green
-base0A: "ddB699" # yellow
+base0A: "EC4625" # yellow
 base0B: "5f87a9" # blue
 base0C: "8477a4" # purple/magenta
 base0D: "5f8787" # cyan
