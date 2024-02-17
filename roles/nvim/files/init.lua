@@ -412,6 +412,7 @@ cmd('let g:pencil#conceallevel = 2')
 cmd('let g:pencil#concealcursor = ""')
 cmd('let g:pencil#wrapModeDefault = "soft"')
 cmd('let g:pencil#cursorwrap = 0    " 0=disable, 1=enable (def)')
+cmd('let g:indentLine_char = "·"') -- set indent indicator to ·
 -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 --   callback = function()
 --     require("lint").try_lint()
@@ -426,7 +427,7 @@ cmd('let g:pencil#cursorwrap = 0    " 0=disable, 1=enable (def)')
 -- quicker escape
 k.set("i", "jj", "<esc>")
 -- open new buffer with file under cursor
-k.set("", "gf", ":edit <cfile><cr>")
+k.set("", "gf", ":edit <cfile><cr> | :set concealcursor=vi<cr>")
 -- toggle nerdtree file manager
 k.set("","<Leader>n", ":NERDTreeToggle<cr><Leader>j")
 -- list buffers then prompt for buffer
@@ -453,9 +454,12 @@ k.set("","<Leader>lb", ":set linebreak<CR>", {noremap = true})
 k.set("","<Leader>nb", ":set nolinebreak<CR>", {noremap = true})
 k.set("n","<space>", "za", {noremap = true})
 k.set("n","FF", ":Telescope find_files<cr><esc>")
-k.set("n","FB", ":Telescope buffers<cr>")
+k.set("n","FB", ":Telescope buffers<cr><esc>")
 k.set("n", "<Leader>f", ":Rg<CR>", {noremap = true, silent = true})
 k.set("i", "<C-f>", "<esc>:call InsertFile()<CR>", {noremap = true})
+k.set("n", "gd", ":call JumpDef()<cr>")
+k.set("n", "]h", "<Plug>(GitGutterNextHunk)", {noremap = true})
+k.set("n", "[h", "<Plug>(GitGutterPrevHunk)", {noremap = true})
 api.nvim_set_keymap('n', '<leader>do', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
 api.nvim_set_keymap('n', '<leader>d[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
 api.nvim_set_keymap('n', '<leader>d]', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
@@ -505,11 +509,26 @@ require "paq" {
   "junegunn/goyo.vim",
   "preservim/vim-pencil",
   "pearofducks/ansible-vim",
+  "norcalli/nvim-colorizer.lua",
   -- "mfussenegger/nvim-lint"
   -- { 'iamcco/markdown-preview.nvim', run = function() vim.fn['mkdp#util#install']() end },
   -- "ThePrimeagen/vim-be-good",
 }
 --}}}
+
+require'colorizer'.setup()
+
+require'colorizer'.setup({
+  javascript = { names = false },
+  css = {
+    names = false;
+    rgb_fn = true;
+  },
+  xml = {
+    names = false;
+    mode = 'background'
+  }
+}, { mode = 'foreground' })
 
 require"startup".setup()
 

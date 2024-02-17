@@ -42,6 +42,11 @@ function! ToggleGoyo()
   endif
 endfunction
 
+function! JumpDef()
+  let def=expand('<cword>')
+  execute "Rg " . def
+endfunction
+
 "function! Open()
 "  let @/=eval('\v((\[\[.*\]\])+.*\[\[)@<=(.{-}%#.{-})(\]\])@=')
 "  echo @/
