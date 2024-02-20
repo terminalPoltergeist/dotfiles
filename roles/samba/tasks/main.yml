@@ -1,0 +1,33 @@
+---
+- name: Install samba
+  ansible.builtin.apt:
+    name: samba
+    state: present
+- name: Verify samba
+  ansible.builtin.shell: whereis samba
+  register: samba
+  changed_when: false
+- name: Create share directory
+  ansible.builtin.file:
+    path: "/media"
+    state: directory
+    mode: '0755'
+  when: samba.rc != 0
+- name: Copy config
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/smb.conf"
+    dest: "/etc/samba/smb.conf"
+    owner: "root"
+    mode: '0644'
+  register: config
+- name: Restart the service
+  become: true
+  ansible.builtin.service:
+    name: smbd
+    state: restarted
+  when: config is changed
+- name: Allow firewall
+  become: true
+  community.general.ufw:
+    rule: allow
+    name: samba

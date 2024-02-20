@@ -527,6 +527,9 @@ require'colorizer'.setup({
   xml = {
     names = false;
     mode = 'background'
+  },
+  yaml = {
+    mode = 'background'
   }
 }, { mode = 'foreground' })
 
