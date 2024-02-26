@@ -419,6 +419,10 @@ cmd('let g:indentLine_defaultGroup = "SpecialKey"')
 --     require("lint").try_lint()
 --   end,
 -- })
+cmd('let g:gitblame_date_format = "%a %y/%m/%d @ %H:%M"')
+cmd('let g:gitblame_message_template = "    <author> - <summary> - <date>"')
+cmd('let g:gitblame_message_when_not_committed = "    ~~~"')
+cmd('let g:gitblame_highlight_group = "CursorLine"')
 --}}}
 
 ---------------------------------------------------
@@ -428,7 +432,7 @@ cmd('let g:indentLine_defaultGroup = "SpecialKey"')
 -- quicker escape
 k.set("i", "jj", "<esc>")
 -- open new buffer with file under cursor
-k.set("", "gf", ":edit <cfile><cr> | :set concealcursor=vi<cr>")
+k.set("", "gf", ":edit <cfile><cr> | :set concealcursor=v<cr>")
 -- toggle nerdtree file manager
 k.set("","<Leader>n", ":NERDTreeToggle<cr><Leader>j")
 -- list buffers then prompt for buffer
@@ -457,7 +461,7 @@ k.set("n","<space>", "za", {noremap = true})
 k.set("n","FF", ":Telescope find_files<cr><esc>")
 k.set("n","FB", ":Telescope buffers<cr><esc>")
 k.set("n", "<Leader>f", ":Rg<CR>", {noremap = true, silent = true})
-k.set("i", "<C-f>", "<esc>:call InsertFile()<CR>", {noremap = true})
+-- k.set("i", "<C-f>", "<esc>:call InsertFile()<CR>", {noremap = true})
 k.set("n", "gd", ":call JumpDef()<cr>")
 k.set("n", "]h", "<Plug>(GitGutterNextHunk)", {noremap = true})
 k.set("n", "[h", "<Plug>(GitGutterPrevHunk)", {noremap = true})
@@ -511,12 +515,16 @@ require "paq" {
   "preservim/vim-pencil",
   "pearofducks/ansible-vim",
   "norcalli/nvim-colorizer.lua",
+  "f-person/git-blame.nvim",
   -- "mfussenegger/nvim-lint"
   -- { 'iamcco/markdown-preview.nvim', run = function() vim.fn['mkdp#util#install']() end },
   -- "ThePrimeagen/vim-be-good",
 }
 --}}}
 
+require'gitblame'.setup({
+
+})
 require'colorizer'.setup()
 
 require'colorizer'.setup({
