@@ -21,6 +21,7 @@ end = "-- End flavours"
 [[item]]
 file = "/Users/jacknemitz/.tmux.conf"
 template = "tmux"
+hook = "tmux source ~/.tmux.conf"
 
 [[item]]
 file = "/Users/jacknemitz/.config/spicetify/Themes/Custom/color.ini"
@@ -30,21 +31,27 @@ start = "# Start flavours"
 end = "# End flavours"
 rewrite = true
 
-[[item]]
-file = "/Users/jacknemitz/dotfiles/sketchybar/colors.sh"
-template = "sketchybar"
-start = "# Start flavours"
-end = "# End flavours"
-rewrite = true
+# [[item]]
+# file = "/Users/jacknemitz/dotfiles/sketchybar/colors.sh"
+# template = "sketchybar"
+# start = "# Start flavours"
+# end = "# End flavours"
+# rewrite = true
 
-[[item]]
-file = "/Users/jacknemitz/Desktop/projects/jacknemitz.com/tailwind.config.js"
-template = "jacknemitz.com"
-start = "// Start flavours"
-end = "// End flavours"
+# [[item]]
+# file = "/Users/jacknemitz/Desktop/projects/jacknemitz.com/tailwind.config.js"
+# template = "jacknemitz.com"
+# start = "// Start flavours"
+# end = "// End flavours"
 
 [[item]]
 file = "/Users/jacknemitz/.zshrc"
 template = "zsh"
+start = "# Start flavours"
+end = "# End flavours"
+
+[[item]]
+file = "/Users/jacknemitz/.config/bat/config"
+template = "bat"
 start = "# Start flavours"
 end = "# End flavours"
