@@ -413,6 +413,7 @@ cmd('let g:pencil#concealcursor = ""')
 cmd('let g:pencil#wrapModeDefault = "soft"')
 cmd('let g:pencil#cursorwrap = 0    " 0=disable, 1=enable (def)')
 cmd('let g:indentLine_char = "·"') -- set indent indicator to ·
+cmd('let g:indentLine_defaultGroup = "SpecialKey"')
 -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 --   callback = function()
 --     require("lint").try_lint()
