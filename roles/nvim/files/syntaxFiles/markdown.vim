@@ -15,8 +15,8 @@ syn match urlText '\v(\[@<!\[)@<=(.{-})(\]@<!\]\(.{-}\))@='
 syn match urltext '\v\[@<!\[(.{-}\]\(.{-}\))@=' conceal
 " match ] if preceded by [ and any number of characters and paired with (*)
 syn match urlText '\v(\[.{-})@<=\](\(.{-}\))@=' conceal
-" match (*any characters*) if preceded by [*any characters*]
-syn match Normal '\v(\[.{-}\])@<=(\(.{-}\))' conceal
+" match (*any characters*) if preceded by [*any characters*], optional {attr="value"} is matched for when markdown is parsed to html, these attributes will be added to the <a>
+syn match Normal '\v(\[.{-}\])@<=(\(.{-}\)\{?(.{-})\}?)' conceal
 
 " match/conceal backlinks
 " match [[ if followed by one or more characters and ]]
