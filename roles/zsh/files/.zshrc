@@ -27,6 +27,8 @@ export LUA_PATH="./?.lua;;"
 export GOPATH="$HOME/go";
 export PATH="$PATH:$GOPATH/bin";
 
+export PATH="$PATH:$HOME/.local/bin/google-cloud-sdk/bin"
+
 # export PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
 export GPG_TTY=$(tty)
 export KEYID="1C49F42B6AAC7CEEB18DEAF60EEBC9431694A88E"
