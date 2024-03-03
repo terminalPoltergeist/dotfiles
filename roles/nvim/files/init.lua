@@ -423,6 +423,8 @@ cmd('let g:gitblame_date_format = "%a %y/%m/%d @ %H:%M"')
 cmd('let g:gitblame_message_template = "    <author> - <summary> - <date>"')
 cmd('let g:gitblame_message_when_not_committed = "    ~~~"')
 cmd('let g:gitblame_highlight_group = "CursorLine"')
+cmd('let g:gitblame_delay = 500')
+cmd('let g:gitblame_use_blame_commit_file_urls = "true"')
 --}}}
 
 ---------------------------------------------------
@@ -443,6 +445,7 @@ k.set("","<Leader>s", ":call ToggleSpellCheck()<CR>", {noremap = true, silent = 
 k.set("","<Leader>g", ":call ToggleGoyo()<CR>", {noremap = true, silent = true})
 -- yank entire line after cursor
 k.set("","Y", "y$")
+k.set("","<Leader>r", ":source ~/.config/nvim/lua/init.lua<CR>")
 -- beter word motion
 -- maybe this wasn't such a good idea?
 -- k.set("", "w", "W")
@@ -522,9 +525,7 @@ require "paq" {
 }
 --}}}
 
-require'gitblame'.setup({
-
-})
+require'gitblame'.setup({})
 require'colorizer'.setup()
 
 require'colorizer'.setup({
@@ -538,6 +539,9 @@ require'colorizer'.setup({
     mode = 'background'
   },
   yaml = {
+    mode = 'background'
+  },
+  go = {
     mode = 'background'
   }
 }, { mode = 'foreground' })
