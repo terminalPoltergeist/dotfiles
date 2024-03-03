@@ -53,8 +53,7 @@ o.clipboard = "unnamedplus"
 vim.g.python3_host_prog = '/Users/jacknemitz/.pyenv/shims/python3'
 vim.g.python2_host_prog = '/Users/jacknemitz/.pyenv/shims/python'
 o.foldmethod = "marker"
-k.set('', '<leader>e', "T<Space>cE()<Esc>PT<Space>lvEhyhi[]<Esc>P")
-k.set('', '<leader>r', ":%s/<br>/\r/g<CR>")
+k.set('', '<leader>e', "T<Space>cE()<Esc>PT<Space>lvEhyhi[]<Esc>P") -- wraps the entire Word in [word](word), for converting raw links to md links
 k.set('', '<leader>cs', ':execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>')
 k.set('', '<leader>cl', ':execute "set colorcolumn=" . (&colorcolumn == "" ? "120" : "")<CR>')
 -- vim.api.nvim_set_hl(0, "MatchParen", {cterm=underline, ctermbg=NONE, ctermfg=NONE})
