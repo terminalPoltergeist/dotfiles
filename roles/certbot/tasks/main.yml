@@ -1,0 +1,31 @@
+- name: Update packages
+  ansible.builtin.apt:
+    upgrade: true
+    update_cache: true
+    cache_valid_time: 86400
+
+- name: Install pip3
+  ansible.builtin.apt:
+    name: "python3-pip"
+    state: present
+
+- name: Install certbot and certbot-dns-cloudflare
+  ansible.builtin.command: pip3 install certbot 'zope.interface>=5.3.0a1' certbot-dns-cloudflare
+
+- name: Create /etc/letsencrypt
+  ansible.builtin.file:
+    path: "/etc/letsencrypt"
+    state: directory
+    recurse: true
+
+- name: Copy cloudflare.ini
+  ansible.builtin.template:
+    src: "cloudflare.ini.j2"
+    dest: "/etc/letsencrypt/cloudflare.ini"
+    mode: '0644'
+
+- name: Attempt to renew certs
+  ansible.builtin.command: certbot renew
+
+# - name: Create certs
+#   ansible.builtin.command: certbot certonly --dns-cloudflare --dns-cloudflare-credentials /etc/letsencrypt/cloudflare.ini --email 'me@jacknemitz.com' --domain jnem.me,*.jnem.me,jacknemitz.com,*.jacknemitz.com --agree-tos --non-interactive
