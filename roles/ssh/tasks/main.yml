@@ -1,6 +1,9 @@
+- name: "Config for Aristotle server"
+  ansible.builtin.include_tasks: aristotle.yml
+  when: inventory_hostname == "aristotle"
 - name: "Config for MacOS"
   ansible.builtin.include_tasks: mac.yml
   when: ansible_os_family == "Darwin"
 - name: "Config for Ubuntu22"
   ansible.builtin.include_tasks: ubuntu22.yml
-  when: ansible_os_family == "Debian"
+  when: ansible_os_family == "Debian" and inventory_hostname != "aristotle"

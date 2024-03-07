@@ -1,0 +1,24 @@
+- name: Place systemd service file
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/albatross.service"
+    dest: "/etc/systemd/system/albatross.service"
+    mode: '0644'
+  register: albatross
+
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: true
+  when: albatross.changed
+
+- name: Create log file
+  ansible.builtin.file:
+    path: "/var/log/albatross.log"
+    state: touch
+    mode: '0644'
+    owner: jack
+
+- name: Enable albatross service
+  ansible.builtin.systemd:
+    name: albatross
+    enabled: true
+    state: started

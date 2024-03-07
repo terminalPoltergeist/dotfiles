@@ -1,0 +1,14 @@
+[Unit]
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+ExecStart=/home/jack/jnem/.server
+WorkingDirectory=/home/jack/jnem
+User=jack
+Restart=always
+RestartSec=5
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=%n
