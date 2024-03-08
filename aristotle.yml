@@ -7,3 +7,4 @@
     - { role: certbot, become: yes }
     - { role: nginx, become: yes }
     - { role: albatross, become: yes }
+    - redis
