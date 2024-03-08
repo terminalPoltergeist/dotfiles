@@ -1,0 +1,11 @@
+- name: Install redis
+  ansible.builtin.apt:
+    update_cache: true
+    name: redis
+    state: latest
+  become: true
+
+- name: Start redis
+  ansible.builtin.service:
+    name: redis-server
+    state: started
