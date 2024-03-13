@@ -92,7 +92,7 @@ alias AFK="~/dotfiles/scripts/lockscreen && pmset displaysleepnow"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 alias please='sudo';
-
+alias myip='curl ifconfig.me';
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`

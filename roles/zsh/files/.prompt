@@ -68,16 +68,16 @@ prompt_git() {
     repoUrl="$(git config --get remote.origin.url)";
 
     if [[ $repoUrl == *"github.umn.edu"* ]]; then
-      if [[ $(git config user.name) == "terminalPoltergeist" ]]; then
-        git config user.name nemit031
-        git config user.email nemit031@umn.edu
+      if [[ $(git config user.name) == "terminalPoltergeist" || $(git config user.name) == "nemit031" ]]; then
+        git config user.name jack
+        git config user.email jack@umn.edu
       fi
     fi
     if [[ $repoUrl == *"github.com"* ]]; then
-      if [[ $(git config user.name) == "nemit031" ]]; then
+      if [[ $(git config user.name) == "jack" ]]; then
         git config user.name terminalPoltergeist
       fi
-      if [[ $(git config user.email) == "nemit031@umn.edu" ]]; then
+      if [[ $(git config user.email) == "jack@umn.edu" ]]; then
         git config user.email jack.nemitz@yahoo.com
       fi
     fi
