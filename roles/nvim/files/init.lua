@@ -424,6 +424,7 @@ cmd('let g:gitblame_message_when_not_committed = "    ~~~"')
 cmd('let g:gitblame_highlight_group = "CursorLine"')
 cmd('let g:gitblame_delay = 500')
 cmd('let g:gitblame_use_blame_commit_file_urls = "true"')
+cmd('let g:gitblame_enabled = 0')
 --}}}
 
 ---------------------------------------------------
