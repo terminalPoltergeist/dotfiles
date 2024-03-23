@@ -7,11 +7,3 @@ workstation:
       ansible_python_interpreter: /usr/local/bin/python3.12
   vars:
     dev_machine: true # when set roles will symlink their config files to [role_name]/files/[config_name]
-homelab:
-  hosts:
-    carlyle:
-      ansible_host: 192.168.50.13
-      ansible_user: jack
-      ansible_port: 2202
-  vars:
-    ansible_ssh_private_key_file: ~/.ssh/id_rsa_homeLab

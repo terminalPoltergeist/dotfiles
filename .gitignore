@@ -4,3 +4,7 @@ path
 webserver.yml
 roles/ssh/files/sshd_config
 roles/nginx
+homelab.yml
+aristotle.yml
+brunelli.yml
+carlyle.yml
