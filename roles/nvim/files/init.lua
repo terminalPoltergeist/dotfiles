@@ -50,7 +50,7 @@ o.swapfile = false
 o.incsearch = true
 o.termguicolors = true
 o.clipboard = "unnamedplus"
-vim.g.python3_host_prog = '/Users/jacknemitz/.pyenv/shims/python3'
+vim.g.python3_host_prog = '/Users/jacknemitz/.pyenv/shims/python3.12'
 vim.g.python2_host_prog = '/Users/jacknemitz/.pyenv/shims/python'
 o.foldmethod = "marker"
 k.set('', '<leader>e', "T<Space>cE()<Esc>PT<Space>lvEhyhi[]<Esc>P") -- wraps the entire Word in [word](word), for converting raw links to md links
@@ -458,6 +458,11 @@ k.set("","<Leader>r", ":source ~/.config/nvim/lua/init.lua<CR>")
 -- these next two were from Primeagen
 k.set("", "<C-u>", "<C-u>zz")
 k.set("", "<C-d>", "<C-d>zz")
+k.set("n", "n", "nzzzv")
+k.set("n", "N", "Nzzzv")
+k.set("v", "J", ":m '>+1<CR>gv=gv")
+k.set("v", "K", ":m '<-2<CR>gv=gv")
+k.set("x", "<leader>p", "\"_dP")
 k.set("","<Leader>lb", ":set linebreak<CR>", {noremap = true})
 k.set("","<Leader>nb", ":set nolinebreak<CR>", {noremap = true})
 k.set("n","<space>", "za", {noremap = true})
@@ -480,7 +485,8 @@ api.nvim_set_keymap('n', '<leader>dd', '<cmd>Telescope diagnostics<CR>', { norem
 ---------------------------------------------------
 --	Plugins
 ---------------------------------------------------
---{{{plugins
+
+--{{{Plugins
 require "paq" {
   "savq/paq-nvim",
   "tpope/vim-commentary",
@@ -519,6 +525,9 @@ require "paq" {
   "pearofducks/ansible-vim",
   "norcalli/nvim-colorizer.lua",
   "f-person/git-blame.nvim",
+  "onsails/lspkind.nvim",
+  "folke/todo-comments.nvim",
+  "lspcontainers/lspcontainers.nvim",
   -- "mfussenegger/nvim-lint"
   -- { 'iamcco/markdown-preview.nvim', run = function() vim.fn['mkdp#util#install']() end },
   -- "ThePrimeagen/vim-be-good",
@@ -527,6 +536,19 @@ require "paq" {
 
 require'gitblame'.setup({})
 require'colorizer'.setup()
+require'todo-comments'.setup({
+  keywords = {
+    TODO = {color = gui0B},
+    NOTE = {color = gui0E},
+    FIX = {color = gui0A, alt = {"WARN"}},
+    ERR = {color = gui0F, alt = {"BUG", "XXX"}}
+  },
+  highlight = {
+    after = "",
+    before = "",
+    keyword = "wide",
+  },
+})
 
 require'colorizer'.setup({
   javascript = { names = false },
@@ -571,7 +593,7 @@ require('telescope').setup({
 
 --{{{treesitter config
 require('nvim-treesitter.configs').setup{
-  ensure_installed = { "c", "lua", "vim", "tsx", "markdown" },
+  ensure_installed = { "c", "lua", "vim",  "javascript", "tsx", "markdown" },
   sync_install = false,
   auto_install = true,
   highlight= {
@@ -622,6 +644,7 @@ cmp.setup({
       ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
+      { name = 'path' },
       { name = 'nvim_lsp' },
       { name = 'vsnip' }, -- For vsnip users.
       -- { name = 'luasnip' }, -- For luasnip users.
@@ -677,13 +700,42 @@ end
 
 api.nvim_set_keymap("i", "<S-Tab>", "v:lua.tab_complete()", {expr = true})
 api.nvim_set_keymap("s", "<S-Tab>", "v:lua.tab_complete()", {expr = true})
+
+-- local lspkind = require('lspkind')
+-- cmp.setup {
+--   formatting = {
+--     format = lspkind.cmp_format({
+--       mode = 'symbol', -- show only symbol annotations
+--       maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+--                      -- can also be a function to dynamically calculate max width such as 
+--                      -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
+--       ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+--       show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+
+--       -- The function below will be called before any actual modifications from lspkind
+--       -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+--       before = function (entry, vim_item)
+--         return vim_item
+--       end
+--     })
+--   }
+-- }
 -- }}}
 
 --lspconfig{{{
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+-- local HTMLcapabilities = vim.lsp.protocol.make_client_capabilities()
+-- HTMLcapabilities.textDocument.completion.completionItem.snippetSupport = true
+
 local lspconfig = require('lspconfig')
+
+-- lspconfig.html.setup {
+--   capabilities = HTMLcapabilities,
+-- }
+
+lspconfig.htmx.setup{}
 
 lspconfig.lua_ls.setup({
   on_attach = custom_attach,
@@ -738,16 +790,16 @@ lspconfig.vimls.setup {
 lspconfig.cssls.setup {
   capabilities = capabilities
 }
-lspconfig.html.setup {
-  capabilities = capabilities
-}
+-- lspconfig.html.setup {
+--   capabilities = capabilities
+-- }
 lspconfig.jsonls.setup {
   capabilities = capabilities
 }
 lspconfig.tsserver.setup {
   capabilities = capabilities,
   cmd = {"typescript-language-server", "--stdio"},
-  filetypes = {"typescript", "typescriptreact", "typescript.tsx"}
+  filetypes = {"javascript", "html", "typescript", "typescriptreact", "typescript.tsx"},
 }
 lspconfig.tailwindcss.setup{
   capabilities = capabilities
@@ -806,6 +858,20 @@ lspconfig.powershell_es.setup{
   bundle_path = '/usr/local/bin/PowerShellEditorServices',
   shell = '/usr/local/bin/pwsh'
 }
+
+-- lspconfig.eslint.setup({
+--   capabilities = capabilities,
+--   filetypes = {
+--     "javascript",
+--     "html",
+--   },
+--   on_attach = function(client, bufnr)
+--     vim.api.nvim_create_autocmd("BufWritePre", {
+--       buffer = bufnr,
+--       command = "EslintFixAll",
+--     })
+--   end,
+-- })
 --}}}
 
 require('nvim-ts-autotag').setup()
