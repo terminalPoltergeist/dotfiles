@@ -1,0 +1,10 @@
+---
+- name: Detect go
+  ansible.builtin.shell: which go
+  register: go
+  changed_when: false
+  ignore_errors: true
+
+- name: Install go v1.22
+  ansible.builtin.shell: wget https://go.dev/dl/go1.22.0.linux-arm64.tar.gz && gzip -d go1.22.0.linux-arm64.tar.gz && tar -xf go1.22.0.linux-arm64.tar && rm go1.22.0.linux-arm64.tar
+  when: go.failed
