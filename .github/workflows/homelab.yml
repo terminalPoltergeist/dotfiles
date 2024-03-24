@@ -53,6 +53,7 @@ jobs:
       SSH_KEY: ${{secrets.SSH_KEY}}
       BRUNELLI_IP: ${{secrets.BRUNELLI_IP}}
       BRUNELLI_PORT: ${{secrets.BRUNELLI_PORT}}
+      ANSIBLE_STDOUT_CALLBACK: "junit"
       JUNIT_OUTPUT_DIR: "~/junit-results"
     steps:
       - uses: actions/checkout@v3
