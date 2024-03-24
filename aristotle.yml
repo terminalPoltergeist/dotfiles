@@ -1,0 +1,39 @@
+- name: aristotle
+  hosts: aristotle
+  vars:
+    nginx_server_name: "aristotle"
+
+  roles:
+    - { role: zsh, become: yes }
+    - { role: ufw, become: yes }
+    - { role: certbot, become: yes }
+    - role: geerlingguy.certbot
+      certbot_admin_email: jack.nemitz@yahoo.com
+      certbot_create_if_missing: true
+      certbot_create_method: standalone
+      certbot_testmode: true
+      certbot_certs:
+        - domains:
+            - "jnem.me"
+            - "*.jnem.me"
+            - "jacknemitz.com"
+            - "*.jacknemitz.com"
+      certbot_create_command: >-
+        {{ certbot_script }} certonly --{{ certbot_create_method  }}
+        {{ '--test-cert' if certbot_testmode else '' }}
+        --noninteractive --agree-tos
+        --email {{ cert_item.email | default(certbot_admin_email) }}
+        -d {{ cert_item.domains | join(',') }}
+        --dns-cloudflare-credentials cloudflare.ini
+        {{ '--pre-hook /etc/letsencrypt/renewal-hooks/pre/stop_services'
+          if certbot_create_standalone_stop_services and certbot_create_method == 'standalone'
+        else '' }}
+        {{ '--post-hook /etc/letsencrypt/renewal-hooks/post/start_services'
+          if certbot_create_standalone_stop_services and certbot_create_method == 'standalone'
+        else '' }}
+      certbot_create_standalone_stop_services:
+        - nginx
+      become: yes
+    - { role: nginx, become: yes }
+    - { role: albatross, become: yes }
+    - redis

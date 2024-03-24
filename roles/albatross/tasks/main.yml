@@ -10,12 +10,19 @@
     daemon_reload: true
   when: albatross.changed
 
+- name: Check for log file
+  ansible.builtin.shell: test -f /var/log/albatross.log
+  register: log
+  changed_when: false
+  ignore_errors: true
+
 - name: Create log file
   ansible.builtin.file:
     path: "/var/log/albatross.log"
     state: touch
     mode: '0644'
     owner: jack
+  when: log.failed
 
 - name: Enable albatross service
   ansible.builtin.systemd:

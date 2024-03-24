@@ -1,0 +1,11 @@
+---
+- name: carlyle
+  hosts: carlyle
+
+  roles:
+    - zsh
+    - { role: ufw, become: yes } # need to be super to configure firewall
+    - tmux
+    - nvim
+    - go
+    - samba

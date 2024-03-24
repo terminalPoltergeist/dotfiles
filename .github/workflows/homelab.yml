@@ -1,0 +1,44 @@
+name: Sync systems
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  aristotle:
+    runs-on: ubuntu-latest
+    env:
+      dns_api_key: ${{secrets.CLOUDFLARE_DNS_API_KEY}}
+      vault_psswd: ${{secrets.VAULT_PASS}}
+      become_psswd: ${{secrets.BECOME_PASS}}
+    steps:
+      - uses: actions/checkout@v3
+      - name: configure ssh
+        run: |
+          mkdir -p /home/runner/.ssh/
+          touch /home/runner/.ssh/id_rsa
+          echo -e "${{secrets.SSH_KEY}}" > /home/runner/.ssh/id_rsa
+          chmod 700 /home/runner/.ssh/id_rsa
+      - name: run playbook
+        shell: bash
+        run: |
+          ansible-playbook --private-key /home/runner/.ssh/id_rsa aristotle.yml -i homelab.yml -e ansible_sudo_pass=$become_psswd -e dns_cloudflare_api_token=$dns_api_key --vault-password-file=<(echo $vault_psswd)
+  brunelli:
+    runs-on: ubuntu-latest
+    env:
+      dns_api_key: ${{secrets.CLOUDFLARE_DNS_API_KEY}}
+      vault_psswd: ${{secrets.VAULT_PASS}}
+      become_psswd: ${{secrets.BECOME_PASS}}
+    steps:
+      - uses: actions/checkout@v3
+      - name: configure ssh
+        run: |
+          mkdir -p /home/runner/.ssh/
+          touch /home/runner/.ssh/id_rsa
+          echo -e "${{secrets.SSH_KEY}}" > /home/runner/.ssh/id_rsa
+          chmod 700 /home/runner/.ssh/id_rsa
+      - name: run playbook
+        shell: bash
+        run: |
+          ansible-playbook --private-key /home/runner/.ssh/id_rsa brunelli.yml -i homelab.yml -e ansible_sudo_pass=$become_psswd -e dns_cloudflare_api_token=$dns_api_key --vault-password-file=<(echo $vault_psswd)

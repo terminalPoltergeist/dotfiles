@@ -1,10 +1,50 @@
----
-- name: Detect go
-  ansible.builtin.shell: which go
-  register: go
-  changed_when: false
-  ignore_errors: true
+# ---
+# - name: Detect go
+#   ansible.builtin.shell: which go
+#   register: go
+#   changed_when: false
+#   ignore_errors: true
 
-- name: Install go v1.22
-  ansible.builtin.shell: wget https://go.dev/dl/go1.22.1.linux-amd64.tar.gz && gzip -d go1.22.1.linux-amd64.tar.gz && tar -xf go1.22.1.linux-amd64.tar && rm go1.22.1.linux-amd64.tar
-  when: go.failed
+# - name: Install go v1.22
+#   ansible.builtin.shell: wget https://go.dev/dl/go1.22.1.linux-amd64.tar.gz && gzip -d go1.22.1.linux-amd64.tar.gz && tar -xf go1.22.1.linux-amd64.tar && rm go1.22.1.linux-amd64.tar && mv go/bin/go /usr/local/bin/go
+#   when: go.failed
+- name: Download the Go tarball
+  ansible.builtin.get_url:
+    url: "{{ go_download_location }}"
+    dest: /usr/local/src/{{ go_tarball }}
+    checksum: "{{ go_tarball_checksum }}"
+    mode: '0764'
+  become: true
+
+- name: Register the current Go version (if any)
+  ansible.builtin.command: /usr/local/go/bin/go version
+  ignore_errors: true
+  register: go_version
+  changed_when: false
+
+- name: Remove old installation of Go
+  ansible.builtin.file:
+    path: /usr/local/go
+    state: absent
+  when: go_version.failed or go_version.stdout != go_version_target
+
+- name: Extract the Go tarball if Go is not yet installed or not the desired version
+  ansible.builtin.unarchive:
+    src: /usr/local/src/{{ go_tarball }}
+    dest: /usr/local
+    copy: false
+  become: true
+  when: go_version.failed or go_version.stdout != go_version_target
+
+- name: Add the Go bin directory to the PATH environment variable for all users
+  ansible.builtin.copy:
+    src: go-bin.sh
+    dest: /etc/profile.d
+  become: true
+
+- name: Set GOPATH for all users
+  ansible.builtin.copy:
+    src: go-path.sh
+    dest: /etc/profile.d
+  when: set_go_path
+  become: true

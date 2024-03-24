@@ -4,15 +4,13 @@
     dest: "/etc/ssh/sshd_config"
     mode: '0644'
   become: true
+  notify:
+    - Restart ssh
 
 - name: Set authorized key taken from file
   ansible.posix.authorized_key:
     user: jack
     state: present
     key: "{{ lookup('file', '/Users/jacknemitz/.ssh/id_rsa_homeLab.pub') }}"
-
-- name: Restart ssh
-  ansible.builtin.service:
-    name: ssh
-    state: restarted
-  become: true
+  notify:
+    - Restart ssh

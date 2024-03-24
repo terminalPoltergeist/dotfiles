@@ -1,0 +1,14 @@
+- name: brunelli
+  hosts: brunelli
+  vars:
+    nginx_server_name: "brunelli"
+
+  roles:
+    # - ssh
+    - zsh
+    - { role: ufw, become: yes }
+    - tmux
+    - nvim
+    - go
+    - { role: certbot, become: yes }
+    - { role: nginx, become: yes }

@@ -1,0 +1,1 @@
+go_download_location: "https://go.dev/dl/{{ go_tarball }}"
