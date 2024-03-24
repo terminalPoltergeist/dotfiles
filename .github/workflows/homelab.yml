@@ -20,6 +20,7 @@ jobs:
           mkdir ~/.ssh
           touch ~/.ssh/known_hosts
           chmod 0600 ~/.ssh/known_hosts
+          echo "$ARISTOTLE_KNOWN_HOSTS" >> ~/.ssh/known_hosts
           echo "$SSH_KEY" >> ~/.ssh/github_actions
           chmod 0600 ~/.ssh/github_actions
       - name: run playbook
@@ -40,6 +41,7 @@ jobs:
           mkdir ~/.ssh
           touch ~/.ssh/known_hosts
           chmod 0600 ~/.ssh/known_hosts
+          echo "$BRUNELLI_KNOWN_HOSTS" >> ~/.ssh/known_hosts
           echo "$SSH_KEY" >> ~/.ssh/github_actions
           chmod 0600 ~/.ssh/github_actions
       - name: run playbook
