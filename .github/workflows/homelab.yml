@@ -23,7 +23,7 @@ jobs:
       - name: run playbook
         shell: bash
         run: |
-          ansible-playbook --private-key /home/runner/.ssh/id_rsa aristotle.yml -i homelab.yml -e ansible_sudo_pass=$become_psswd -e dns_cloudflare_api_token=$dns_api_key --vault-password-file=<(echo $vault_psswd)
+          ansible-playbook --private-key /home/runner/.ssh/id_rsa -u jack aristotle.yml -i homelab.yml -e ansible_sudo_pass=$become_psswd -e dns_cloudflare_api_token=$dns_api_key --vault-password-file=<(echo $vault_psswd)
   brunelli:
     runs-on: ubuntu-latest
     env:
@@ -41,4 +41,4 @@ jobs:
       - name: run playbook
         shell: bash
         run: |
-          ansible-playbook --private-key /home/runner/.ssh/id_rsa brunelli.yml -i homelab.yml -e ansible_sudo_pass=$become_psswd -e dns_cloudflare_api_token=$dns_api_key --vault-password-file=<(echo $vault_psswd)
+          ansible-playbook --private-key /home/runner/.ssh/id_rsa -u jack brunelli.yml -i homelab.yml -e ansible_sudo_pass=$become_psswd -e dns_cloudflare_api_token=$dns_api_key --vault-password-file=<(echo $vault_psswd)
