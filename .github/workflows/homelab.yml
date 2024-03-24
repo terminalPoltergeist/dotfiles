@@ -8,6 +8,7 @@ on:
 jobs:
   aristotle:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     env:
       dns_api_key: ${{secrets.CLOUDFLARE_DNS_API_KEY}}
       vault_psswd: ${{secrets.VAULT_PASS}}
@@ -15,8 +16,12 @@ jobs:
       SSH_KEY: ${{secrets.SSH_KEY}}
       ARISTOTLE_IP: ${{secrets.ARISTOTLE_IP}}
       ARISTOTLE_PORT: ${{secrets.ARISTOTLE_PORT}}
+      ANSIBLE_STDOUT_CALLBACK: "junit"
+      JUNIT_OUTPUT_DIR: "~/junit-results"
     steps:
       - uses: actions/checkout@v3
+      - name: install junit for python
+        run: sudo apt install python3-junit.xml
       - name: configure ssh
         run: |
           mkdir ~/.ssh
@@ -30,8 +35,16 @@ jobs:
         shell: bash
         run: |
           ansible-playbook --private-key="$SSH_KEY" --user="jack" aristotle.yml -i homelab.yml -e ansible_sudo_pass=$become_psswd -e dns_cloudflare_api_token=$dns_api_key --vault-password-file=<(echo $vault_psswd)
+      - name: publish run
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Junit results
+          path: ~/junit-results/*.xml
+          fail-on-error: true
   brunelli:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     env:
       dns_api_key: ${{secrets.CLOUDFLARE_DNS_API_KEY}}
       vault_psswd: ${{secrets.VAULT_PASS}}
