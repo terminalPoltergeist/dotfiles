@@ -53,8 +53,11 @@ jobs:
       SSH_KEY: ${{secrets.SSH_KEY}}
       BRUNELLI_IP: ${{secrets.BRUNELLI_IP}}
       BRUNELLI_PORT: ${{secrets.BRUNELLI_PORT}}
+      JUNIT_OUTPUT_DIR: "~/junit-results"
     steps:
       - uses: actions/checkout@v3
+      - name: install junit for python
+        run: sudo apt install python3-junit.xml
       - name: configure ssh
         run: |
           mkdir ~/.ssh
@@ -68,3 +71,12 @@ jobs:
         shell: bash
         run: |
           ansible-playbook --private-key="$SSH_KEY" --user="jack" brunelli.yml -i homelab.yml -e ansible_sudo_pass=$become_psswd -e dns_cloudflare_api_token=$dns_api_key --vault-password-file=<(echo $vault_psswd)
+      - name: publish run
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Junit results
+          path: ~/junit-results/*.xml
+          reporter: java-junit
+          fail-on-error: true
+
