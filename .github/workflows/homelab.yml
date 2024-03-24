@@ -24,8 +24,8 @@ jobs:
           # chmod 0600 ~/.ssh/known_hosts
           # echo "$ARISTOTLE_KNOWN_HOSTS" >> ~/.ssh/known_hosts
           ssh-keyscan -p $ARISTOTLE_PORT -H $ARISTOTLE_IP >> ~/.ssh/known_hosts
-          echo "$SSH_KEY" >> ~/.ssh/github_actions
-          chmod 0600 ~/.ssh/github_actions
+          echo "$SSH_KEY" >> ~/.ssh/id_rsa_homeLab
+          chmod 0600 ~/.ssh/id_rsa_homeLab
       - name: run playbook
         shell: bash
         run: |
@@ -48,8 +48,8 @@ jobs:
           # chmod 0600 ~/.ssh/known_hosts
           # echo "$BRUNELLI_KNOWN_HOSTS" >> ~/.ssh/known_hosts
           ssh-keyscan -p $BRUNELLI_PORT -H $BRUNELLI_IP >> ~/.ssh/known_hosts
-          echo "$SSH_KEY" >> ~/.ssh/github_actions
-          chmod 0600 ~/.ssh/github_actions
+          echo "$SSH_KEY" >> ~/.ssh/id_rsa_homeLab
+          chmod 0600 ~/.ssh/id_rsa_homeLab
       - name: run playbook
         shell: bash
         run: |
