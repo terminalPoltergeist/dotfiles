@@ -41,6 +41,7 @@ jobs:
         with:
           name: Junit results
           path: ~/junit-results/*.xml
+          reporter: java-junit
           fail-on-error: true
   brunelli:
     runs-on: ubuntu-latest
