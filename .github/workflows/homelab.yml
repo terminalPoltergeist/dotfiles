@@ -16,14 +16,13 @@ jobs:
       - uses: actions/checkout@v3
       - name: configure ssh
         run: |
-          mkdir -p /home/runner/.ssh/
-          touch /home/runner/.ssh/id_rsa
-          echo -e "${{secrets.SSH_KEY}}" > /home/runner/.ssh/id_rsa
-          chmod 700 /home/runner/.ssh/id_rsa
+          mkdir ~/.ssh
+          echo "$SSH_KEY" >> ~/.ssh/github_actions
+          chmod 400 ~/.ssh/github_actions
       - name: run playbook
         shell: bash
         run: |
-          ansible-playbook --private-key /home/runner/.ssh/id_rsa -u jack aristotle.yml -i homelab.yml -e ansible_sudo_pass=$become_psswd -e dns_cloudflare_api_token=$dns_api_key --vault-password-file=<(echo $vault_psswd)
+          ansible-playbook --private-key /home/runner/.ssh/github_actions -u jack aristotle.yml -i homelab.yml -e ansible_sudo_pass=$become_psswd -e dns_cloudflare_api_token=$dns_api_key --vault-password-file=<(echo $vault_psswd)
   brunelli:
     runs-on: ubuntu-latest
     env:
@@ -34,11 +33,10 @@ jobs:
       - uses: actions/checkout@v3
       - name: configure ssh
         run: |
-          mkdir -p /home/runner/.ssh/
-          touch /home/runner/.ssh/id_rsa
-          echo -e "${{secrets.SSH_KEY}}" > /home/runner/.ssh/id_rsa
-          chmod 700 /home/runner/.ssh/id_rsa
+          mkdir ~/.ssh
+          echo "$SSH_KEY" >> ~/.ssh/github_actions
+          chmod 400 ~/.ssh/github_actions
       - name: run playbook
         shell: bash
         run: |
-          ansible-playbook --private-key /home/runner/.ssh/id_rsa -u jack brunelli.yml -i homelab.yml -e ansible_sudo_pass=$become_psswd -e dns_cloudflare_api_token=$dns_api_key --vault-password-file=<(echo $vault_psswd)
+          ansible-playbook --private-key /home/runner/.ssh/github_actions -u jack brunelli.yml -i homelab.yml -e ansible_sudo_pass=$become_psswd -e dns_cloudflare_api_token=$dns_api_key --vault-password-file=<(echo $vault_psswd)
