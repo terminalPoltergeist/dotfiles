@@ -13,8 +13,8 @@ jobs:
       vault_psswd: ${{secrets.VAULT_PASS}}
       become_psswd: ${{secrets.BECOME_PASS}}
       SSH_KEY: ${{secrets.SSH_KEY}}
-      ARISTOTLE_IP: ${{ARISTOTLE_IP}}
-      ARISTOTLE_PORT: ${{ARISTOTLE_PORT}}
+      ARISTOTLE_IP: ${{secrets.ARISTOTLE_IP}}
+      ARISTOTLE_PORT: ${{secrets.ARISTOTLE_PORT}}
     steps:
       - uses: actions/checkout@v3
       - name: configure ssh
@@ -37,8 +37,8 @@ jobs:
       vault_psswd: ${{secrets.VAULT_PASS}}
       become_psswd: ${{secrets.BECOME_PASS}}
       SSH_KEY: ${{secrets.SSH_KEY}}
-      BRUNELLI_IP: ${{BRUNELLI_IP}}
-      BRUNELLI_PORT: ${{BRUNELLI_PORT}}
+      BRUNELLI_IP: ${{secrets.BRUNELLI_IP}}
+      BRUNELLI_PORT: ${{secrets.BRUNELLI_PORT}}
     steps:
       - uses: actions/checkout@v3
       - name: configure ssh
