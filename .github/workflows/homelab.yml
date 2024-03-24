@@ -13,14 +13,17 @@ jobs:
       vault_psswd: ${{secrets.VAULT_PASS}}
       become_psswd: ${{secrets.BECOME_PASS}}
       SSH_KEY: ${{secrets.SSH_KEY}}
+      ARISTOTLE_IP: ${{ARISTOTLE_IP}}
+      ARISTOTLE_PORT: ${{ARISTOTLE_PORT}}
     steps:
       - uses: actions/checkout@v3
       - name: configure ssh
         run: |
           mkdir ~/.ssh
-          touch ~/.ssh/known_hosts
-          chmod 0600 ~/.ssh/known_hosts
-          echo "$ARISTOTLE_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+          # touch ~/.ssh/known_hosts
+          # chmod 0600 ~/.ssh/known_hosts
+          # echo "$ARISTOTLE_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+          ssh-keyscan -p $ARISTOTLE_PORT -H $ARISTOTLE_IP >> ~/.ssh/known_hosts
           echo "$SSH_KEY" >> ~/.ssh/github_actions
           chmod 0600 ~/.ssh/github_actions
       - name: run playbook
@@ -34,14 +37,17 @@ jobs:
       vault_psswd: ${{secrets.VAULT_PASS}}
       become_psswd: ${{secrets.BECOME_PASS}}
       SSH_KEY: ${{secrets.SSH_KEY}}
+      BRUNELLI_IP: ${{BRUNELLI_IP}}
+      BRUNELLI_PORT: ${{BRUNELLI_PORT}}
     steps:
       - uses: actions/checkout@v3
       - name: configure ssh
         run: |
           mkdir ~/.ssh
-          touch ~/.ssh/known_hosts
-          chmod 0600 ~/.ssh/known_hosts
-          echo "$BRUNELLI_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+          # touch ~/.ssh/known_hosts
+          # chmod 0600 ~/.ssh/known_hosts
+          # echo "$BRUNELLI_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+          ssh-keyscan -p $BRUNELLI_PORT -H $BRUNELLI_IP >> ~/.ssh/known_hosts
           echo "$SSH_KEY" >> ~/.ssh/github_actions
           chmod 0600 ~/.ssh/github_actions
       - name: run playbook

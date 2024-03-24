@@ -7,6 +7,11 @@
   roles:
     - { role: zsh, become: yes }
     - { role: ufw, become: yes }
+    - nvim
+    - go
+    - { role: nginx, become: yes }
+    - { role: albatross, become: yes }
+    - redis
     - { role: certbot, become: yes }
     - role: geerlingguy.certbot
       certbot_admin_email: jack.nemitz@yahoo.com
@@ -35,6 +40,3 @@
       certbot_create_standalone_stop_services:
         - nginx
       become: yes
-    - { role: nginx, become: yes }
-    - { role: albatross, become: yes }
-    - redis
