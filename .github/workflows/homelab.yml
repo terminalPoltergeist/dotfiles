@@ -12,6 +12,7 @@ jobs:
       dns_api_key: ${{secrets.CLOUDFLARE_DNS_API_KEY}}
       vault_psswd: ${{secrets.VAULT_PASS}}
       become_psswd: ${{secrets.BECOME_PASS}}
+      SSH_KEY: ${{secrets.SSH_KEY}}
     steps:
       - uses: actions/checkout@v3
       - name: configure ssh
@@ -29,6 +30,7 @@ jobs:
       dns_api_key: ${{secrets.CLOUDFLARE_DNS_API_KEY}}
       vault_psswd: ${{secrets.VAULT_PASS}}
       become_psswd: ${{secrets.BECOME_PASS}}
+      SSH_KEY: ${{secrets.SSH_KEY}}
     steps:
       - uses: actions/checkout@v3
       - name: configure ssh
