@@ -2,6 +2,7 @@
   ansible.builtin.apt_repository:
     repo: ppa:neovim-ppa/unstable
     state: present
+  become: true
 - name: Install neovim - remote
   ansible.builtin.apt:
     name: neovim
