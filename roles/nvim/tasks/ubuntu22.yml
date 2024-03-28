@@ -31,3 +31,8 @@
     dest: "{{ ansible_env.HOME }}/.config/nvim/lua/"
     owner: "{{ ansible_user_id }}"
     mode: '0644'
+- name: Install Paq
+  ansible.builtin.git:
+    repo: https://github.com/savq/paq-nvim.git
+    dest: "~/.local/share/nvim/site/pack/paqs/start/paq-nvim"
+    depth: 1
