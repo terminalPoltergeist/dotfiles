@@ -1,7 +1,12 @@
+- name: Add neovim repository
+  ansible.builtin.apt_repository:
+    repo: ppa:neovim-ppa/unstable
+    state: present
 - name: Install neovim - remote
   ansible.builtin.apt:
     name: neovim
     state: present
+    update_cache: true
   become: true
 - name: Create config directory
   ansible.builtin.file:
