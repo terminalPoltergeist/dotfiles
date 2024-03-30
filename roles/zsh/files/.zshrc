@@ -23,6 +23,24 @@ source $HOME/dotfiles/path
 export FLAVOURS_CONFIG_FILE="$HOME/.config/flavours/base16/config.toml";
 export LUA_PATH="./?.lua;;"
 
+export GUM_INPUT_CURSOR_FOREGROUND=$red
+export GUM_INPUT_PROMPT_FOREGROUND=$yellow
+export GUM_CHOOSE_CURSOR_FOREGROUND=$yellow
+export GUM_CHOOSE_ITEM_FOREGROUND=$green
+export GUM_FILE_CURSOR_FOREGROUND=$yellow
+export GUM_FILE_SELECTED_FOREGROUND=$yellow
+export GUM_FILE_SYMLINK_FOREGROUND=$purple
+export GUM_FILE_DIRECTORY_FOREGROUND=$green
+export GUM_FILE_FILE_FOREGROUND=$blue
+export GUM_FILE_PERMISSIONS_FOREGROUND=$red
+export GUM_CONFIRM_PROMPT_FOREGROUND=$yellow
+export GUM_CONFIRM_PROMPT_BACKGROUND=$background
+export GUM_CONFIRM_SELECTED_FOREGROUND=$background
+export GUM_CONFIRM_SELECTED_BACKGROUND=$red
+export GUM_CONFIRM_UNSELECTED_BACKGROUND=$background
+export GUM_CONFIRM_UNSELECTED_FOREGROUND=$foreground
+export GUM_INPUT_WIDTH=120
+
 #Set up Go env
 export GOPATH="$HOME/go";
 export PATH="$PATH:$GOPATH/bin";
