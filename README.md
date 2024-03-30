@@ -37,5 +37,9 @@ Before running be sure to backup any configurations you want to preserve.
 To run the install script:
 
 ```bash
-bash -c "$(curl -fSL https://raw.githubusercontent.com/terminalPoltergeist/dotfiles/main/install > .tmp)" && source .tmp && rm .tmp
+bash -c\
+"$(curl -fSL https://raw.githubusercontent.com/terminalPoltergeist/dotfiles/main/install\
+> .tmp)" &&\
+source .tmp &&\
+rm .tmp
 ```
