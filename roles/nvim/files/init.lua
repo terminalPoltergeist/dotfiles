@@ -466,7 +466,7 @@ k.set("x", "<leader>p", "\"_dP")
 k.set("","<Leader>lb", ":set linebreak<CR>", {noremap = true})
 k.set("","<Leader>nb", ":set nolinebreak<CR>", {noremap = true})
 k.set("n","<space>", "za", {noremap = true})
-k.set("n","FF", ":Telescope find_files<cr><esc>")
+k.set("n","FF", ":Telescope find_files hidden=true<cr><esc>")
 k.set("n","FB", ":Telescope buffers<cr><esc>")
 k.set("n", "<Leader>f", ":Rg<CR>", {noremap = true, silent = true})
 -- k.set("i", "<C-f>", "<esc>:call InsertFile()<CR>", {noremap = true})
@@ -537,6 +537,7 @@ require "paq" {
 require'gitblame'.setup({})
 require'colorizer'.setup()
 require'todo-comments'.setup({
+  signs = false,
   keywords = {
     TODO = {color = gui0B},
     NOTE = {color = gui0E},
@@ -573,6 +574,10 @@ require"startup".setup()
 -- {{{telescope config
 require('telescope').setup({
   defaults = {
+    hidden = true,
+    file_ignore_patterns = {
+      ".git", "node_modules"
+    },
     layout_strategy = "bottom_pane",
     results_title = false,
     sorting_strategy = "ascending",
