@@ -38,8 +38,7 @@ To run the install script:
 
 ```bash
 bash -c\
-"$(curl -fSL https://raw.githubusercontent.com/terminalPoltergeist/dotfiles/main/install\
-> .tmp)" &&\
+"$(curl -fSL https://raw.githubusercontent.com/terminalPoltergeist/dotfiles/main/install > .tmp)" &&\
 source .tmp &&\
 rm .tmp
 ```
