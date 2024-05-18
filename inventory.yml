@@ -4,6 +4,6 @@ workstation:
       ansible_host: localhost
       ansible_user: jacknemitz
       ansible_connection: local
-      ansible_python_interpreter: /Users/jacknemitz/.pyenv/versions/ansible/bin/python
+      ansible_python_interpreter: /Users/jack/.pyenv/versions/ansible/bin/python
   vars:
     dev_machine: true # when set roles will symlink their config files to [role_name]/files/[config_name]
