@@ -1,1 +1,0 @@
-Plug 'yuezk/vim-js'
