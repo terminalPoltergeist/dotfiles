@@ -2,3 +2,4 @@
 todo.md
 path
 roles/ssh/files/sshd_config
+roles/nvim/files/plugin
