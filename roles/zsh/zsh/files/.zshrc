@@ -57,28 +57,28 @@ export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 # Start flavours
 # base16-shell (https://github.com/chriskempson/base16-shell)
 # Base16 Zsh template by terminalPoltergeist (https://github.com/terminalPoltergeist)
-# spirited-haku-dark scheme by terminalPoltergeist
+# scheme01 scheme by terminalPoltergeist
 
-export background='#1d2122'
-export foreground='#c2c8cb'
-export text='#1d2122'
-export cursor='#c2c8cb'
-export black='#1d2122'
-export red='#457080'
-export green='#a6889b'
-export yellow='#747291'
-export blue='#73a489'
-export magenta='#457080'
-export cyan='#8f4f48'
-export white='#c2c8cb'
-export light_black='#536061'
-export light_red='#457080'
-export light_green='#a6889b'
-export light_yellow='#747291'
-export light_blue='#73a489'
-export light_magenta='#457080'
-export light_cyan='#8f4f48'
-export light_white='#eceeef'
+export background='#121212'
+export foreground='#c1c1c1'
+export text='#121212'
+export cursor='#c1c1c1'
+export black='#121212'
+export red='#a06666'
+export green='#5f87a9'
+export yellow='#ddb699'
+export blue='#5f8787'
+export magenta='#87775f'
+export cyan='#8477a4'
+export white='#c1c1c1'
+export light_black='#444444'
+export light_red='#a06666'
+export light_green='#5f87a9'
+export light_yellow='#ddb699'
+export light_blue='#5f8787'
+export light_magenta='#87775f'
+export light_cyan='#8477a4'
+export light_white='#c1c1c1'
 # End flavours
 
 # unclear on the correct way to load the completion module.. this works for now
@@ -133,16 +133,7 @@ export NVM_DIR="$HOME/.nvm"
 # You could just use `-g` instead, but I like being explicit
 complete -W "NSGlobalDomain" defaults;
 
-bindkey '^R' history-incremental-search-backward
 export EDITOR=nvim
-autoload -z edit-command-line
-zle -N edit-command-line
-bindkey '^X^E' edit-command-line
-set -o vi
-set editing-mode vi
-set show-mode-in-prompt on
-set vi-ins-mode-string +
-set vi-cmd-mode-string:
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -151,7 +142,8 @@ eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)" # this auto-activates venvs per project, disabled because it slows down the propmpt
 
+export HCP_CLIENT_ID=lUsSxT19E9JWZXO46CW7iIoAi69YCFRP
+export HCP_CLIENT_SECRET=FAioBqgJsxKX_zdA4D3Xu2tlJVzwNJ9EeEEA-2ozM_ZmbkgGPeJHA6Goj0pmHTCn
+
 neofetch
 uptime
-
-alias gam="/Users/jacknemitz/bin/gam7/gam"

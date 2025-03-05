@@ -4,24 +4,21 @@ shell = "bash -c '{}'"
 [[item]]
 file = "/Users/jacknemitz/.config/alacritty/alacritty.toml"
 template = "alacritty"
-subtemplate = "custom"
-
-# [[item]]
-# file = "/Users/jacknemitz/dotfiles/nvim/init.vim"
-# template = "vim"
-# start = "\" Start flavours"
-# end = "\" End flavours"
 
 [[item]]
-file = "/Users/jacknemitz/.config/nvim/lua/init.lua"
+file = "/Users/jacknemitz/.config/nvim/lua/terminalPoltergeist/colors.lua"
 template = "nvim"
+subtemplate = "custom"
 start = "-- Start flavours"
 end = "-- End flavours"
 
 [[item]]
 file = "/Users/jacknemitz/.tmux.conf"
 template = "tmux"
+subtemplate = "base16"
 hook = "tmux source ~/.tmux.conf"
+start = "# Start flavours"
+end = "# End flavours"
 
 [[item]]
 file = "/Users/jacknemitz/.config/spicetify/Themes/Custom/color.ini"
@@ -30,19 +27,6 @@ template = "spicetify"
 start = "# Start flavours"
 end = "# End flavours"
 rewrite = true
-
-# [[item]]
-# file = "/Users/jacknemitz/dotfiles/sketchybar/colors.sh"
-# template = "sketchybar"
-# start = "# Start flavours"
-# end = "# End flavours"
-# rewrite = true
-
-# [[item]]
-# file = "/Users/jacknemitz/Desktop/projects/jacknemitz.com/tailwind.config.js"
-# template = "jacknemitz.com"
-# start = "// Start flavours"
-# end = "// End flavours"
 
 [[item]]
 file = "/Users/jacknemitz/.zshrc"

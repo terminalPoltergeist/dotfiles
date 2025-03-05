@@ -1,30 +1,6 @@
-- name: Install ufw
-  ansible.builtin.apt:
-    name: ufw
-    state: latest
-
-- name: Enable rate-limiting on ssh
-  community.general.ufw:
-    rule: limit
-    port: ssh
-    proto: tcp
-
-- name: Allow default ssh port
-  community.general.ufw:
-    rule: allow
-    port: 22
-
-- name: Allow application port
-  community.general.ufw:
-    rule: allow
-    port: 2201
-
-- name: Allow https
-  community.general.ufw:
-    rule: allow
-    port: 443
-
-- name: Enable and deny by default
-  community.general.ufw:
-    state: enabled
-    default: deny
+- name: "Config for Ubuntu22"
+  ansible.builtin.include_tasks: ubuntu22.yml
+  when: ansible_os_family == "Debian"
+- name: "Config for Fedora39"
+  ansible.builtin.include_tasks: fedora39.yml
+  when: ansible_os_family == "RedHat"

@@ -21,9 +21,9 @@
 
 setopt prompt_subst # enable variable expansion
 NEWLINE=$'\n'
-PS1='%F{yellow}$(prompt_ssh)$(prompt_venv)'
-PS1+='%F{red}%~ '
-PS1+='%F{green}$(prompt_git)'
+PS1='%F{red}$(prompt_ssh)$(prompt_venv)'
+PS1+='%F{yellow}%~ '
+PS1+='%F{blue}$(prompt_git)'
 PS1+='%F{white}%T${NEWLINE}$ '
 export PS1;                             # Exports the prompt global
 
@@ -103,8 +103,7 @@ prompt_git() {
         s+='\xF0\x9F\x92\xBC'; # briefcase
       fi;
       # Check for unpushed commits.
-      git log @{u}.. &> /dev/null
-      if [ $? -eq 0 ]; then
+      if [ -n "$(git log @{u}..)" ]; then
         s+='\xF0\x9F\x9A\x80'; # rocketship
       fi;
     fi;

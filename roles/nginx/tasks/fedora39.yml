@@ -1,0 +1,30 @@
+- name: Install nginx
+  ansible.builtin.dnf:
+    name: nginx
+    state: latest
+
+- name: Copy nginx config
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/nginx.conf"
+    dest: "/etc/nginx/nginx.conf"
+    mode: '0644'
+
+- name: Delete default server
+  ansible.builtin.file:
+    path: "/etc/nginx/sites-enabled/default"
+    state: absent
+    force: true
+
+- name: Copy server config
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/{{ nginx_server_name }}"
+    dest: "/etc/nginx/sites-available/{{ nginx_server_name }}"
+    mode: '0644'
+
+- name: Link server to enabled sites
+  ansible.builtin.file:
+    src: "/etc/nginx/sites-available/{{ nginx_server_name }}"
+    dest: "/etc/nginx/sites-enabled/{{ nginx_server_name }}"
+    state: link
+    force: true
+  notify: Restart nginx

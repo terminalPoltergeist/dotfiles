@@ -1,0 +1,38 @@
+# - name: Add neovim repository
+#   ansible.builtin.dnf_repository:
+#     repo: ppa:neovim-ppa/unstable
+#     state: present
+#   become: true
+- name: Install neovim - remote
+  ansible.builtin.dnf:
+    name: neovim
+    state: present
+    update_cache: true
+  become: true
+- name: Create config directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/nvim"
+    state: directory
+    mode: '0755'
+- name: Create init.vim
+  ansible.builtin.shell: 'cd {{ ansible_env.HOME }}/.config/nvim && echo "lua require(\"init\")" > init.vim'
+  register: result
+  changed_when: false
+  failed_when: result.rc != 0
+  ignore_errors: true
+- name: Create lua directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/nvim/lua"
+    state: directory
+    mode: '0755'
+- name: Copy configs
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/"
+    dest: "{{ ansible_env.HOME }}/.config/nvim/lua/"
+    owner: "{{ ansible_user_id }}"
+    mode: '0644'
+- name: Install Paq
+  ansible.builtin.git:
+    repo: https://github.com/savq/paq-nvim.git
+    dest: "~/.local/share/nvim/site/pack/paqs/start/paq-nvim"
+    depth: 1

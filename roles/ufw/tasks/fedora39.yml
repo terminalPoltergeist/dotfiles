@@ -1,0 +1,35 @@
+- name: Install ufw
+  ansible.builtin.dnf:
+    name: ufw
+    state: latest
+
+- name: Enable and deny by default
+  community.general.ufw:
+    state: enabled
+    default: deny
+
+- name: Enable rate-limiting on ssh
+  community.general.ufw:
+    rule: limit
+    port: ssh
+    proto: tcp
+
+- name: Allow default ssh port
+  community.general.ufw:
+    rule: allow
+    port: 22
+
+- name: Allow application port
+  community.general.ufw:
+    rule: allow
+    port: 2201
+
+- name: Allow https
+  community.general.ufw:
+    rule: allow
+    port: 443
+
+- name: Enable and deny by default
+  community.general.ufw:
+    state: enabled
+    default: deny

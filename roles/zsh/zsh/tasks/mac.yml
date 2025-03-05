@@ -1,0 +1,34 @@
+- name: Detect zsh
+  ansible.builtin.shell: which zsh
+  register: zsh
+  changed_when: false
+  ignore_errors: true
+- name: Install zsh
+  community.general.homebrew:
+    name: zsh
+    state: present
+  when: zsh.failed
+- name: Get zsh path
+  ansible.builtin.shell: which zsh
+  register: zsh
+  changed_when: false
+- name: Create config directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/zsh"
+    state: directory
+    mode: '0755'
+- name: Sync configs
+  ansible.builtin.include_role:
+    name: env
+    tasks_from: linkConfig
+- name: Link .zshrc
+  ansible.builtin.file:
+    src: "{{ ansible_env.HOME }}/.config/zsh/.zshrc"
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+    state: link
+    force: true
+- name: Set shell
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    shell: "/bin/zsh"
+  become: true

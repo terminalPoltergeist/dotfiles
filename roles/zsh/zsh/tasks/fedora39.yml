@@ -1,0 +1,54 @@
+# - name: Detect zsh
+#   ansible.builtin.shell: which zsh
+#   register: zsh
+#   changed_when: false
+#   ignore_errors: true
+- name: Install zsh
+  ansible.builtin.dnf:
+    name: zsh
+    state: present
+  become: true
+- name: Get zsh path
+  ansible.builtin.shell: which zsh
+  register: zsh
+  changed_when: false
+- name: Copy configs
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/"
+    dest: "{{ ansible_env.HOME }}/.config/zsh"
+    owner: "{{ ansible_user_id }}"
+    mode: '0755'
+  when: dev_machine is undefined or not dev_machine
+- name: Disable pyenv init
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.config/zsh/.zshrc"
+    regexp: '^eval "$(pyenv init --path)"'
+    line: ''
+- name: Disable pyenv init 2
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.config/zsh/.zshrc"
+    regexp: '^eval "$(pyenv init -)"'
+    line: ''
+- name: Disable neofetch
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.config/zsh/.zshrc"
+    regexp: '^neofetch'
+    line: ''
+- name: Link configs
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_env.HOME }}/.config/zsh"
+    state: link
+    force: true
+  when: dev_machine is defined and dev_machine
+- name: Link .zshrc
+  ansible.builtin.file:
+    src: "{{ ansible_env.HOME }}/.config/zsh/.zshrc"
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+    state: link
+    force: true
+- name: Set shell
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    shell: "/bin/zsh"
+  become: true

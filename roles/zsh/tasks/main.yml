@@ -1,6 +1,9 @@
 - name: "Config for MacOS"
   ansible.builtin.include_tasks: mac.yml
   when: ansible_os_family == "Darwin"
-- name: "Config for Ubuntu22"
-  ansible.builtin.include_tasks: ubuntu22.yml
+- name: "Config for Ubuntu/Debian"
+  ansible.builtin.include_tasks: ubuntu.yml
   when: ansible_os_family == "Debian"
+- name: "Config for Fedora39"
+  ansible.builtin.include_tasks: fedora39.yml
+  when: ansible_os_family == "RedHat"

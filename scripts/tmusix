@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+# This script invokes the tmux-spotify-info osascript to get currently playing music
+# It then infinitely loops, slicing the output to a set length and scrolling through the text
+
+while getopts "hctl:" option; do
+  case $option in
+    h)
+      echo "tmusix"
+      echo
+      echo "Output the currently playing track/artist by your MacOS Spotify Client."
+      echo
+      echo "Usage:"
+      echo
+      echo "./tmusix [-l 50] [-c]"
+      echo
+      echo "options:"
+      echo "  l   length of output to truncate to"
+      echo "  c   copy the output to system clipboard"
+      echo "  t   output is being used in tmux status line (different escape codes)"
+      echo
+      exit;;
+    l)
+      length=${OPTARG};;
+    c)
+      toclipboard="yes";;
+    t)
+      tmuxstatusline="yes";;
+    \?)
+      echo "ERROR: Invalid option"
+      exit;;
+  esac
+done
+
+TMUSIX_LENGTH="${length:=50}"
+
+input=$(/Users/jacknemitz/dotfiles/scripts/tmux-spotify-info)
+input_length=${#input}
+
+if [[ $toclipboard == "yes" ]]; then
+  printf "♫ $input" | pbcopy
+  exit 0
+fi
+
+if [[ $input_length -le 0 ]]; then
+  exit 0
+elif [[ $input_length -lt $TMUSIX_LENGTH ]]; then
+  printf "♫ $input"
+elif [[ $input_length -gt 0 ]]; then
+  # buffer will always contain all characters in input
+  buffer="$input "
+  # output will be the buffer truncated down to the TMUSIX_LENGTH size
+  output=${buffer:0:$TMUSIX_LENGTH}
+
+  while [[ $input == $(/Users/jacknemitz/dotfiles/scripts/tmux-spotify-info) ]]; do
+    if [[ $tmuxstatusline == "yes" ]]; then
+      printf "♫ $output\033\r" # \033[0K\r cleans the residues of the previous output.
+    else
+      printf "♫ $output\033[0K\r" # \033[0K\r cleans the residues of the previous output.
+    fi
+    sleep 0.5
+    # move the first character to the end
+    buffer="${buffer:1:((${#buffer}-1))}${buffer:0:1}"
+    output=${buffer:0:$TMUSIX_LENGTH}
+  done
+fi

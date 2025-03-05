@@ -1,29 +1,29 @@
 [url "git@github.com:"]
-  insteadOf = https://github.com/
+    insteadOf = https://github.com/
 
 [user]
-	name = terminalPoltergeist
-  email = jack.nemitz@yahoo.com
-  signingkey = CDB45764
+    name = terminalPoltergeist
+    email = jack.nemitz@yahoo.com
+    signingkey = 0D735E4A
 
 [core]
-	excludesfile = /Users/jacknemitz/.gitignore_global
-	editor = nvim
+    excludesfile = /Users/jacknemitz/.gitignore_global
+    editor = nvim
 
 [commit]
-  template = ~/dotfiles/gitconfig/git-templates/.git-commit-template
-  gpgSign = true
+    template = ~/dotfiles/gitconfig/git-templates/.git-commit-template
+    gpgSign = true
 
 [credential]
-	helper = store
+    helper = store
 
 [init]
-	defaultBranch = main
-	templatedir = ~/dotfiles/gitconfig/git-templates
+    defaultBranch = main
+    templatedir = ~/dotfiles/gitconfig/git-templates
 
 [push]
-	autoSetupRemote = true
+    autoSetupRemote = true
 
 [color "diff"]
-  old = red
-  new = green
+    old = red
+    new = green
